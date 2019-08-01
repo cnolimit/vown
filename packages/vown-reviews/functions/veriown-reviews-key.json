@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "veriown-reviews",
+  "private_key_id": "11bc70de8b19af4ac15f1a0d530c1cc11045f8a0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDMduTM1EQJ4ftA\ntKme/v3PF+Nb65v4n/v9grx78Kam5KmOi5je6Yyuyi1zy04fL4UZngwuzwt8bss9\nM4oNdzhf1Awb13Ie5IzIkz+Fz+Kycl2fsK3s88m0y5jcLfb/1ZpDWGnQFDPW30dY\nrJIs6I0fKZ0ZB6hzwqEU4P3WmH4DwE+SL6CLbSJx9CiGKrpPgT0Ks6tQqLCdkuNT\nRytG6N0hiRPIECzTaVkn55zk5o5xAiDMgRgp7C0hLeOLOmJqJHR7sn/E5tmpUETc\noW3dgMGgNx3egE/OW7fSAREvhPF0RD1T38cYo5+20OxljPvDT2UlH4Bnciz8UAjq\n2LdN6u/vAgMBAAECggEAM9BtavrfwyFhaqRd180GxNRo6YJrpDXmxfe7jC0QDnsj\n/NujgdntrN3PZui+g2incjZ7H+GYJ5BsMLY+5eqwfphd+TA/21RP2QR3tJFaAZ65\n2x4K9WFSXF67/hAn5+1Zind9WR3FhU5P5kjVQkwsdxk0loM6TRuldoUNzrQWOxys\nnI6Pzfkzc0EjhssVjpKYVTS+d7J2mQIMVts48xl07yuuPJ78NNjBB+GYExpWTIkQ\n29GI+BnO5/3FVy4rlHVi7DtVCR8ROciSmMc+HoVyvGh22xuiziyUUclMFG842wXU\nJo+qePZoLWYWmq5dfm7TBWos2xWQi87h4e/OUt+yAQKBgQD6rKcY1ewShMNr42ma\nNpF53FkQYbn7Nqgt5Lg1vFMOeQ6U95grab2LyvOnia5GalQS1iMNerR5EAUWbPm0\n9Wl49IMFYCSn5FHOPIwxbWoKT8i+6GBkiWkn9yzKS5L6nlzG4uVm1v5MTZ5xmNzy\nNKgHBg529pX2n7SC0KEyPPtR6QKBgQDQzur9ppFRVm4K8PT5OlozB62pigwVaQDS\npLM3aruqBjANuw4Q5Cs35YtjhtX6eprbky+aEtAC9dW6i3RtSsnpvvNIA0b3rOuH\nYA36QK5ffGepY1ewa613td8pVHridEJ7LtKnJv8UtW6YYhFUVb1LjxQ1QnTxSOLV\nwCvsm9F0FwKBgQDJjAnp4Q4nMZHCbB1bPaan+S+vCTQ0tJRyGeS2Z83L5C+CPLSf\nqywYerx/Jyb1PMaOQpf6XX8/m07L4iC/i1YbR1UU/GFckCnqDSqXDybkVZPNUx81\nlnnzBTyBBlSNpshnrMTPc+sQxJOxODvljcrPouH8anTWzz+eskn5D6juCQKBgEcl\nWZgXewgVxOThePa6VSVyBk/wA3IAFxGuoInPSiYCebkT9RT4SWmAQuAkfyAbSkxq\neButMUbw8GPhREhA5U9JiqcMxs95Eb9MkTald0R9pOxoNuabqb1SMLlqWXxzVHuY\nVpoxhVRPBWHSeEkd9aObGq2S+TmFNhTSp6S06sb9AoGAHm9UQIuAl6YZbQSvCDf6\n3yKXNhLvn9WIUWnt0lYDAhevTKCkJtlJ+29YI+QPKAkRHLuhxcgr097gY1WbTa8a\nTZ6n7AVnSdylKe2UipyapVZRnI3C3Vc18cFKNM6bMtffrzSUJP2BjSwDV4yvx/Qb\n4Vz69kYTXQt0mYjGF6lh/Rg=\n-----END PRIVATE KEY-----\n",
+  "client_email": "veriown-reviews@appspot.gserviceaccount.com",
+  "client_id": "102126461758655271813",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/veriown-reviews%40appspot.gserviceaccount.com"
+}

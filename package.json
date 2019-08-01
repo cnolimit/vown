@@ -1,0 +1,12 @@
+{
+  "name": "vown",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "repository": "git@github.com:Veriown/vown.git",
+  "author": "Phillip Boateng <cnolimit@gmail.com>",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*"
+  ]
+}

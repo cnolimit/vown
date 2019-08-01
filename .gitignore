@@ -1,0 +1,11 @@
+# Modules
+node_modules
+
+# Build Folders
+lib
+
+# Error Logs
+*-debug.log
+
+# Misc
+*.DS_STORE

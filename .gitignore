@@ -1,5 +1,6 @@
-# Modules
+# Module Files
 node_modules
+package-lock.json
 
 # Build Folders
 lib
@@ -9,3 +10,6 @@ lib
 
 # Misc
 *.DS_STORE
+
+# Config Files
+*-key.json

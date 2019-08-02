@@ -3,10 +3,13 @@
   "version": "1.0.0",
   "private": true,
   "main": "index.js",
-  "repository": "git@github.com:Veriown/vown.git",
-  "author": "Phillip Boateng <cnolimit@gmail.com>",
-  "license": "MIT",
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "scripts": {
+    "compile": "cd packages/vown-reviews && npm run compile"
+  },
+  "license": "MIT",
+  "repository": "git@github.com:Veriown/vown.git",
+  "author": "Phillip Boateng <cnolimit@gmail.com>"
 }

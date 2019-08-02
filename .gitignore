@@ -4,6 +4,7 @@ package-lock.json
 
 # Build Folders
 lib
+dist
 
 # Error Logs
 *-debug.log

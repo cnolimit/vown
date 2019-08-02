@@ -1,0 +1,14 @@
+{
+  "name": "vown-reviews",
+  "version": "1.0.0",
+  "scripts": {
+    "compile": "tsc -p tsconfig.json"
+  },
+  "devDependencies": {
+    "@types/axios": "^0.14.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "axios": "^0.19.0"
+  }
+}

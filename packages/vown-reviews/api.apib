@@ -1,0 +1,150 @@
+FORMAT: 1A
+HOST: http://api.veriown.io/reviews/v1
+
+# Veriown Reviews
+
+Reviews api allows users to both create and retireve reviews for Landlord submitted by tenants
+
+## Reviews [/{landlord_id}?limit={limit}]
+
+### Create Review [POST]
+
+Create a new review for a Landlord
+
++ Request (application/json)
+    + Attributes (ReviewObject)
+    + Headers
+
+            token: {user_generated_token}
+            user: tenant_id
+
++ Response 201 (application/json)
+    + Attributes (CreateReviewResponse)
+
++ Response 422 (application/json)
+    + Attributes (CreateReviewError422)
+
++ Response 401 (application/json)
+    + Attributes (CreateReviewError401)
+
+### Retrive Review [GET]
+
+Retrive reviews
+
++ Parameters
+    + limit - The amount of reviews you want to receive
+
++ Response 201 (application/json)
+    + Attributes (RetrieveReviews201)
+
++ Response 422 (application/json)
+    + Attributes (RetrieveReviewError422)
+
+
+# Data Structures
+
+### =========== Error ===============
+
+## ErrorDetails (object)
++ code             (string, required)
++ message          (string, required)
++ target           (string, required)
+
+## Error (ErrorDetails)
++ details          (array[ErrorDetails])
+
+### =========== Create Review ===============
+
+## ReviewObject (object)
++ title                     (string, required)
++ rating                    (string, required)
++ difficulty_rating         (number, required)
++ experience_rating         (number, required)
++ approve_of_landlord       (boolean, required)
++ recommends                (boolean, required)
++ pros                      (string)
++ cons                      (string)
++ questions                 (array[QuestionObject])
+
+## QuestionObject (object)
++ question                  (string, required)
++ answer                    (string, required)
+
+## CreateReviewResponse (object)
++ reviews                   (array[ReviewObject])
++ landlord_id               (string)
+
+## CreateReviewErrorMissingTitle422
++ code: MISSING_TITLE_FIELD
++ message: missing title field
++ target: review object
+
+## CreateReviewErrorMissingRating422
++ code: MISSING_RATING_FIELD
++ message: missing rating field
++ target: review object
+
+## CreateReviewErrorMissingDifficultyRating422
++ code: MISSING_DIFFICULTY_RATING_FIELD
++ message: missing difficulty_rating field
++ target: review object
+
+## CreateReviewErrorMissingExperienceRating422
++ code: MISSING_EXPERIENCE_RATING_FIELD
++ message: missing experience_rating field
++ target: review object
+
+## CreateReviewErrorMissingApproveOfLandlord422
++ code: MISSING_APPROVE_OF_LANDLORD_FIELD
++ message: missing approve_of_landlord field
++ target: review object
+
+## CreateReviewErrorMissingReccomends422
++ code: MISSING_RECCOMENDS_FIELD
++ message: missing recommends field
++ target: review object
+
+## CreateReviewErrorInvalidToken401
++ code: INVALID_TOKEN
++ message: invalid token
++ target: headers verification
+
+## CreateReviewErrorInvalidUser401
++ code: INVALID_USER
++ message: invalid user
++ target: headers verification
+
+## CreateReviewErrorExpiredToken401
++ code: EXPIRED_TOKEN
++ message: token expired
++ target: headers verification
+
+## CreateReviewError422 (Error)
++ code:             MISSING_REQUIRED_FIELDS
++ message:          Missing required fields
++ target:           review
++ details           (array[CreateReviewErrorMissingTitle422, CreateReviewErrorMissingRating422, CreateReviewErrorMissingDifficultyRating422, CreateReviewErrorMissingExperienceRating422, CreateReviewErrorMissingApproveOfLandlord422, CreateReviewErrorMissingReccomends422])
+
+## CreateReviewError401 (Error)
++ code:             INVALID_HEADER
++ message:          Invalid header
++ target:           header
++ details           (array[CreateReviewErrorInvalidToken401, CreateReviewErrorInvalidUser401, CreateReviewErrorExpiredToken401])
+
+
+### =========== Retrieve Review ===============
+
+## RetrieveReviews201
++ reviews                   (array[ReviewObject])
++ landlord_id               (string)
+
+## RetrieveReviewsErrorInvalidLandlordId
++ code: INVALID_LANDLORD_ID
++ message: Invalid landlord_id
++ target: landlord id
+
+## RetrieveReviewError422 (Error)
++ code:             INVALID_PARAMETERS
++ message:          Invalid parameters
++ target:           parameters
++ details           (array[RetrieveReviewsErrorInvalidLandlordId])

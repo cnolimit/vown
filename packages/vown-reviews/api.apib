@@ -5,7 +5,7 @@ HOST: http://api.veriown.io/reviews/v1
 
 Reviews api allows users to both create and retireve reviews for Landlord submitted by tenants
 
-## Reviews [/{landlord_id}?limit={limit}]
+## Create Review [/{landlord_id}]
 
 ### Create Review [POST]
 
@@ -27,7 +27,10 @@ Create a new review for a Landlord
 + Response 401 (application/json)
     + Attributes (CreateReviewError401)
 
-### Retrive Review [GET]
+
+## Retrieve Reviews [/{landlord_id}?limit={limit}]
+
+### Retrive Reviews [GET]
 
 Retrive reviews
 
@@ -39,6 +42,26 @@ Retrive reviews
 
 + Response 422 (application/json)
     + Attributes (RetrieveReviewError422)
+
+
+## Update Review [/{review_id}]
+
+### Update Review [PUT]
+
+Update a review
+
++ Request (application/json)
+    + Attributes (ReviewObject)
+    + Headers
+
+            token: {user_generated_token}
+            user: tenant_id
+
++ Response 201 (application/json)
+    + Attributes (UpdateReview201)
+
++ Response 422 (application/json)
+    + Attributes (UpdateReviewError422)
 
 
 # Data Structures
@@ -62,6 +85,7 @@ Retrive reviews
 + experience_rating         (number, required)
 + approve_of_landlord       (boolean, required)
 + recommends                (boolean, required)
++ landlord_id               (string, required)
 + pros                      (string)
 + cons                      (string)
 + questions                 (array[QuestionObject])
@@ -148,3 +172,26 @@ Retrive reviews
 + message:          Invalid parameters
 + target:           parameters
 + details           (array[RetrieveReviewsErrorInvalidLandlordId])
+
+
+### =========== Update Review ===============
+
+## UpdateReview201
++ reviews                   (array[ReviewObject])
++ landlord_id               (string)
+
+## UpdateReviewErrorMissingProperties
++ code: MISSING_PROPERTIES
++ message: Missing properties, expected object of changes
++ target: review object
+
+## UpdateReviewErrorInvalidProperties
++ code: INVALID_PROPERTIES
++ message: Object contains invalid property: {invalid_property}
++ target: review object
+
+## UpdateReviewError422 (Error)
++ code:             INVALID_PARAMETERS
++ message:          Invalid parameters
++ target:           parameters
++ details           (array[UpdateReviewErrorMissingProperties, UpdateReviewErrorInvalidProperties])

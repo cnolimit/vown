@@ -3,8 +3,8 @@ import * as admin from 'firebase-admin'
 import * as express from 'express'
 import * as cors from 'cors'
 import * as bodyParser from 'body-parser'
+import { IReview } from '../types'
 
-import { IReview } from './types'
 const app = express()
 admin.initializeApp()
 
@@ -14,16 +14,31 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => res.send('Welcome to the reviews API'))
 
 app.post('/reviews', async (req, res) => {
-  const review: IReview = req.body
+  const review = req.body
 
   try {
+    if (!Object.values(review).length) {
+      res.status(422).send(`Failed to create review`)
+    }
+
     await admin
       .firestore()
       .collection('reviews')
       .doc()
       .create({ ...review })
 
-    res.send('Created Review!')
+    const reviewDocs = await admin
+      .firestore()
+      .collection('reviews')
+      .get()
+
+    let reviews: IReview[] = []
+
+    reviewDocs.forEach(snap => {
+      reviews.push(snap.data() as IReview)
+    })
+
+    res.send({ reviews })
   } catch (e) {
     res.status(422).send(`Failed to create review - Error: ${e.message}`)
   }

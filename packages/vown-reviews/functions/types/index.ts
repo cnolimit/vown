@@ -13,3 +13,8 @@ export interface IQuestion {
   question: string
   answer: string
 }
+
+export enum Collections {
+  LANDLORDS = 'landlords',
+  REVIEWS = 'reviews',
+}

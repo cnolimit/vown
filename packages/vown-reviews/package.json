@@ -1,10 +1,11 @@
 {
   "name": "@vown/reviews",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "main": "dist/index.js",
-  "types": "types/index.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "compile": "tsc -p tsconfig.json"
+    "clean": "rm -rf ./dist",
+    "compile": "npm run clean && tsc -p tsconfig.json"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

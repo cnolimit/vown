@@ -3,5 +3,6 @@
   "exclude": ["./functions"],
   "compilerOptions": {
     "outDir": "./dist",
+    "declaration": true
   }
 }

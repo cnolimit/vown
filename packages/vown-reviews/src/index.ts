@@ -1,8 +1,22 @@
-import axios from 'axios'
-import { IReview } from '@vown/types'
+import axios, { AxiosResponse } from 'axios'
+import { IReview, IReviewUpdate } from '@vown/types'
+
+type Callback = (error: string | null, data?: object) => void
+
+interface IReviewModule {
+  create: (review: IReview, callback: Callback) => void
+  update: (review: IReviewUpdate, callback: Callback) => void
+  retrieve: {
+    landlord: (id: string, callback: Callback) => void
+    user: (id: string, callback: Callback) => void
+  }
+}
+
+const version = 'v1'
+const host = 'https://us-central1-veriown-reviews.cloudfunctions.net/api/reviews'
 
 const reviewsApi = axios.create({
-  baseURL: 'https://us-central1-veriown-reviews.cloudfunctions.net/api',
+  baseURL: `${host}/${version}`,
   timeout: 25000,
   headers: {
     'Content-Type': 'application/json',
@@ -10,22 +24,32 @@ const reviewsApi = axios.create({
   },
 })
 
-interface IReviewModule {
-  create: (review: IReview, callback: (error: string | null, data?: object) => void) => void
-}
-
-enum IReviewErrors {
-  MISSING_ARGUMENT = 'MISSING_ARGUMENT',
-}
-
 const Review: IReviewModule = {
   create: (review, callback) => {
-    console.log('REVIEW DATA', { review })
-    if (!review) return callback(IReviewErrors.MISSING_ARGUMENT)
-
-    reviewsApi.post('/reviews', review).then(res => {
-      callback(null, res.data)
-    })
+    reviewsApi
+      .post('/create', review)
+      .then(res => callback(null, res.data))
+      .catch((res: AxiosResponse) => callback(res.data))
+  },
+  update: (review, callback) => {
+    reviewsApi
+      .put('/update', review)
+      .then(res => callback(null, res.data))
+      .catch((res: AxiosResponse) => callback(res.data))
+  },
+  retrieve: {
+    landlord: (id, callback) => {
+      reviewsApi
+        .get(`/l/${id}`)
+        .then(res => callback(null, res.data))
+        .catch((res: AxiosResponse) => callback(res.data))
+    },
+    user: (id, callback) => {
+      reviewsApi
+        .get(`/u/${id}`)
+        .then(res => callback(null, res.data))
+        .catch((res: AxiosResponse) => callback(res.data))
+    },
   },
 }
 

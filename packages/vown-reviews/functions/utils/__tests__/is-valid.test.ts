@@ -1,5 +1,5 @@
-import { isInvalid } from '.'
-import { createError404 } from '../api/v1/errors/create-errors'
+import { isInvalid } from '..'
+import { createApi } from '../../api/v1/errors'
 
 describe('Testing isValid function', () => {
   it('Should return an error for landlord id', () => {
@@ -12,8 +12,8 @@ describe('Testing isValid function', () => {
       },
     ]
 
-    expect(isInvalid([{ key: 'landlord_id', exists: false }], createError404)).toEqual({
-      ...createError404,
+    expect(isInvalid([{ key: 'landlord_id', exists: false }], createApi.Error404)).toEqual({
+      ...createApi.Error404,
       details,
     })
   })
@@ -28,8 +28,8 @@ describe('Testing isValid function', () => {
       },
     ]
 
-    expect(isInvalid([{ key: 'user_id', exists: false }], createError404)).toEqual({
-      ...createError404,
+    expect(isInvalid([{ key: 'user_id', exists: false }], createApi.Error404)).toEqual({
+      ...createApi.Error404,
       details,
     })
   })
@@ -53,9 +53,9 @@ describe('Testing isValid function', () => {
     expect(
       isInvalid(
         [{ key: 'user_id', exists: false }, { key: 'landlord_id', exists: false }],
-        createError404
+        createApi.Error404
       )
-    ).toEqual({ ...createError404, details })
+    ).toEqual({ ...createApi.Error404, details })
   })
 
   it('Should return an error for user but not landlord', () => {
@@ -71,12 +71,12 @@ describe('Testing isValid function', () => {
     expect(
       isInvalid(
         [{ key: 'user_id', exists: false }, { key: 'landlord_id', exists: true }],
-        createError404
+        createApi.Error404
       )
-    ).toEqual({ ...createError404, details })
+    ).toEqual({ ...createApi.Error404, details })
   })
 
   it('Should return false if the user exists', () => {
-    expect(isInvalid([{ key: 'user_id', exists: true }], createError404)).toEqual(false)
+    expect(isInvalid([{ key: 'user_id', exists: true }], createApi.Error404)).toEqual(false)
   })
 })

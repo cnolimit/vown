@@ -1,4 +1,5 @@
 export interface IReview {
+  [index: string]: any
   title: string
   difficulty_rating: number
   experience_rating: number
@@ -9,6 +10,7 @@ export interface IReview {
   questions?: IQuestion[]
   landlord_id: string
   user_id: string
+  rating: number
 }
 
 export interface IQuestion {

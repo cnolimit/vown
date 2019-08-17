@@ -7,63 +7,6 @@ import { createApi, updateApi, defaultApi } from '../v1/errors'
 
 const router = express.Router()
 
-router.put('/v1/update/:review_id', async (req, res) => {
-  try {
-    const review: IReview = req.body
-    const review_id: string = req.params.review_id
-    const { landlord_id, user_id } = review
-    const missingValues = hasEmptyValues(review)
-    let IDError: ResponseError | false = false
-
-    if (missingValues) {
-      const missingValueKeys = getEmptyValueKeys(review).map(key => ({ key, exists: false }))
-
-      return res.status(422).send(isInvalid(missingValueKeys, updateApi.Error422))
-    }
-
-    if (landlord_id) {
-      const landlordRef = await admin
-        .firestore()
-        .collection(Collections.LANDLORDS)
-        .doc(review.landlord_id)
-
-      const landlord = await landlordRef.get()
-      IDError = isInvalid(
-        [{ key: ReviewKeys.LANDLORD_ID, exists: landlord.exists }],
-        updateApi.Error404
-      )
-    }
-
-    if (user_id) {
-      const userRef = await admin
-        .firestore()
-        .collection(Collections.USERS)
-        .doc(review.user_id)
-
-      const user = await userRef.get()
-      IDError = isInvalid([{ key: ReviewKeys.USER_ID, exists: user.exists }], updateApi.Error404)
-    }
-
-    if (IDError) return res.status(404).send(IDError)
-
-    const reviewRef = await admin.firestore().collection(Collections.REVIEWS)
-
-    await reviewRef.doc(review_id).update({ ...review })
-
-    const reviewDocs = await reviewRef.get()
-
-    const reviews: IReview[] = []
-
-    reviewDocs.forEach(snap => {
-      reviews.push(snap.data() as IReview)
-    })
-
-    return res.send({ reviews })
-  } catch (e) {
-    return res.status(422).send({ ...defaultApi.Error, target: req.route.path, message: e.message })
-  }
-})
-
 /*
  * @Endpoint
  * @params
@@ -71,13 +14,14 @@ router.put('/v1/update/:review_id', async (req, res) => {
  * @description
  *
  */
-const fetchReviews = async (idName: string, idValue: string, limit?: number) => {
+const fetchReviews = async (idName: string, idValue: string, limit?: string) => {
+  const limitInt = limit ? parseInt(limit, 10) : 30
   const reviewDocs = await admin
     .firestore()
     .collection(Collections.REVIEWS)
     .where(idName, '==', idValue)
     .orderBy('rating')
-    .limit(limit || 30)
+    .limit(limitInt)
     .get()
 
   const reviews: IReview[] = []
@@ -189,6 +133,63 @@ router.post('/v1/create', async (req, res) => {
     const reviewRef = await admin.firestore().collection(Collections.REVIEWS)
 
     await reviewRef.doc(id).create({ id, landlord_id, user_id, ...review })
+
+    const reviewDocs = await reviewRef.get()
+
+    const reviews: IReview[] = []
+
+    reviewDocs.forEach(snap => {
+      reviews.push(snap.data() as IReview)
+    })
+
+    return res.send({ reviews })
+  } catch (e) {
+    return res.status(422).send({ ...defaultApi.Error, target: req.route.path, message: e.message })
+  }
+})
+
+router.put('/v1/update/:review_id', async (req, res) => {
+  try {
+    const review: IReview = req.body
+    const review_id: string = req.params.review_id
+    const { landlord_id, user_id } = review
+    const missingValues = hasEmptyValues(review)
+    let IDError: ResponseError | false = false
+
+    if (missingValues) {
+      const missingValueKeys = getEmptyValueKeys(review).map(key => ({ key, exists: false }))
+
+      return res.status(422).send(isInvalid(missingValueKeys, updateApi.Error422))
+    }
+
+    if (landlord_id) {
+      const landlordRef = await admin
+        .firestore()
+        .collection(Collections.LANDLORDS)
+        .doc(review.landlord_id)
+
+      const landlord = await landlordRef.get()
+      IDError = isInvalid(
+        [{ key: ReviewKeys.LANDLORD_ID, exists: landlord.exists }],
+        updateApi.Error404
+      )
+    }
+
+    if (user_id) {
+      const userRef = await admin
+        .firestore()
+        .collection(Collections.USERS)
+        .doc(review.user_id)
+
+      const user = await userRef.get()
+      IDError = isInvalid([{ key: ReviewKeys.USER_ID, exists: user.exists }], updateApi.Error404)
+    }
+
+    if (IDError) return res.status(404).send(IDError)
+
+    const reviewRef = await admin.firestore().collection(Collections.REVIEWS)
+
+    await reviewRef.doc(review_id).update({ ...review })
 
     const reviewDocs = await reviewRef.get()
 

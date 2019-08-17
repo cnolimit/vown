@@ -41,7 +41,6 @@ export const Error422: ResponseError = {
       target: 'review object',
       key: 'recommends',
     },
-    // ====== New Errors ====== //
     {
       code: 'INVALID_LANDLORD_FIELD',
       message: 'invalid landlord field',

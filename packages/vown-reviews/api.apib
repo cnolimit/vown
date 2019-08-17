@@ -5,7 +5,7 @@ HOST: http://api.veriown.io/reviews/v1
 
 Reviews api allows users to both create and retireve reviews for Landlord submitted by tenants
 
-## Create Review [/{landlord_id}]
+## Create Review [/create]
 
 ### Create Review [POST]
 
@@ -16,7 +16,7 @@ Create a new review for a Landlord
     + Headers
 
             token: {user_generated_token}
-            user: tenant_id
+            user: user_id
 
 + Response 201 (application/json)
     + Attributes (CreateReviewResponse)
@@ -27,12 +27,15 @@ Create a new review for a Landlord
 + Response 401 (application/json)
     + Attributes (CreateReviewError401)
 
++ Response 404 (application/json)
+    + Attributes (CreateReviewError404)
 
-## Retrieve Reviews [/{landlord_id}?limit={limit}]
 
-### Retrive Reviews [GET]
+## Retrieve Landlord Reviews [/landlord/{landlord_id}?limit={limit}]
 
-Retrive reviews
+### Retrive Landlord Reviews [GET]
+
+Retrive landlord reviews and use limit to control how many are returned
 
 + Parameters
     + limit - The amount of reviews you want to receive
@@ -44,7 +47,23 @@ Retrive reviews
     + Attributes (RetrieveReviewError422)
 
 
-## Update Review [/{review_id}]
+## Retrieve User Reviews [/user/{user_id}?limit={limit}]
+
+### Retrive User Reviews [GET]
+
+Retrive user reviews and use limit to control how many are returned
+
++ Parameters
+    + limit - The amount of reviews you want to receive
+
++ Response 201 (application/json)
+    + Attributes (RetrieveReviews201)
+
++ Response 422 (application/json)
+    + Attributes (RetrieveReviewError422)
+
+
+## Update Review [/update/{review_id}]
 
 ### Update Review [PUT]
 
@@ -55,10 +74,16 @@ Update a review
     + Headers
 
             token: {user_generated_token}
-            user: tenant_id
+            user: user_id
 
 + Response 201 (application/json)
     + Attributes (UpdateReview201)
+
++ Response 401 (application/json)
+    + Attributes (UpdateReviewError401)
+
++ Response 404 (application/json)
+    + Attributes (UpdateReviewError404)
 
 + Response 422 (application/json)
     + Attributes (UpdateReviewError422)
@@ -86,6 +111,7 @@ Update a review
 + approve_of_landlord       (boolean, required)
 + recommends                (boolean, required)
 + landlord_id               (string, required)
++ user_id                   (string, required)
 + pros                      (string)
 + cons                      (string)
 + questions                 (array[QuestionObject])
@@ -128,6 +154,16 @@ Update a review
 + message: missing recommends field
 + target: review object
 
+## CreateReviewErrorMissingLandlord422
++ code: MISSING_LANDLORD_FIELD
++ message: missing landlord field
++ target: review object
+
+## CreateReviewErrorMissingUser422
++ code: MISSING_USER_FIELD
++ message: missing user field
++ target: review object
+
 ## CreateReviewErrorInvalidToken401
 + code: INVALID_TOKEN
 + message: invalid token
@@ -143,17 +179,33 @@ Update a review
 + message: token expired
 + target: headers verification
 
+## CreateReviewErrorNotFoundLandlord404
++ code: INVALID_LANDLORD_ID
++ message: Invalid landlord id
++ target: landlord
+
+## CreateReviewErrorNotFoundUser404
++ code: INVALID_USER_ID
++ message: Invalid user id
++ target: user
+
 ## CreateReviewError422 (Error)
 + code:             MISSING_REQUIRED_FIELDS
 + message:          Missing required fields
 + target:           review
-+ details           (array[CreateReviewErrorMissingTitle422, CreateReviewErrorMissingRating422, CreateReviewErrorMissingDifficultyRating422, CreateReviewErrorMissingExperienceRating422, CreateReviewErrorMissingApproveOfLandlord422, CreateReviewErrorMissingReccomends422])
++ details           (array[CreateReviewErrorMissingTitle422, CreateReviewErrorMissingRating422, CreateReviewErrorMissingDifficultyRating422, CreateReviewErrorMissingExperienceRating422, CreateReviewErrorMissingApproveOfLandlord422, CreateReviewErrorMissingReccomends422, CreateReviewErrorMissingLandlord422, CreateReviewErrorMissingUser422])
 
 ## CreateReviewError401 (Error)
 + code:             INVALID_HEADER
 + message:          Invalid header
 + target:           header
 + details           (array[CreateReviewErrorInvalidToken401, CreateReviewErrorInvalidUser401, CreateReviewErrorExpiredToken401])
+
+## CreateReviewError404 (Error)
++ code:             NOT_FOUND
++ message:          ID not found
++ target:           id
++ details           (array[CreateReviewErrorNotFoundUser404, CreateReviewErrorNotFoundLandlord404])
 
 
 ### =========== Retrieve Review ===============
@@ -180,18 +232,86 @@ Update a review
 + reviews                   (array[ReviewObject])
 + landlord_id               (string)
 
-## UpdateReviewErrorMissingProperties
-+ code: MISSING_PROPERTIES
-+ message: Missing properties, expected object of changes
+## UpdateReviewErrorInvalidTitle422
++ code: INVALID_TITLE_FIELD
++ message: Invalid title field
 + target: review object
 
-## UpdateReviewErrorInvalidProperties
-+ code: INVALID_PROPERTIES
-+ message: Object contains invalid property: {invalid_property}
+## UpdateReviewErrorInvalidRating422
++ code: INVALID_RATING_FIELD
++ message: Invalid rating field
 + target: review object
+
+## UpdateReviewErrorInvalidDifficultyRating422
++ code: INVALID_DIFFICULTY_RATING_FIELD
++ message: Invalid difficulty_rating field
++ target: review object
+
+## UpdateReviewErrorInvalidExperienceRating422
++ code: INVALID_EXPERIENCE_RATING_FIELD
++ message: Invalid experience_rating field
++ target: review object
+
+## UpdateReviewErrorInvalidApproveOfLandlord422
++ code: INVALID_APPROVE_OF_LANDLORD_FIELD
++ message: Invalid approve_of_landlord field
++ target: review object
+
+## UpdateReviewErrorInvalidReccomends422
++ code: INVALID_RECCOMENDS_FIELD
++ message: Invalid recommends field
++ target: review object
+
+## UpdateReviewErrorInvalidLandlord422
++ code: INVALID_LANDLORD_FIELD
++ message: Invalid landlord field
++ target: review object
+
+## UpdateReviewErrorInvalidUser422
++ code: INVALID_USER_FIELD
++ message: Invalid user field
++ target: review object
+
+## UpdateReviewErrorNotFoundLandlord404
++ code: INVALID_LANDLORD_ID
++ message: Invalid landlord id
++ target: landlord
+
+## UpdateReviewErrorNotFoundUser404
++ code: INVALID_USER_ID
++ message: Invalid user id
++ target: user
+
+## UpdateReviewErrorInvalidToken401
++ code: INVALID_TOKEN
++ message: invalid token
++ target: headers verification
+
+## UpdateReviewErrorInvalidUser401
++ code: INVALID_USER
++ message: invalid user
++ target: headers verification
+
+## UpdateReviewErrorExpiredToken401
++ code: EXPIRED_TOKEN
++ message: token expired
++ target: headers verification
+
 
 ## UpdateReviewError422 (Error)
 + code:             INVALID_PARAMETERS
 + message:          Invalid parameters
 + target:           parameters
-+ details           (array[UpdateReviewErrorMissingProperties, UpdateReviewErrorInvalidProperties])
++ details           (array[UpdateReviewErrorInvalidTitle422, UpdateReviewErrorInvalidRating422, UpdateReviewErrorInvalidDifficultyRating422, UpdateReviewErrorInvalidExperienceRating422, UpdateReviewErrorInvalidApproveOfLandlord422, UpdateReviewErrorInvalidReccomends422, UpdateReviewErrorInvalidLandlord422, UpdateReviewErrorInvalidUser422 ])
+
+## UpdateReviewError404 (Error)
++ code:             NOT_FOUND
++ message:          ID not found
++ target:           id
++ details           (array[UpdateReviewErrorNotFoundUser404, UpdateReviewErrorNotFoundLandlord404])
+
+## UpdateReviewError401 (Error)
++ code:             INVALID_HEADER
++ message:          Invalid header
++ target:           header
++ details           (array[UpdateReviewErrorInvalidToken401, UpdateReviewErrorInvalidUser401, UpdateReviewErrorExpiredToken401])

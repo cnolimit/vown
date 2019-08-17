@@ -18,6 +18,10 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
-    "@vown/reviews": "0.1.0"
+    "@types/react": "^16.9.2",
+    "@types/react-dom": "^16.8.5",
+    "@vown/reviews": "0.1.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
   }
 }

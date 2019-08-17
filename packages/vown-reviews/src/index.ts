@@ -40,13 +40,13 @@ const Review: IReviewModule = {
   retrieve: {
     landlord: (id, callback) => {
       reviewsApi
-        .get(`/l/${id}`)
+        .get(`/landlord/${id}`)
         .then(res => callback(null, res.data))
         .catch((res: AxiosResponse) => callback(res.data))
     },
     user: (id, callback) => {
       reviewsApi
-        .get(`/u/${id}`)
+        .get(`/user/${id}`)
         .then(res => callback(null, res.data))
         .catch((res: AxiosResponse) => callback(res.data))
     },

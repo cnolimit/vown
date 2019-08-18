@@ -10,7 +10,7 @@ type isInvalidProps = { key: string; exists: boolean }
  * @returns - The errorSchema with the array of errors as the value in the details property
  */
 export const isInvalidBody = (body: any, errorSchema: ResponseError) => {
-  const missing_keys = errorSchema.details.filter(error => !body[error.key])
+  const missing_keys = errorSchema.details.filter(error => typeof body[error.key] === 'undefined')
 
   const errors = { ...errorSchema, details: missing_keys }
 

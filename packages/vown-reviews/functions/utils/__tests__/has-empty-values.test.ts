@@ -28,4 +28,8 @@ describe('Testing isInvalidBody function', () => {
     }
     expect(hasEmptyValues(review)).toBeFalsy()
   })
+
+  it('Should return false if an empty object is provided', () => {
+    expect(hasEmptyValues({} as any)).toBeFalsy()
+  })
 })

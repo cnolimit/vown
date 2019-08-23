@@ -1,10 +1,15 @@
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
   entry: {
     app: path.resolve(__dirname, '../src/index.tsx'),
+  },
+  resolve: {
+    extensions: ['.tsx', '.ts', '.js'],
+    alias: {
+      '@components': path.join(__dirname + '/../src/components/'),
+    },
   },
   module: {
     rules: [
@@ -16,9 +21,6 @@ module.exports = {
     ],
   },
   plugins: [new CopyPlugin([{ from: 'public', to: path.resolve(__dirname, '../dist') }])],
-  resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
-  },
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: 'bundle.js',

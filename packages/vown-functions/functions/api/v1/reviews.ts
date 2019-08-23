@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin'
 import * as uuid from 'uuid/v4'
 import { IReview, Collections, ReviewKeys, ResponseError } from '../../types'
 import { isInvalidBody, isInvalid, hasEmptyValues, getEmptyValueKeys } from '../../utils'
-import { createApi, updateApi, defaultApi } from '../v1/errors'
+import { createApi, updateApi, defaultApi } from './errors'
 
 const router = express.Router()
 

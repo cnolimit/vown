@@ -58,3 +58,12 @@ export interface ILandlord {
   rating: number
   reviews: IReview[]
 }
+
+export interface IUserDetails {
+  displayName: string
+  email: string
+  photoURL: string
+  uid: string
+  token_id: string
+  token: string
+}

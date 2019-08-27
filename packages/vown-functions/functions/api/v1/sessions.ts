@@ -4,12 +4,13 @@ import * as jsonwebtoken from 'jsonwebtoken'
 const secret = 'YOLO'
 const router = express.Router()
 
-router.post('/v1', (req, res) => {
-  const token = jsonwebtoken.sign(
-    { user: 'id', exp: Math.floor(Date.now() / 100) + 60 * 60 },
+const generateToken = (id: string = '') => {
+  return jsonwebtoken.sign(
+    { unique_token_id: id, exp: Math.floor(Date.now() / 100) + 60 * 60 },
     secret
   )
-  res.send({ token })
-})
+}
+
+router.post('/v1/token', (req, res) => res.send({ token: generateToken(req.body.uid) }))
 
 export default router

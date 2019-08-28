@@ -2,7 +2,7 @@ import { ResponseError } from '../../../types'
 
 export const Error401: ResponseError = {
   code: 'INVALID_HEADER',
-  message: 'Invalid header',
+  message: 'Invalid header values',
   target: 'header',
   details: [
     {
@@ -21,9 +21,29 @@ export const Error401: ResponseError = {
       code: 'EXPIRED_TOKEN',
       message: 'token expired',
       target: 'headers verification',
-      key: 'token',
+      key: 'token_exp',
     },
   ],
 }
 
-export default { Error401 }
+export const Error422: ResponseError = {
+  code: 'MISSING_HEADER_VALUES',
+  message: 'Missing header',
+  target: 'header',
+  details: [
+    {
+      code: 'MISSING_TOKEN',
+      message: 'Missing token',
+      target: 'headers verification',
+      key: 'token',
+    },
+    {
+      code: 'MISSING_USER',
+      message: 'Missing user',
+      target: 'headers verification',
+      key: 'user',
+    },
+  ],
+}
+
+export default { Error401, Error422 }

@@ -4,6 +4,7 @@ import * as uuid from 'uuid/v4'
 import { IReview, Collections, ReviewKeys, ResponseError } from '../../types'
 import { isInvalidBody, isInvalid, hasEmptyValues, getEmptyValueKeys } from '../../utils'
 import { createApi, updateApi, defaultApi } from './errors'
+import authRoute from './middleware/auth-route'
 
 const router = express.Router()
 
@@ -71,10 +72,9 @@ router.get('/v1/landlord/:landlord_id', async (req, res) => {
  * @description
  *
  */
-router.get('/v1/user/:user_id', async (req, res) => {
-  const user_id = req.params.user_id
+router.get('/v1/user', authRoute, async (req, res) => {
+  const user_id = req.body.token.user
   const limit = req.query.limit
-
   const userRef = await admin
     .firestore()
     .collection(Collections.USERS)

@@ -22,7 +22,6 @@ exports.api = functions.https.onRequest(app)
 
 exports.createUser = functions.auth.user().onCreate(user => {
   const { email, uid, metadata, displayName, photoURL, phoneNumber } = user
-  console.log({ user })
 
   return admin
     .firestore()

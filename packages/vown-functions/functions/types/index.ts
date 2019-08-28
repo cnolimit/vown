@@ -37,6 +37,11 @@ export enum ReviewKeys {
   USER_ID = 'user_id',
 }
 
+export interface IJWT {
+  user: string
+  exp: number
+}
+
 export interface ResponseErrorBody {
   code: string
   message: string

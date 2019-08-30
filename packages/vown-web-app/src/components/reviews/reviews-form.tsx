@@ -10,7 +10,8 @@ import {
   FormControlLabel,
 } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
-import Review from '@vown/reviews'
+import Reviews from '@vown/reviews'
+import auth from '@vown/auth'
 
 const ReviewForm = () => {
   const [title, setTitle] = useState('')
@@ -20,24 +21,31 @@ const ReviewForm = () => {
   const [recommends, setRecommends] = useState(false)
   const [approves, setApproves] = useState(false)
 
-  const submitData = () => {
-    Review.create(
-      {
-        title,
-        user_id: '3c56afb7-8336-44f4-b784-6ecb72a14d31',
-        landlord_id: '9dd53577-b9aa-4024-beaa-1a38d3bba38b',
-        difficulty_rating: difficulty,
-        experience_rating: experience,
-        rating,
-        approve_of_landlord: approves,
-        recommends,
-      },
-      (err, data) => {
-        if (err) return console.log({ err })
+  const submitData = async () => {
+    const token = await auth.GetToken()
+    const userId = await auth.GetId()
 
-        console.log({ data, err })
-      }
-    )
+    if (token && userId) {
+      const ReviewsMod = new Reviews(token, userId)
+
+      ReviewsMod.create(
+        {
+          title,
+          user_id: userId,
+          landlord_id: '9dd53577-b9aa-4024-beaa-1a38d3bba38b',
+          difficulty_rating: difficulty,
+          experience_rating: experience,
+          rating,
+          approve_of_landlord: approves,
+          recommends,
+        },
+        (err, data) => {
+          if (err) return console.log({ err })
+
+          console.log({ data, err })
+        }
+      )
+    }
   }
 
   return (

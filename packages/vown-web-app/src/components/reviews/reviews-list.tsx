@@ -3,26 +3,34 @@ import Card from '@material-ui/core/Card'
 import { CardHeader, Box, Typography } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { IReview } from '@vown/types'
-import Review from '@vown/reviews'
+import Reviews from '@vown/reviews'
+import auth from '@vown/auth'
 
 const App = () => {
   const [reviews, setReviews] = useState<IReview[]>([])
   const [fetching, setFecting] = useState(true)
 
   useEffect(() => {
-    console.log('YOLO')
+    const fetchUserReviews = async () => {
+      const token = await auth.GetToken()
+      const userId = await auth.GetId()
 
-    Review.retrieve.user(
-      '3c56afb7-8336-44f4-b784-6ecb72a14d31',
-      (err, data: { reviews: IReview[] }) => {
-        if (err) return setFecting(false)
-        if (data) {
-          setReviews(data.reviews)
-        }
-        setFecting(false)
+      console.log({ token, userId })
+
+      if (token && userId) {
+        const ReviewsMod = new Reviews(token, userId)
+
+        ReviewsMod.retrieve().user((err, data: { reviews: IReview[] }) => {
+          if (err) return setFecting(false)
+          if (data) {
+            setReviews(data.reviews)
+          }
+          setFecting(false)
+        })
       }
-    )
-  }, [reviews.length])
+    }
+    fetchUserReviews()
+  }, [])
 
   return (
     <React.Fragment>

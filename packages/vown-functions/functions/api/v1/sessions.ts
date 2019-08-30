@@ -1,6 +1,8 @@
 import * as express from 'express'
 import * as jsonwebtoken from 'jsonwebtoken'
 import { JWTSecret } from '../../utils/constants'
+import { sessionsApi } from './errors'
+import { isInvalidBody } from '../../utils'
 
 const router = express.Router()
 
@@ -11,8 +13,14 @@ const generateToken = (id: string, user: string) => {
   )
 }
 
-router.post('/v1/token', (req, res) =>
-  res.send({ token: generateToken(req.body.uid, req.body.user) })
-)
+router.post('/v1/token', (req, res) => {
+  const user = req.body.user
+  const uid = req.body.uid
+  const errorObj = isInvalidBody({ user, uid }, sessionsApi.Error422)
+
+  if (errorObj) return res.status(422).send(errorObj)
+
+  return res.send({ token: generateToken(req.body.uid, req.body.user) })
+})
 
 export default router

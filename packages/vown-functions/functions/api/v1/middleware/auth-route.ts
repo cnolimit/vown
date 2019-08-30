@@ -3,16 +3,14 @@ import * as jwt from 'jsonwebtoken'
 import { JWTSecret } from '../../../utils/constants'
 import { IJWT } from '../../../types'
 import { headerApi } from '../errors'
-import { isInvalid } from '../../../utils'
+import { isInvalidBody, isInvalid } from '../../../utils'
 
 const authRoute = (req: Request, res: Response, next: NextFunction) => {
   const token = req.header('token') as string
   const user = req.header('user') as string
+  const errorObj = isInvalidBody({ user, token }, headerApi.Error422)
 
-  if (!token)
-    return res.status(422).send(isInvalid([{ key: 'token', exists: false }], headerApi.Error422))
-  if (!user)
-    return res.status(422).send(isInvalid([{ key: 'user', exists: false }], headerApi.Error422))
+  if (errorObj) return res.status(422).send(errorObj)
 
   jwt.verify(token, JWTSecret, (err, decoded) => {
     const _decoded = decoded as IJWT

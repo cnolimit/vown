@@ -1,4 +1,4 @@
-import { ResponseError, IReview } from '../types'
+import { ResponseError } from '../types'
 
 type isInvalidProps = { key: string; exists: boolean }
 
@@ -37,14 +37,14 @@ export const isInvalid = (ids: isInvalidProps[], errorSchema: ResponseError) => 
  * @param obj
  * @returns - Boolean that states whether or not the object has missing values
  */
-export const hasEmptyValues = (obj: IReview) => Boolean(getEmptyValueKeys(obj).length)
+export const hasEmptyValues = (obj: any) => Boolean(getEmptyValueKeys(obj).length)
 
 /**
  * @description - Checks object propertites to see if any are missing values
  * @param obj
  * @returns - Array of keys which had misssing values from the object
  */
-export const getEmptyValueKeys = (obj: IReview) => {
+export const getEmptyValueKeys = (obj: any) => {
   const keyValues = Object.entries(obj)
 
   return keyValues.map(key => (obj[key[0]] === '' ? key[0] : '')).filter(Boolean)

@@ -1,6 +1,7 @@
 import * as firebase from 'firebase'
 import { IUserDetails } from '@vown/types'
 import localforage from 'localforage'
+import axios from 'axios'
 
 const app = firebase.initializeApp({
   apiKey: 'AIzaSyARkIZDrZNFCSYd6At-tOmy8pLBY3EN3ng',
@@ -36,19 +37,19 @@ const _getPersonalDetails = async (): Promise<IUserDetails | null> => {
   return null
 }
 
-const _getToken = async (token_id: string) => {
-  const res = await fetch(
+const _getToken = async (token_id: string, user: string) => {
+  const res = await axios.post(
     'https://us-central1-veriown-reviews.cloudfunctions.net/api/sessions/v1/token',
-    { method: 'POST', body: JSON.stringify({ uid: token_id }) }
+    { uid: token_id, user }
   )
-  return res.json()
+  return res.data
 }
 
 const SignIn = async (username: string, password: string) => {
   await app.auth().signInWithEmailAndPassword(username, password)
   const details = await _getPersonalDetails()
   if (details) {
-    const token = await _getToken(details.token_id)
+    const token = await _getToken(details.token_id, details.uid)
     await _setToken(token.token)
     await _setSession(details)
   }
@@ -59,7 +60,7 @@ const SignUp = async (username: string, password: string) => {
   await app.auth().createUserWithEmailAndPassword(username, password)
   const details = await _getPersonalDetails()
   if (details) {
-    const token = await _getToken(details.token_id)
+    const token = await _getToken(details.token_id, details.uid)
     await _setToken(token.token)
     await _setSession(details)
   }
@@ -75,7 +76,7 @@ const SignOut = async () => {
 const isLoggedIn = async () => !!app.auth().currentUser
 
 const GetId = async () => {
-  const user = app.auth().currentUser
+  const user = (await localforage.getItem(AUTH_STORAGE)) as IUserDetails
   if (user) return user.uid
   return null
 }

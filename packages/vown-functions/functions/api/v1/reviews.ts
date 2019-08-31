@@ -8,13 +8,6 @@ import authRoute from './middleware/auth-route'
 
 const router = express.Router()
 
-/*
- * @Endpoint
- * @params
- * @body
- * @description
- *
- */
 const fetchReviews = async (idName: string, idValue: string, limit?: string) => {
   const limitInt = limit ? parseInt(limit, 10) : 30
   const reviewDocs = await admin
@@ -34,13 +27,6 @@ const fetchReviews = async (idName: string, idValue: string, limit?: string) => 
   return { reviews, [idName]: idValue }
 }
 
-/**
- * @Endpoint
- * @params
- * @body
- * @description
- *
- */
 router.get('/v1/landlord/:landlord_id', async (req, res) => {
   const landlord_id = req.params.landlord_id
   const limit = req.query.limit
@@ -65,13 +51,6 @@ router.get('/v1/landlord/:landlord_id', async (req, res) => {
   }
 })
 
-/**
- * @Endpoint
- * @params
- * @body
- * @description
- *
- */
 router.get('/v1/user', authRoute, async (req, res) => {
   const user_id = req.body.token.user
   const limit = req.query.limit
@@ -92,14 +71,6 @@ router.get('/v1/user', authRoute, async (req, res) => {
   }
 })
 
-/**
- * @Endpoint - Create new review
- * @params - { landlord_id: string }
- * @body - { body: IReview }
- * @description - Will check if the landlord_id and the user_id are both valid
- * and if they are it will create a new review in the review collection and if not
- * it will return a 404 error
- */
 router.post('/v1/create', authRoute, async (req, res) => {
   try {
     const { token, ...review }: IReview & { token: IJWT } = req.body
@@ -180,19 +151,14 @@ router.put('/v1/update/:review_id', authRoute, async (req, res) => {
     }
 
     if (IDError) return res.status(404).send(IDError)
-
     const reviewRef = await admin.firestore().collection(Collections.REVIEWS)
-
     await reviewRef.doc(review_id).update({ ...review })
-
     const reviewDocs = await reviewRef.get()
-
     const reviews: IReview[] = []
 
     reviewDocs.forEach(snap => {
       reviews.push(snap.data() as IReview)
     })
-
     return res.send({ reviews })
   } catch (e) {
     return res.status(422).send({ ...defaultApi.Error, target: req.route.path, message: e.message })

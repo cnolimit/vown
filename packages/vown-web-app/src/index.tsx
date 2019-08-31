@@ -1,6 +1,6 @@
 import React from 'react'
 import * as ReactDOM from 'react-dom'
-// import ReviewContainer from '@components/reviews/reviews.container'
+import ReviewContainer from '@components/reviews/reviews.container'
 import auth from '@vown/auth'
 
 const signIn = async () => {
@@ -41,7 +41,7 @@ const App = () => {
         <button onClick={getUserDetails}>Get User Details</button>
         <button onClick={getToken}>Get User TOKEN</button>
       </div>
-      {/* <ReviewContainer /> */}
+      <ReviewContainer />
     </React.Fragment>
   )
 }

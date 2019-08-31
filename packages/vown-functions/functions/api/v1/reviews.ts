@@ -1,7 +1,7 @@
 import * as express from 'express'
 import * as admin from 'firebase-admin'
 import * as uuid from 'uuid/v4'
-import { IReview, Collections, ReviewKeys, ResponseError } from '../../types'
+import { IReview, Collections, ReviewKeys, ResponseError, IJWT } from '../../types'
 import { isInvalidBody, isInvalid, hasEmptyValues, getEmptyValueKeys } from '../../utils'
 import { createApi, updateApi, defaultApi } from './errors'
 import authRoute from './middleware/auth-route'
@@ -59,7 +59,7 @@ router.get('/v1/landlord/:landlord_id', async (req, res) => {
   if (IDError) return res.status(404).send(IDError)
 
   try {
-    return res.send(await fetchReviews('landlord_id', landlord_id, limit))
+    return res.send(await fetchReviews(ReviewKeys.LANDLORD_ID, landlord_id, limit))
   } catch (e) {
     return res.status(422).send({ ...defaultApi.Error, target: req.route.path, message: e.message })
   }
@@ -86,7 +86,7 @@ router.get('/v1/user', authRoute, async (req, res) => {
   if (IDError) return res.status(404).send(IDError)
 
   try {
-    return res.send(await fetchReviews('user_id', user_id, limit))
+    return res.send(await fetchReviews(ReviewKeys.USER_ID, user_id, limit))
   } catch (e) {
     return res.status(422).send({ ...defaultApi.Error, target: req.route.path, message: e.message })
   }
@@ -100,10 +100,10 @@ router.get('/v1/user', authRoute, async (req, res) => {
  * and if they are it will create a new review in the review collection and if not
  * it will return a 404 error
  */
-router.post('/v1/create', async (req, res) => {
+router.post('/v1/create', authRoute, async (req, res) => {
   try {
-    const review: IReview = req.body
-    const { landlord_id, user_id } = review
+    const { token, ...review }: IReview & { token: IJWT } = req.body
+    const { user: userId } = token
     const error = isInvalidBody(review, createApi.Error422)
     if (error) return res.status(422).send(error)
 
@@ -111,7 +111,7 @@ router.post('/v1/create', async (req, res) => {
     const userRef = await admin
       .firestore()
       .collection(Collections.USERS)
-      .doc(review.user_id)
+      .doc(userId)
 
     const landlordRef = await admin
       .firestore()
@@ -130,25 +130,19 @@ router.post('/v1/create', async (req, res) => {
 
     if (IDError) return res.status(404).send(IDError)
 
-    const reviewRef = await admin.firestore().collection(Collections.REVIEWS)
+    await admin
+      .firestore()
+      .collection(Collections.REVIEWS)
+      .doc(id)
+      .create({ id, landlord_id: review.landlord_id, user_id: userId, ...review })
 
-    await reviewRef.doc(id).create({ id, landlord_id, user_id, ...review })
-
-    const reviewDocs = await reviewRef.get()
-
-    const reviews: IReview[] = []
-
-    reviewDocs.forEach(snap => {
-      reviews.push(snap.data() as IReview)
-    })
-
-    return res.send({ reviews })
+    return res.send(await fetchReviews(ReviewKeys.USER_ID, userId))
   } catch (e) {
     return res.status(422).send({ ...defaultApi.Error, target: req.route.path, message: e.message })
   }
 })
 
-router.put('/v1/update/:review_id', async (req, res) => {
+router.put('/v1/update/:review_id', authRoute, async (req, res) => {
   try {
     const review: IReview = req.body
     const review_id: string = req.params.review_id

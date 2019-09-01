@@ -27,7 +27,7 @@ const fetchReviews = async (idName: string, idValue: string, limit?: string) => 
   return { reviews, [idName]: idValue }
 }
 
-router.get('/v1/landlord/:landlord_id', async (req, res) => {
+router.get('/landlord/:landlord_id', async (req, res) => {
   const landlord_id = req.params.landlord_id
   const limit = req.query.limit
 
@@ -51,7 +51,7 @@ router.get('/v1/landlord/:landlord_id', async (req, res) => {
   }
 })
 
-router.get('/v1/user', authRoute, async (req, res) => {
+router.get('/user', authRoute, async (req, res) => {
   const user_id = req.body.token.user
   const limit = req.query.limit
   const userRef = await admin
@@ -71,7 +71,7 @@ router.get('/v1/user', authRoute, async (req, res) => {
   }
 })
 
-router.post('/v1/create', authRoute, async (req, res) => {
+router.post('/create', authRoute, async (req, res) => {
   try {
     const { token, ...review }: IReview & { token: IJWT } = req.body
     const { user: userId } = token
@@ -113,7 +113,7 @@ router.post('/v1/create', authRoute, async (req, res) => {
   }
 })
 
-router.put('/v1/update/:review_id', authRoute, async (req, res) => {
+router.put('/update/:review_id', authRoute, async (req, res) => {
   try {
     const review: IReview = req.body
     const review_id: string = req.params.review_id

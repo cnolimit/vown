@@ -13,7 +13,7 @@ const generateToken = (id: string, user: string) => {
   )
 }
 
-router.post('/v1/token', (req, res) => {
+router.post('/token', (req, res) => {
   const user = req.body.user
   const uid = req.body.uid
   const errorObj = isInvalidBody({ user, uid }, sessionsApi.Error422)

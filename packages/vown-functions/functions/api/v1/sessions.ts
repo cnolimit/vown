@@ -2,13 +2,13 @@ import * as express from 'express'
 import * as jsonwebtoken from 'jsonwebtoken'
 import { JWTSecret } from '../../utils/constants'
 import { sessionsApi } from './errors'
-import { isInvalidBody } from '../../utils'
+import { isInvalidBody, addMinutesToMS } from '../../utils'
 
 const router = express.Router()
 
 const generateToken = (id: string, user: string) => {
   return jsonwebtoken.sign(
-    { unique_token_id: id, user: user, exp: Math.floor(Date.now() / 100) + 60 * 60 },
+    { unique_token_id: id, user: user, exp: addMinutesToMS(15, Date.now()) },
     JWTSecret
   )
 }

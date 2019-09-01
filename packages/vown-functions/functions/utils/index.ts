@@ -3,6 +3,17 @@ import { ResponseError } from '../types'
 type isInvalidProps = { key: string; exists: boolean }
 
 /**
+ * @description - Converts the minutes to ms, adds it to the ms value and
+ * returns the new ms value.
+ * @param minutes
+ * @param ms
+ */
+export const addMinutesToMS = (minutes: number, ms: number) => {
+  const minutesToAdd = 60000 * minutes
+
+  return ms + minutesToAdd
+}
+/**
  * @description - Checks the body for missing required values and uses the errorSchema
  * to determine the associated error for the missing attribute.
  * @param body

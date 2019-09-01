@@ -21,7 +21,7 @@ const authRoute = (req: Request, res: Response, next: NextFunction) => {
     if (user !== _decoded.user)
       return res.status(401).send(isInvalid([{ key: 'user', exists: false }], headerApi.Error401))
 
-    if (Date.now() >= _decoded.exp * 100) {
+    if (Date.now() >= _decoded.exp) {
       return res
         .status(401)
         .send(isInvalid([{ key: 'token_exp', exists: false }], headerApi.Error401))

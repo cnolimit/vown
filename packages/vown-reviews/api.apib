@@ -1,5 +1,5 @@
 FORMAT: 1A
-HOST: http://api.veriown.io/reviews/v1
+HOST: https://us-central1-veriown-reviews.cloudfunctions.net/api/v1/reviews
 
 # Veriown Reviews
 
@@ -15,7 +15,7 @@ Create a new review for a Landlord
     + Attributes (ReviewObject)
     + Headers
 
-            token: {user_generated_token}
+            token: token
             user: user_id
 
 + Response 201 (application/json)
@@ -41,27 +41,39 @@ Retrive landlord reviews and use limit to control how many are returned
     + limit - The amount of reviews you want to receive
 
 + Response 201 (application/json)
-    + Attributes (RetrieveReviews201)
+    + Attributes (RetrieveLandlordReviews201)
 
 + Response 422 (application/json)
-    + Attributes (RetrieveReviewError422)
+    + Attributes (RetrieveLandlordReviewError422)
+
++ Response 401 (application/json)
+    + Attributes (RetrieveReviewError401)
 
 
-## Retrieve User Reviews [/user/{user_id}?limit={limit}]
+## Retrieve User Reviews [/user/?limit={limit}]
 
 ### Retrive User Reviews [GET]
 
 Retrive user reviews and use limit to control how many are returned
 
++ Request (application/json)
+    + Attributes (ReviewObject)
+    + Headers
+
+            token: token
+            user: user_id
+
 + Parameters
     + limit - The amount of reviews you want to receive
 
 + Response 201 (application/json)
-    + Attributes (RetrieveReviews201)
+    + Attributes (RetrieveUserReviews201)
 
 + Response 422 (application/json)
-    + Attributes (RetrieveReviewError422)
+    + Attributes (RetrieveUserReviewError422)
 
++ Response 401 (application/json)
+    + Attributes (RetrieveReviewError401)
 
 ## Update Review [/update/{review_id}]
 
@@ -73,7 +85,7 @@ Update a review
     + Attributes (ReviewObject)
     + Headers
 
-            token: {user_generated_token}
+            token: token
             user: user_id
 
 + Response 201 (application/json)
@@ -112,6 +124,7 @@ Update a review
 + recommends                (boolean, required)
 + landlord_id               (string, required)
 + user_id                   (string, required)
++ id                        (string)
 + pros                      (string)
 + cons                      (string)
 + questions                 (array[QuestionObject])
@@ -210,20 +223,61 @@ Update a review
 
 ### =========== Retrieve Review ===============
 
-## RetrieveReviews201
+## RetrieveLandlordReviews201
 + reviews                   (array[ReviewObject])
 + landlord_id               (string)
 
+## RetrieveUserReviews201
++ reviews                   (array[ReviewObject])
++ user_id               (string)
+
+## RetrieveReviewsErrorMissingUserId
++ code: MISSING_USER_ID
++ message: Missing user id
++ target: user id
+
+## RetrieveReviewsErrorMissingToken
++ code: MISSING_TOKEN
++ message: Missing token
++ target: token
+
+## RetrieveUserReviewError422 (Error)
++ code:             INVALID_PARAMETERS
++ message:          Invalid parameters
++ target:           parameters
++ details           (array[RetrieveReviewsErrorMissingUserId, RetrieveReviewsErrorMissingToken])
+
 ## RetrieveReviewsErrorInvalidLandlordId
 + code: INVALID_LANDLORD_ID
-+ message: Invalid landlord_id
++ message: Invalid landlord id
 + target: landlord id
 
-## RetrieveReviewError422 (Error)
+## RetrieveLandlordReviewError422 (Error)
 + code:             INVALID_PARAMETERS
 + message:          Invalid parameters
 + target:           parameters
 + details           (array[RetrieveReviewsErrorInvalidLandlordId])
+
+## RetrieveReviewErrorHeaderToken401
++ code: EXPIRED_TOKEN
++ message: token expired
++ target: headers verification
+
+## RetrieveReviewErrorHeaderInvalidUser401
++ code: INVALID_USER
++ message: invalid user
++ target: headers verification
+
+## RetrieveReviewErrorHeaderInvalidToken401
++ code: INVALID_TOKEN
++ message: Invalid token
++ target: token
+
+## RetrieveReviewError401 (Error)
++ code:             INVALID_HEADER
++ message:          Invalid header
++ target:           header
++ details           (array[RetrieveReviewErrorHeaderToken401, RetrieveReviewErrorHeaderInvalidUser401, RetrieveReviewErrorHeaderInvalidToken401])
 
 
 ### =========== Update Review ===============

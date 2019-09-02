@@ -28,7 +28,7 @@ export const Error401: ResponseError = {
 
 export const Error422: ResponseError = {
   code: 'MISSING_HEADER_VALUES',
-  message: 'Missing header',
+  message: 'Missing header values',
   target: 'header',
   details: [
     {
@@ -38,8 +38,8 @@ export const Error422: ResponseError = {
       key: 'token',
     },
     {
-      code: 'MISSING_USER',
-      message: 'Missing user',
+      code: 'MISSING_USER_ID',
+      message: 'Missing user id',
       target: 'headers verification',
       key: 'user',
     },

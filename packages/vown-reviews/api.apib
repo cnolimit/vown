@@ -1,11 +1,11 @@
 FORMAT: 1A
-HOST: https://us-central1-veriown-reviews.cloudfunctions.net/api/v1/reviews
+HOST: https://us-central1-veriown-reviews.cloudfunctions.net/api/v1
 
-# Veriown Reviews
+# Veriown Reviews v1
 
 Reviews api allows users to both create and retireve reviews for Landlord submitted by tenants
 
-## Create Review [/create]
+## Create Review [/reviews/create]
 
 ### Create Review [POST]
 
@@ -31,7 +31,7 @@ Create a new review for a Landlord
     + Attributes (CreateReviewError404)
 
 
-## Retrieve Landlord Reviews [/landlord/{landlord_id}?limit={limit}]
+## Retrieve Landlord Reviews [/reviews/landlord/{landlord_id}?limit={limit}]
 
 ### Retrive Landlord Reviews [GET]
 
@@ -43,21 +43,23 @@ Retrive landlord reviews and use limit to control how many are returned
 + Response 201 (application/json)
     + Attributes (RetrieveLandlordReviews201)
 
-+ Response 422 (application/json)
-    + Attributes (RetrieveLandlordReviewError422)
-
 + Response 401 (application/json)
     + Attributes (RetrieveReviewError401)
 
++ Response 404 (application/json)
+    + Attributes (RetrieveLandlordReviewError404)
 
-## Retrieve User Reviews [/user/?limit={limit}]
++ Response 422 (application/json)
+    + Attributes (RetrieveLandlordReviewError422)
+
+
+## Retrieve User Reviews [/reviews/user/?limit={limit}]
 
 ### Retrive User Reviews [GET]
 
 Retrive user reviews and use limit to control how many are returned
 
 + Request (application/json)
-    + Attributes (ReviewObject)
     + Headers
 
             token: token
@@ -75,7 +77,7 @@ Retrive user reviews and use limit to control how many are returned
 + Response 401 (application/json)
     + Attributes (RetrieveReviewError401)
 
-## Update Review [/update/{review_id}]
+## Update Review [/reviews/update/{review_id}]
 
 ### Update Review [PUT]
 
@@ -101,6 +103,28 @@ Update a review
     + Attributes (UpdateReviewError422)
 
 
+## Sessions [/token]
+
+### Generate Token [POST]
+
+Generate a new token
+
++ Request (application/json)
+    + Attributes (TokenObject)
+
++ Response 201 (application/json)
+    + Attributes (GenerateTokenResponse)
+
++ Response 401 (application/json)
+    + Attributes (GenerateTokenError401)
+
++ Response 404 (application/json)
+    + Attributes (GenerateTokenError404)
+
++ Response 422 (application/json)
+    + Attributes (GenerateTokenError422)
+
+
 # Data Structures
 
 ### =========== Error ===============
@@ -112,6 +136,68 @@ Update a review
 
 ## Error (ErrorDetails)
 + details          (array[ErrorDetails])
+
+### =========== Sessions ===============
+
+## TokenObject (object)
++ uid              (string, required)
++ user             (string, required)
+
+## GenerateTokenResponse (object)
++ token             (string, required)
+
+## GenerateTokenErrorMissingUserId
++ code: MISSING_USER_ID
++ message: Missing user id
++ target: user id
+
+## GenerateTokenErrorMissingToken
++ code: MISSING_TOKEN
++ message: Missing token
++ target: token
+
+## GenerateTokenErrorNotFoundLandlord404
++ code: INVALID_LANDLORD_ID
++ message: Invalid landlord id
++ target: landlord
+
+## GenerateTokenErrorNotFoundUser404
++ code: INVALID_USER_ID
++ message: Invalid user id
++ target: user
+
+## GenerateTokenErrorInvalidToken401
++ code: INVALID_TOKEN
++ message: invalid token
++ target: headers verification
+
+## GenerateTokenErrorInvalidUser401
++ code: INVALID_USER
++ message: invalid user
++ target: headers verification
+
+## GenerateTokenErrorExpiredToken401
++ code: EXPIRED_TOKEN
++ message: token expired
++ target: headers verification
+
+## GenerateTokenError422 (Error)
++ code:             MISSING_HEADER_VALUES
++ message:          Missing header values
++ target:           header
++ details           (array[GenerateTokenErrorMissingUserId, GenerateTokenErrorMissingToken])
+
+## GenerateTokenError404 (Error)
++ code:             INVALID_PARAMETERS
++ message:          Invalid parameters
++ target:           parameters
++ details           (array[GenerateTokenErrorNotFoundLandlord404, GenerateTokenErrorNotFoundUser404])
+
+## GenerateTokenError401 (Error)
++ code:             INVALID_HEADER
++ message:          Invalid header
++ target:           header
++ details           (array[GenerateTokenErrorInvalidToken401, GenerateTokenErrorInvalidUser401, GenerateTokenErrorExpiredToken401])
 
 ### =========== Create Review ===============
 
@@ -242,10 +328,11 @@ Update a review
 + target: token
 
 ## RetrieveUserReviewError422 (Error)
-+ code:             INVALID_PARAMETERS
-+ message:          Invalid parameters
-+ target:           parameters
++ code:             MISSING_HEADER_VALUES
++ message:          Missing header values
++ target:           header
 + details           (array[RetrieveReviewsErrorMissingUserId, RetrieveReviewsErrorMissingToken])
+
 
 ## RetrieveReviewsErrorInvalidLandlordId
 + code: INVALID_LANDLORD_ID
@@ -253,6 +340,17 @@ Update a review
 + target: landlord id
 
 ## RetrieveLandlordReviewError422 (Error)
++ code:             INVALID_PARAMETERS
++ message:          Invalid parameters
++ target:           parameters
++ details           (array[RetrieveReviewsErrorInvalidLandlordId, RetrieveReviewsErrorMissingUserId, RetrieveReviewsErrorMissingToken])
+
+## RetrieveReviewsErrorNotFoundLandlordId
++ code: NOT_FOUND
++ message: Invalid landlord id
++ target: landlord id
+
+## RetrieveLandlordReviewError404 (Error)
 + code:             INVALID_PARAMETERS
 + message:          Invalid parameters
 + target:           parameters
@@ -278,7 +376,6 @@ Update a review
 + message:          Invalid header
 + target:           header
 + details           (array[RetrieveReviewErrorHeaderToken401, RetrieveReviewErrorHeaderInvalidUser401, RetrieveReviewErrorHeaderInvalidToken401])
-
 
 ### =========== Update Review ===============
 

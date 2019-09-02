@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin'
 import * as uuid from 'uuid/v4'
 import { IReview, Collections, ReviewKeys, ResponseError, IJWT } from '../../types'
 import { isInvalidBody, isInvalid, hasEmptyValues, getEmptyValueKeys } from '../../utils'
-import { createApi, updateApi, defaultApi } from './errors'
+import { createApi, updateApi, defaultApi, retrieveApi } from './errors'
 import authRoute from './middleware/auth-route'
 
 const router = express.Router()
@@ -31,15 +31,15 @@ router.get('/landlord/:landlord_id', async (req, res) => {
   const landlord_id = req.params.landlord_id
   const limit = req.query.limit
 
-  const userRef = await admin
+  const landlordRef = await admin
     .firestore()
     .collection(Collections.LANDLORDS)
     .doc(landlord_id)
 
-  const landlord = await userRef.get()
+  const landlord = await landlordRef.get()
   const IDError = isInvalid(
-    [{ key: ReviewKeys.USER_ID, exists: landlord.exists }],
-    createApi.Error404
+    [{ key: ReviewKeys.LANDLORD_ID, exists: landlord.exists }],
+    retrieveApi.Error404
   )
 
   if (IDError) return res.status(404).send(IDError)
@@ -60,7 +60,10 @@ router.get('/user', authRoute, async (req, res) => {
     .doc(user_id)
 
   const user = await userRef.get()
-  const IDError = isInvalid([{ key: ReviewKeys.USER_ID, exists: user.exists }], createApi.Error404)
+  const IDError = isInvalid(
+    [{ key: ReviewKeys.USER_ID, exists: user.exists }],
+    retrieveApi.Error404
+  )
 
   if (IDError) return res.status(404).send(IDError)
 

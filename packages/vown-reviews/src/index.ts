@@ -8,7 +8,7 @@ class Review {
   private user: string
   private reviewsApi: AxiosInstance
   private version = 'v1'
-  private host = 'https://us-central1-veriown-reviews.cloudfunctions.net/api/reviews'
+  private host = `https://us-central1-veriown-reviews.cloudfunctions.net/api/${this.version}reviews`
 
   constructor(token: string, user: string) {
     this.token = token

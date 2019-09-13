@@ -5,17 +5,18 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npm run compile",
-    "compile": "tsc -p tsconfig.json",
+    "build": "yarn clean && yarn compile",
+    "compile": "tsc",
     "test": "jest"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",
+    "@types/jest": "^24.0.18",
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@types/jest": "^24.0.17",
     "@vown/types": "1.0.0",
     "axios": "^0.19.0"
-  }
+  },
+  "license": "MIT"
 }

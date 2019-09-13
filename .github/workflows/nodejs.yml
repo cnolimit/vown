@@ -12,10 +12,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
-
-    - name: List Directories
-      run: ls -al
-
+        
     - name: Install Yarn
       run: npm install -g yarn
 
@@ -24,9 +21,6 @@ jobs:
 
     - name: Run Build - @vown/reviews
       run: cd ./packages/vown-reviews && yarn build
-      
-    - name: List Directories
-      run: ls -al
 
     - name: Run Tests - @vown/reviews
       run: cd ./packages/vown-reviews && yarn test

@@ -1,15 +1,13 @@
-const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
+const { filePaths, alias } = require('./constants')
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, '../src/index.tsx'),
+    app: filePaths.entryFile,
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      '@components': path.join(__dirname + '/../src/components/'),
-    },
+    alias,
   },
   module: {
     rules: [
@@ -18,11 +16,15 @@ module.exports = {
         use: 'ts-loader',
         exclude: /node_modules/,
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
-  plugins: [new CopyPlugin([{ from: 'public', to: path.resolve(__dirname, '../dist') }])],
+  plugins: [new CopyPlugin([{ from: 'public', to: filePaths.buildFolder }])],
   output: {
-    path: path.resolve(__dirname, '../dist'),
+    path: filePaths.buildFolder,
     filename: 'bundle.js',
   },
 }

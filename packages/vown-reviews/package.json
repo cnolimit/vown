@@ -6,7 +6,8 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "build": "npm run clean && npm run compile",
-    "compile": "tsc -p tsconfig.json"
+    "compile": "tsc -p tsconfig.json",
+    "test": "jest"
   },
   "devDependencies": {
     "@types/axios": "^0.14.0",

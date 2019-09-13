@@ -12,8 +12,11 @@ jobs:
       with:
         node-version: 10.x
 
+    - name: List Directories
+      run: ls -al
+
     - name: Install Yarn
-      run: npm install yarn
+      run: npm install -g yarn
 
     - name: Install Dependancies
       run: yarn

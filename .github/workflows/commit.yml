@@ -7,7 +7,8 @@ jobs:
     name: "🏠Veriown - Build Checks"
     runs-on: ubuntu-latest
     steps:
-      uses: actions/checkout@master
+    - uses: actions/checkout@v1
+    - name: Setup Node
     - name: Build Info
       run: |
         yarn -v
@@ -25,8 +26,13 @@ jobs:
     name: "🏠Veriown - Running Tests"
     runs-on: ubuntu-latest
     steps:
-      uses: actions/checkout@master
+    - uses: actions/checkout@v1
     - name: Install Dependancies
       run: yarn
+    - name: Build Info
+      run: |
+        yarn -v
+        node -v
+        printenv
     - name: Run Tests - @vown/reviews
       run: cd ./packages/vown-reviews && yarn test

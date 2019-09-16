@@ -11,7 +11,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: 10.x
+        node-version: 8.x
     - name: Build Info
       run: |
         yarn -v
@@ -38,7 +38,7 @@ jobs:
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
-        node-version: 10.x
+        node-version: 8.x
     - name: Install Dependancies
       run: yarn
     - name: Run Tests - @vown/reviews

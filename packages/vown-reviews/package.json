@@ -24,6 +24,9 @@
     "roots": [
       "<rootDir>/"
     ],
+    "testPathIgnorePatterns" : [
+      "<rootDir>/dist/__tests__/index.d.ts" 
+    ],
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     }

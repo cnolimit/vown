@@ -1,0 +1,10 @@
+vown-auth 🔑:
+- packages/vown-android/**/*
+vown-functions 🔥:
+- packages/vown-functions/**/*
+vown-reviews 📝:
+- packages/vown-reviews/**/*
+vown-types 🖋:
+- packages/vown-types/**/*
+vown-web-app 🌎:
+- packages/vown-web-app/**/*

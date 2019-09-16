@@ -23,9 +23,12 @@ jobs:
       run: yarn
     - name: Run Build - @vown/reviews
       run: cd ./packages/vown-reviews && yarn build
-
-      env:
-        CI: true
+    - name: Run Build - @vown/web-app
+      run: cd ./packages/vown-web-app && yarn build
+    - name: Run Build - @vown/functions
+      run: cd ./packages/vown-functions/functions && yarn build
+    - name: Run Build - @vown/auth
+      run: cd ./packages/vown-auth && yarn build
 
   test:
     name: "🏠Veriown - Running Tests"
@@ -40,3 +43,11 @@ jobs:
       run: yarn
     - name: Run Tests - @vown/reviews
       run: cd ./packages/vown-reviews && yarn test
+    - name: Run Tests - @vown/web-app
+      run: cd ./packages/vown-web-app && yarn test
+    - name: Run Tests - @vown/functions
+      run: cd ./packages/vown-functions/functions && yarn test
+    - name: Run Tests - @vown/auth
+      run: cd ./packages/vown-auth && yarn test
+      env:
+        CI: true

@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --config webpack/webpack.prod.js",
-    "dev": "webpack-dev-server  --config webpack/webpack.dev.js"
+    "dev": "webpack-dev-server  --config webpack/webpack.dev.js",
+    "test": "jest"
   },
   "devDependencies": {
     "copy-webpack-plugin": "^5.0.4",
@@ -27,8 +28,21 @@
     "@types/styled-components": "^4.1.18",
     "@vown/auth": "1.0.0",
     "@vown/reviews": "1.1.0",
+    "jest": "^24.9.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "styled-components": "^4.3.2"
+    "styled-components": "^4.3.2",
+    "ts-jest": "^24.1.0"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
   }
 }

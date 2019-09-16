@@ -1,29 +1,40 @@
-name: Node CI
-
 on: [push]
+
+name: Node CI
 
 jobs:
   build:
+    name: "🏠Veriown - Build Checks"
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Setup Node
       uses: actions/setup-node@v1
       with:
         node-version: 10.x
-        
+    - name: Build Info
+      run: |
+        yarn -v
+        node -v
+        printenv
     - name: Install Yarn
       run: npm install -g yarn
-
     - name: Install Dependancies
       run: yarn
-
     - name: Run Build - @vown/reviews
       run: cd ./packages/vown-reviews && yarn build
 
-    - name: Run Tests - @vown/reviews
-      run: cd ./packages/vown-reviews && yarn test
-
       env:
         CI: true
+
+  test:
+    name: "🏠Veriown - Running Tests"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Run Tests - @vown/reviews
+      run: cd ./packages/vown-reviews && yarn test

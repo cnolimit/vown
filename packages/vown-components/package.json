@@ -1,0 +1,9 @@
+{
+  "name": "vown-components",
+  "version": "1.0.0",
+  "description": "veriown components library",
+  "main": "index.js",
+  "author": "veriown",
+  "license": "MIT",
+  "private": true
+}

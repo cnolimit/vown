@@ -13,7 +13,8 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "esnext",
-    "lib": ["es2017"]
+    "lib": ["es2017"],
+    "skipLibCheck": true
   },
   "exclude": ["**/*/node_modules", "**/*/__tests__/*.ts"]
 }

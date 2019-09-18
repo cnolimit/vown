@@ -3,7 +3,7 @@ on:
     branches:
     - master
 
-name: 🏠Veriown - Pull Requests
+name: 🏠Veriown - PR Checks
 
 jobs:
   labeler:
@@ -16,6 +16,13 @@ jobs:
       uses: actions/labeler@v2
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
-    - name: ⚠️Danger JS 
-      uses: danger/danger-js@9.1.8
 
+  danger:
+    name: ⚠️Danger JS 
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Danger Checks
+      uses: danger/danger-js@9.1.8
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

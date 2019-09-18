@@ -1,11 +1,11 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["src"],
-  "exclude": ["**/*/__tests__"],
+
   "compilerOptions": {
     "outDir": "./dist",
     "declaration": true,
-    "types": ["firebase"]
+    "types": ["firebase", "jest"]
   }
 }
 

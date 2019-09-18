@@ -1,0 +1,35 @@
+on: 
+  pull_request:
+    branches:
+    - master
+
+name: 🏠Veriown - PR Checks
+
+jobs:
+  labeler:
+    name: 🏷️Labeler
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - name: Add Labels
+      if: github.event.action == 'opened' || github.event.action == 'synchronize'
+      uses: actions/labeler@v2
+      with:
+        repo-token: "${{ secrets.VOWN_BOT_TOKEN }}"
+
+  danger:
+    name: ⚠️Danger JS 
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+    - name: Install Dependancies
+      run: yarn
+    - name: Danger Checks
+      run: yarn danger ci
+      env:
+        GITHUB_TOKEN: ${{ secrets.VOWN_BOT_TOKEN }}

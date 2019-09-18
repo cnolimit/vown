@@ -7,9 +7,13 @@
     "packages/*"
   ],
   "scripts": {
-    "compile": "cd packages/vown-reviews && npm run compile"
+    "danger": "danger",
+    "compile": "cd packages/vown-reviews && yarn compile"
   },
   "license": "MIT",
   "repository": "git@github.com:Veriown/vown.git",
-  "author": "Phillip Boateng <cnolimit@gmail.com>"
+  "author": "Phillip Boateng <cnolimit@gmail.com>",
+  "dependencies": {
+    "danger": "^9.2.0"
+  }
 }

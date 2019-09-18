@@ -15,18 +15,14 @@ const App = () => {
       const token = await auth.GetToken()
       const userId = await auth.GetId()
 
-      console.log({ token, userId })
-
       if (token && userId) {
         const ReviewsMod = new Reviews(token, userId)
+        const userReviews = await ReviewsMod.retrieve().user()
 
-        ReviewsMod.retrieve().user((err, data: { reviews: IReview[] }) => {
-          if (err) return setFecting(false)
-          if (data) {
-            setReviews(data.reviews)
-          }
-          setFecting(false)
-        })
+        if (userReviews) {
+          setReviews(userReviews)
+        }
+        setFecting(false)
       }
     }
     fetchUserReviews()

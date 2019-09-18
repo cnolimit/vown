@@ -1,6 +1,7 @@
 {
   "name": "@vown/types",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "index.d.ts",
+  "types": "index.d.ts",
   "license": "MIT"
 }

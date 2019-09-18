@@ -28,23 +28,16 @@ const ReviewForm = () => {
     if (token && userId) {
       const ReviewsMod = new Reviews(token, userId)
 
-      ReviewsMod.create(
-        {
-          title,
-          user_id: userId,
-          landlord_id: '9dd53577-b9aa-4024-beaa-1a38d3bba38b',
-          difficulty_rating: difficulty,
-          experience_rating: experience,
-          rating,
-          approve_of_landlord: approves,
-          recommends,
-        },
-        (err, data) => {
-          if (err) return console.log({ err })
-
-          console.log({ data, err })
-        }
-      )
+      ReviewsMod.create({
+        title,
+        user_id: userId,
+        landlord_id: '9dd53577-b9aa-4024-beaa-1a38d3bba38b',
+        difficulty_rating: difficulty,
+        experience_rating: experience,
+        rating,
+        approve_of_landlord: approves,
+        recommends,
+      })
     }
   }
 

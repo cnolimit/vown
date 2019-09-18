@@ -22,7 +22,7 @@ jobs:
     - name: Install Dependancies
       run: yarn
     - name: Install Firebase Function Dependancies
-      run: cd ./packages/vown-functions/functions && npm ci
+      run: cd ./packages/vown-functions/functions && npm i
     - name: Run Build - @vown/auth
       run: cd ./packages/vown-auth && yarn build
     - name: Run Build - @vown/reviews

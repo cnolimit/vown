@@ -8,5 +8,5 @@ vown-types 🖋:
 - packages/vown-types/**/*
 vown-web-app 🌎:
 - packages/vown-web-app/**/*
-vown-commponents 🎨:
+vown-components 🎨:
 - packages/vown-components/**/*

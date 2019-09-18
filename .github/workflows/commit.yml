@@ -37,8 +37,6 @@ jobs:
         node-version: 10.x
     - name: Install Dependancies
       run: yarn
-    - name: Install Firebase Function Dependancies
-      run: cd ./packages/vown-functions/functions && yarn
     - name: Run Tests - @vown/auth
       run: cd ./packages/vown-auth && yarn test
     - name: Run Tests - @vown/reviews

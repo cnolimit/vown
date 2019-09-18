@@ -51,7 +51,7 @@ jobs:
       run: cd ./packages/vown-functions/functions && yarn test
 
   firebase:
-    name: "🏠Veriown - Running Tests"
+    name: "🏠Veriown - Running Firebase Functions Build"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

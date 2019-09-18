@@ -11,9 +11,9 @@ const TS_FILES = [...APP_FILES]
 // -- PR into master branch -------------------------------------------------------------- //
 if (PR.base.ref === 'master') {
   // PR description has no issue refference that is being closed
-  // if (!PR.body.includes('closes #')) {
-  //   fail('PR description should include issue refference being closed')
-  // }
+  if (!PR.body.includes('closes #')) {
+    fail('PR description should include issue refference being closed')
+  }
 
   // -- TS_FILES checks ------------------------------------------------------------------ //
   TS_FILES.forEach(file => {

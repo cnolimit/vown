@@ -11,5 +11,8 @@
   },
   "license": "MIT",
   "repository": "git@github.com:Veriown/vown.git",
-  "author": "Phillip Boateng <cnolimit@gmail.com>"
+  "author": "Phillip Boateng <cnolimit@gmail.com>",
+  "dependencies": {
+    "danger": "^9.2.0"
+  }
 }

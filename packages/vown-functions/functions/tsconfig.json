@@ -7,8 +7,7 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2017",
-    "lib": ["dom"],
-    "types": ["firebase"]
+    "lib": ["dom"]
   },
   "compileOnSave": true,
   "include": ["index.ts"]

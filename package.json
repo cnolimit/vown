@@ -7,7 +7,7 @@
     "packages/*"
   ],
   "scripts": {
-    "compile": "cd packages/vown-reviews && npm run compile"
+    "compile": "cd packages/vown-reviews && yarn compile"
   },
   "license": "MIT",
   "repository": "git@github.com:Veriown/vown.git",

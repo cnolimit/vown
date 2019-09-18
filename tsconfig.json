@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "module": "esnext",
     "moduleResolution": "node",
-    "target": "es6",
-    "lib": [ "es2015", "es2017"]
-  }
+    "target": "esnext",
+    "lib": ["es2017"],
+  },
+  "exclude": ["**/*/node_modules", "**/*/__tests__/*.ts"]
 }

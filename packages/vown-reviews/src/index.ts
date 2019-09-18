@@ -17,14 +17,14 @@ class Review {
     }
   }
 
-  create(review: IReview) {
+  create(review: IReview): Promise<IReview[]> {
     return axios
       .post(`${this.baseURL}/create`, review, { headers: this.headers })
       .then(res => res.data)
       .catch((res: AxiosResponse) => res.data)
   }
 
-  update(review: IReviewUpdate) {
+  update(review: IReviewUpdate): Promise<IReview[]> {
     return axios
       .put(`${this.baseURL}/update`, review, { headers: this.headers })
       .then(res => res.data)
@@ -33,13 +33,13 @@ class Review {
 
   retrieve() {
     return {
-      landlord: (id: string) => {
+      landlord: (id: string): Promise<IReview[]> => {
         return axios
           .get(`${this.baseURL}/landlord/${id}`, { headers: this.headers })
           .then(res => res.data)
           .catch((res: AxiosResponse) => res.data)
       },
-      user: () => {
+      user: (): Promise<IReview[]> => {
         return axios
           .get(`${this.baseURL}/user`, { headers: this.headers })
           .then(res => res.data)

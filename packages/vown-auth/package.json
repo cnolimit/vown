@@ -6,8 +6,8 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "npm run clean && npm run compile",
-    "compile": "tsc -p tsconfig.json",
+    "build": "yarn clean && yarn compile",
+    "compile": "tsc",
     "test": "jest"
   },
   "keywords": [],
@@ -15,7 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@vown/types": "1.0.0",
-    "firebase": "^6.4.0",
+    "firebase": "^6.6.1",
     "localforage": "^1.7.3"
   },
   "jest": {

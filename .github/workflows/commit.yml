@@ -21,14 +21,14 @@ jobs:
       run: npm install -g yarn
     - name: Install Dependancies
       run: yarn
+    - name: Run Build - @vown/auth
+      run: cd ./packages/vown-auth && yarn build
     - name: Run Build - @vown/reviews
       run: cd ./packages/vown-reviews && yarn build
     - name: Run Build - @vown/web-app
       run: cd ./packages/vown-web-app && yarn build
     - name: Run Build - @vown/functions
       run: cd ./packages/vown-functions/functions && yarn build
-    - name: Run Build - @vown/auth
-      run: cd ./packages/vown-auth && yarn build
 
   test:
     name: "🏠Veriown - Running Tests"
@@ -41,6 +41,8 @@ jobs:
         node-version: 8.x
     - name: Install Dependancies
       run: yarn
+    - name: Install Firebase Function Dependancies
+      run: cd ./packages/vown-functions/functions && yarn
     - name: Run Tests - @vown/auth
       run: cd ./packages/vown-auth && yarn test
     - name: Run Tests - @vown/reviews

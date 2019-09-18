@@ -23,6 +23,10 @@ jobs:
     timeout-minutes: 5
     steps:
     - uses: actions/checkout@v1
+    - name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 8.x
     - name: Danger Checks
       uses: danger/danger-js@9.1.8
       env:

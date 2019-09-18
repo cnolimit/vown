@@ -17,8 +17,6 @@ jobs:
         yarn -v
         node -v
         printenv
-    - name: Install Yarn
-      run: npm install -g yarn
     - name: Install Dependancies
       run: yarn
     - name: Run Build - @vown/auth
@@ -59,11 +57,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 8.x
-    - name: Install Dependancies
-      run: yarn
     - name: Install Firebase Function Dependancies
-      run: cd ./packages/vown-functions/functions && yarn
+      run: cd ./packages/vown-functions/functions && npm i
     - name: Run Build - @vown/functions
-      run: cd ./packages/vown-functions/functions && yarn build
+      run: cd ./packages/vown-functions/functions && npm run build
       env:
         CI: true

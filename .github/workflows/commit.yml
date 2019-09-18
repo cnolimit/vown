@@ -4,7 +4,7 @@ name: 🏠Veriown - Package Checks
 
 jobs:
   build:
-    name: "🏠Veriown - Build Checks"
+    name: "⚒️Build Checks"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -27,7 +27,7 @@ jobs:
       run: cd ./packages/vown-web-app && yarn build
 
   test:
-    name: "🏠Veriown - Running Tests"
+    name: "🧪Tests"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
@@ -47,7 +47,7 @@ jobs:
       run: cd ./packages/vown-web-app && yarn test
 
   firebase:
-    name: "🏠Veriown - Running Functions (build/tests)"
+    name: "🔥Firebase Functions (build/tests)"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1

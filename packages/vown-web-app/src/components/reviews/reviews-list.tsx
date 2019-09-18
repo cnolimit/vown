@@ -15,8 +15,6 @@ const App = () => {
       const token = await auth.GetToken()
       const userId = await auth.GetId()
 
-      console.log({ token, userId })
-
       if (token && userId) {
         const ReviewsMod = new Reviews(token, userId)
         const userReviews = await ReviewsMod.retrieve().user()

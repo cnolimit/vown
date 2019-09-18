@@ -3,7 +3,7 @@ on:
     branches:
     - master
 
-name: PR Labeler
+name: 🏷️PR - Labeler
 
 jobs:
   labeler:

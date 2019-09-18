@@ -1,6 +1,6 @@
 on: [push]
 
-name: Node CI
+name: 🏠Veriown - Package Checks
 
 jobs:
   build:

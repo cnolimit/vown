@@ -1,5 +1,6 @@
 <div align="center">
 <h1>Veriown Project</h1>
+<br />
 
 <a href="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png">
   <img
@@ -10,6 +11,7 @@
   />
 </a>
 
+<br />
 <br />
 
 <p>This is a monorepo for the Veriown project running at https://veriown.io/.</p>

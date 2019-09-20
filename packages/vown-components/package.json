@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "veriown components library",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
+  "types": "dist/index.d.ts",
   "author": "veriown",
   "license": "MIT",
   "private": true,

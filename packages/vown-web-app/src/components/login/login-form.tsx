@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { Card, Typography, TextField, Link } from '@material-ui/core'
 import { styled } from '@material-ui/styles'
-import Button from '@components/shared/button'
-import OverflowLoader from '@components/shared/overflow-loader'
+import { Button, OverflowLoader } from '@vown/components'
 
 const Container = styled(Card)({
   width: '100%',

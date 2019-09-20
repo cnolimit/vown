@@ -28,6 +28,7 @@
     "@types/styled-components": "^4.1.18",
     "@vown/auth": "1.0.0",
     "@vown/reviews": "1.1.0",
+    "@vown/components": "1.0.0",
     "jest": "^24.9.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

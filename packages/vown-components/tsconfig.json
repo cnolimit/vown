@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "jsx": "react",
-    "lib": ["dom", "es2015", "es2017"],
+    "declaration": true,
+    "sourceMap": false
   }
 }

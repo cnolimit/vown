@@ -3,7 +3,7 @@
 
 <a href="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png">
   <img
-    height="150"
+    height="135"
     width="150"
     alt="veriown logo"
     src="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png"

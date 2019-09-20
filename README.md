@@ -1,14 +1,16 @@
 <div align="center">
 <h1>Veriown Project</h1>
 
-<a href="https://avatars1.githubusercontent.com/u/31484240?s=400&u=3b743f8be139259f85735526afafa928e995c0d0&v=4">
+<a href="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png">
   <img
     height="150"
     width="150"
     alt="veriown logo"
-    src="https://avatars1.githubusercontent.com/u/31484240?s=400&u=3b743f8be139259f85735526afafa928e995c0d0&v=4"
+    src="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png"
   />
 </a>
+
+<br />
 
 <p>This is a monorepo for the Veriown project running at https://veriown.io/.</p>
 

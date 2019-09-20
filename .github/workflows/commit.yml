@@ -39,6 +39,8 @@ jobs:
         node-version: 10.x
     - name: Install Dependancies
       run: yarn
+    - name: Run Lint - @vown
+      run: yarn lint
     - name: Run Tests - @vown/auth
       run: cd ./packages/vown-auth && yarn test
     - name: Run Tests - @vown/components

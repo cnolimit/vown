@@ -3,6 +3,17 @@ import { ResponseError } from '../types'
 type isInvalidProps = { key: string; exists: boolean }
 
 /**
+ * @description - Checks object propertites to see if any are missing values
+ * @param obj
+ * @returns - Array of keys which had misssing values from the object
+ */
+export const getEmptyValueKeys = (obj: any) => {
+  const keyValues = Object.entries(obj)
+
+  return keyValues.map(key => (obj[key[0]] === '' ? key[0] : '')).filter(Boolean)
+}
+
+/**
  * @description - Converts the minutes to ms, adds it to the ms value and
  * returns the new ms value.
  * @param minutes
@@ -49,14 +60,3 @@ export const isInvalid = (ids: isInvalidProps[], errorSchema: ResponseError) => 
  * @returns - Boolean that states whether or not the object has missing values
  */
 export const hasEmptyValues = (obj: any) => Boolean(getEmptyValueKeys(obj).length)
-
-/**
- * @description - Checks object propertites to see if any are missing values
- * @param obj
- * @returns - Array of keys which had misssing values from the object
- */
-export const getEmptyValueKeys = (obj: any) => {
-  const keyValues = Object.entries(obj)
-
-  return keyValues.map(key => (obj[key[0]] === '' ? key[0] : '')).filter(Boolean)
-}

@@ -1,0 +1,19 @@
+webpack
+__tests__
+
+# Module Files
+node_modules
+package-lock.json
+
+# Build Folders
+dist
+
+# Error Logs
+*-debug.log
+*-error.log
+
+# Misc
+*.DS_STORE
+
+# Config Files
+*-key.json

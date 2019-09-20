@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "sourceMap": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -16,5 +17,5 @@
     "lib": ["es2017"],
     "skipLibCheck": true
   },
-  "exclude": ["**/*/node_modules", "**/*/__tests__/*.ts"]
+  "exclude": ["**/*/node_modules", "**/*/__tests__/*.ts", "**/*/__tests__/*.tsx"]
 }

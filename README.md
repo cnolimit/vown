@@ -3,8 +3,8 @@
 
 <a href="https://avatars1.githubusercontent.com/u/31484240?s=400&u=3b743f8be139259f85735526afafa928e995c0d0&v=4">
   <img
-    height="80"
-    width="80"
+    height="150"
+    width="150"
     alt="veriown logo"
     src="https://avatars1.githubusercontent.com/u/31484240?s=400&u=3b743f8be139259f85735526afafa928e995c0d0&v=4"
   />

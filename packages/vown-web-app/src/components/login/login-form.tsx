@@ -61,7 +61,7 @@ const LoginForm = ({ onSubmit }: ILoginForm) => {
           />
           <Button onClick={handleFormSubmit}>Sign In</Button>
           <MarginTypography variant="subtitle2">
-            Don't have an account? <Link>Create Account</Link>
+            {`Don't have an account?`} <Link>Create Account</Link>
           </MarginTypography>
         </div>
       </OverflowLoader>

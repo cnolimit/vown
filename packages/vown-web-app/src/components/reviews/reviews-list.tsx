@@ -25,6 +25,7 @@ const App = () => {
       }
     }
     fetchUserReviews()
+    return
   }, [])
 
   return (

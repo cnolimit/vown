@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "danger": "danger",
-    "compile": "cd packages/vown-reviews && yarn compile"
+    "clean": "./scripts/clean.sh"
   },
   "license": "MIT",
   "repository": "git@github.com:Veriown/vown.git",

@@ -21,6 +21,8 @@ jobs:
       run: yarn
     - name: Run Build - @vown/auth
       run: cd ./packages/vown-auth && yarn build
+    - name: Run Build - @vown/components
+      run: cd ./packages/vown-components && yarn build
     - name: Run Build - @vown/reviews
       run: cd ./packages/vown-reviews && yarn build
     - name: Run Build - @vown/web-app
@@ -39,6 +41,8 @@ jobs:
       run: yarn
     - name: Run Tests - @vown/auth
       run: cd ./packages/vown-auth && yarn test
+    - name: Run Tests - @vown/components
+      run: cd ./packages/vown-components && yarn test
     - name: Run Tests - @vown/reviews
       run: cd ./packages/vown-reviews && yarn test
     - name: Run Tests - @vown/web-app

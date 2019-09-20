@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Card from '@material-ui/core/Card'
-import { CardHeader, Box, Typography } from '@material-ui/core'
+import { CardHeader, Box, Typography, Card } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { IReview } from '@vown/types'
 import Reviews from '@vown/reviews'

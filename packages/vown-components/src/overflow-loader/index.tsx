@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import styled from 'styled-components'
 import { CircularProgress } from '@material-ui/core'
 
@@ -27,10 +27,10 @@ const OverflowLoader = (props: IOverflowLoader) => {
     <React.Fragment>
       {props.loading ? (
         <Container>
-          <CircularProgress size={60} thickness={4.5} />
+          <CircularProgress data-testid="loader-component" size={60} thickness={4.5} />
         </Container>
       ) : null}
-      {props.loading ? <Blur>{props.children}</Blur> : props.children}
+      {props.loading ? <Blur data-testid="blur-component">{props.children}</Blur> : props.children}
     </React.Fragment>
   )
 }

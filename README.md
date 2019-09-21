@@ -1,6 +1,29 @@
-# Veriown Project
+<div align="center">
+<h1>Veriown Project</h1>
+<br />
 
-This is a monorepo for the Veriown project running at https://veriown.io/
+<a href="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png">
+  <img
+    height="135"
+    width="150"
+    alt="veriown logo"
+    src="https://user-images.githubusercontent.com/6928300/65358655-0b51f580-dbf2-11e9-9ee0-bb0950d24baa.png"
+  />
+</a>
+
+<br />
+<br />
+
+<p>This is a monorepo for the Veriown project running at https://veriown.io/.</p>
+
+<br />
+
+[**API Documentation**](https://veriownreviews.docs.apiary.io/)
+
+<br />
+</div>
+
+<hr />
 
 ## Getting Started
 

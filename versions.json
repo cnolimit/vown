@@ -1,0 +1,46 @@
+{
+  "packages": [
+    {
+      "name": "@vown/auth",
+      "current": "1.0.1",
+      "previous": "1.0.0",
+      "lastUpdated": "2019-09-23T20:38:20.293Z"
+    },
+    {
+      "name": "@vown/components",
+      "current": "1.0.1",
+      "previous": "1.0.0",
+      "lastUpdated": "2019-09-23T20:38:20.289Z"
+    },
+    {
+      "name": "@vown/functions",
+      "current": "1.1.1",
+      "previous": "1.1.0",
+      "lastUpdated": "2019-09-23T20:38:20.290Z"
+    },
+    {
+      "name": "@vown/reviews",
+      "current": "1.1.1",
+      "previous": "1.1.0",
+      "lastUpdated": "2019-09-23T20:38:20.290Z"
+    },
+    {
+      "name": "@vown/scripts",
+      "current": "1.0.1",
+      "previous": "1.0.0",
+      "lastUpdated": "2019-09-23T20:38:20.290Z"
+    },
+    {
+      "name": "@vown/types",
+      "current": "1.0.1",
+      "previous": "1.0.0",
+      "lastUpdated": "2019-09-23T20:38:20.292Z"
+    },
+    {
+      "name": "@vown/web-app",
+      "current": "1.0.1",
+      "previous": "1.0.0",
+      "lastUpdated": "2019-09-23T20:38:20.292Z"
+    }
+  ]
+}

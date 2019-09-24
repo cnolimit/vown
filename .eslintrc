@@ -8,18 +8,21 @@
   "rules": {
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/camelcase": 0,
-    "@typescript-eslint/no-explicit-any" : 0,
-    "@typescript-eslint/member-delimiter-style" : 0,
-    "@typescript-eslint/interface-name-prefix" : 0
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/member-delimiter-style": 0,
+    "@typescript-eslint/interface-name-prefix": 0,
+    "@typescript-eslint/no-var-requires": 0
   },
   "globals": {
     "document": true,
     "window": true,
-    "console": true
+    "console": true,
+    "process": true,
+    "require": true
   },
-    "settings": {
-      "react": {
-        "version": "detect"
-      }
+  "settings": {
+    "react": {
+      "version": "detect"
     }
+  }
 }

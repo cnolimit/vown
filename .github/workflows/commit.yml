@@ -4,66 +4,66 @@ name: 🏠Veriown - Package Checks
 
 jobs:
   build:
-    name: "⚒️Build Checks"
+    name: '⚒️Build Checks'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-    - name: Build Info
-      run: |
-        yarn -v
-        node -v
-        printenv
-    - name: Install Dependancies
-      run: yarn
-    - name: Run Build - @vown/auth
-      run: cd ./packages/vown-auth && yarn build
-    - name: Run Build - @vown/components
-      run: cd ./packages/vown-components && yarn build
-    - name: Run Build - @vown/reviews
-      run: cd ./packages/vown-reviews && yarn build
-    - name: Run Build - @vown/web-app
-      run: cd ./packages/vown-web-app && yarn build
+      - uses: actions/checkout@v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Build Info
+        run: |
+          yarn -v
+          node -v
+          printenv
+      - name: Install Dependancies
+        run: yarn
+      - name: Run Build - @vown/auth
+        run: cd ./packages/vown-auth && yarn build
+      - name: Run Build - @vown/components
+        run: cd ./packages/vown-components && yarn build
+      - name: Run Build - @vown/reviews
+        run: cd ./packages/vown-reviews && yarn build
+      - name: Run Build - @vown/web-app
+        run: cd ./packages/vown-web-app && yarn build
 
   test:
-    name: "🧪Tests"
+    name: '🧪Tests'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 10.x
-    - name: Install Dependancies
-      run: yarn
-    - name: Run Lint - @vown
-      run: yarn lint
-    - name: Run Tests - @vown/auth
-      run: cd ./packages/vown-auth && yarn test
-    - name: Run Tests - @vown/components
-      run: cd ./packages/vown-components && yarn test
-    - name: Run Tests - @vown/reviews
-      run: cd ./packages/vown-reviews && yarn test
-    - name: Run Tests - @vown/web-app
-      run: cd ./packages/vown-web-app && yarn test
+      - uses: actions/checkout@v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Install Dependancies
+        run: yarn
+      - name: Run Lint - @vown
+        run: yarn lint
+      - name: Run Tests - @vown/auth
+        run: cd ./packages/vown-auth && yarn test
+      - name: Run Tests - @vown/components
+        run: cd ./packages/vown-components && yarn test
+      - name: Run Tests - @vown/reviews
+        run: cd ./packages/vown-reviews && yarn test
+      - name: Run Tests - @vown/web-app
+        run: cd ./packages/vown-web-app && yarn test
 
   firebase:
-    name: "🔥Firebase Functions (build/tests)"
+    name: '🔥Firebase Functions (build/tests)'
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - name: Setup Node
-      uses: actions/setup-node@v1
-      with:
-        node-version: 8.x
-    - name: Install Firebase Function Dependancies
-      run: cd ./packages/vown-functions/functions && npm i
-    - name: Run Build - @vown/functions
-      run: cd ./packages/vown-functions/functions && npm run build
-    - name: Run Tests - @vown/functions
-      run: cd ./packages/vown-functions/functions && npm test
-      env:
-        CI: true
+      - uses: actions/checkout@v1
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 8.x
+      - name: Install Firebase Function Dependancies
+        run: cd ./packages/vown-functions/functions && npm i
+      - name: Run Build - @vown/functions
+        run: cd ./packages/vown-functions/functions && npm run build
+      - name: Run Tests - @vown/functions
+        run: cd ./packages/vown-functions/functions && npm test
+        env:
+          CI: true

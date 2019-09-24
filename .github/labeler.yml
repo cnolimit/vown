@@ -1,12 +1,14 @@
 vown-auth 🔑:
-- packages/vown-android/**/*
+  - packages/vown-auth/**/*
 vown-functions 🔥:
-- packages/vown-functions/**/*
+  - packages/vown-functions/**/*
 vown-reviews 📝:
-- packages/vown-reviews/**/*
+  - packages/vown-reviews/**/*
 vown-types 🖋:
-- packages/vown-types/**/*
+  - packages/vown-types/**/*
 vown-web-app 🌎:
-- packages/vown-web-app/**/*
+  - packages/vown-web-app/**/*
 vown-components 🎨:
-- packages/vown-components/**/*
+  - packages/vown-components/**/*
+vown-scripts 📜:
+  - packages/vown-scripts/**/*

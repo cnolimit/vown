@@ -1,6 +1,17 @@
 {
   "name": "vown-functions",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "version-bump": "version-bump @vown/functions"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Veriown/vown.git",
+    "directory": "packages/vown-functions"
+  },
+  "devDependencies": {
+    "@vown/scripts": "1.0.1"
+  }
 }

@@ -1,17 +1,23 @@
 {
   "name": "@vown/components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "veriown components library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "veriown",
   "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Veriown/vown.git",
+    "directory": "packages/vown-components"
+  },
   "scripts": {
     "build": "yarn clean && yarn compile",
     "clean": "rm -rf ./dist",
     "compile": "tsc",
-    "test": "jest"
+    "test": "jest",
+    "version-bump": "version-bump @vown/components"
   },
   "dependencies": {
     "@material-ui/core": "^4.4.2"
@@ -19,7 +25,8 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^4.1.0",
     "@testing-library/react": "^9.1.4",
-    "@types/testing-library__react": "^9.1.1"
+    "@types/testing-library__react": "^9.1.1",
+    "@vown/scripts": "1.0.1"
   },
   "jest": {
     "roots": [

@@ -1,0 +1,9 @@
+{
+  "**/*.+(ts|tsx|json|md)": [
+    "yarn format",
+    "git add"
+  ],
+  "**/*.+(ts|tsx)": [
+    "yarn lint"
+  ]
+}

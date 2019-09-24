@@ -1,0 +1,34 @@
+{
+  "name": "@vown/scripts",
+  "version": "1.0.1",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Veriown/vown.git",
+    "directory": "packages/vown-scripts"
+  },
+  "scripts": {
+    "build": "yarn clean && yarn compile && yarn set-executable ",
+    "set-executable": "cd ./dist/scripts && chmod +x $(ls | grep .js)",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc",
+    "test": "jest",
+    "version-bump": "version-bump @vown/scripts"
+  },
+  "bin": {
+    "version-bump": "./dist/scripts/version-bump.js"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/dist",
+      "<rootDir>/src/__tests__/data"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    }
+  }
+}

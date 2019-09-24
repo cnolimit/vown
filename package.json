@@ -10,18 +10,21 @@
     "danger": "danger",
     "clean": "./scripts/clean.sh",
     "test": "jest",
-    "lint": "eslint ./packages --ext .ts,.tsx"
+    "lint": "eslint ./packages --ext .ts,.tsx",
+    "prettier": "prettier --check \"packages/**/*.+(ts|tsx|json|md)\"",
+    "format": "yarn prettier --write"
   },
   "license": "MIT",
   "repository": "git@github.com:Veriown/vown.git",
   "author": "Phillip Boateng <cnolimit@gmail.com>",
   "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^2.3.0",
-    "@typescript-eslint/parser": "^2.3.0",
     "danger": "^9.2.0",
-    "eslint": "^6.4.0",
-    "eslint-plugin-react": "^7.14.3",
     "jest": "^24.9.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "jest": {
     "roots": [
@@ -33,5 +36,14 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     }
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^2.3.0",
+    "@typescript-eslint/parser": "^2.3.0",
+    "eslint": "^6.4.0",
+    "eslint-plugin-react": "^7.14.3",
+    "husky": "^3.0.5",
+    "lint-staged": "^9.3.0",
+    "prettier": "^1.18.2"
   }
 }

@@ -1,4 +1,4 @@
-import { ResponseError } from '../../../types'
+import { ResponseError } from '../../types'
 
 export const Error422: ResponseError = {
   code: 'MISSING_BODY_VALUES',

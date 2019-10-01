@@ -35,7 +35,7 @@
     "@vown/auth": "1.0.1",
     "@vown/reviews": "1.1.1",
     "@vown/components": "1.0.1",
-    "@vown/scripts": "1.0.1",
+    "@vown/scripts": "1.1.0",
     "jest": "^24.9.0",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

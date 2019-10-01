@@ -41,26 +41,28 @@ npm install -g yarn
 
 In order to get up an running locally follow the steps below:
 
-
 clone the repository
+
 ```
 git clone git@github.com:Veriown/vown.git
 cd vown
 ```
 
 install the dependancies
+
 ```
 yarn install
 ```
 
 #### Run Web App
+
 cd into the web app package
 
 ```
 cd packages/vown-web-app
 ```
 
-run the web app 
+run the web app
 
 ```
 yarn dev
@@ -70,7 +72,7 @@ Server should be running on http://localhost:3000
 
 ## Running the tests
 
-In order to run the unit tests you can follow the steps below: 
+In order to run the unit tests you can follow the steps below:
 
 cd into any package and run the command
 
@@ -82,13 +84,13 @@ yarn test
 
 TBA -
 
-
 ### Coding Styles
 
 We have a linter which we use to manage our preferred code styles.
 We also use danger js in order to ensure we don't merge code that violates our coding styles into our master branch
 
 To run the linter you can run this command from the root:
+
 ```
 yarn lint
 ```
@@ -99,12 +101,10 @@ TBA
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Veriown/vown/releases). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/Veriown/vown/releases).
 
 ## Authors
 
-* **Phillip A-Boateng** - *Initial work* - [Veriown](https://github.com/Veriown/vown)
+- **Phillip A-Boateng** - _Initial work_ - [Veriown](https://github.com/Veriown/vown)
 
 See also the list of [contributors](https://github.com/Veriown/vown/graphs/contributors) who participated in this project.
-
-

@@ -1,10 +1,11 @@
-import Review from '../index'
-import axios from 'axios'
+import {createReview, updateReview, retrieveReview} from '..'
+import { authInit } from '@vown/auth'
+import { IReview } from '@vown/types'
 
-jest.mock('axios')
+jest.mock('@vown/auth')
 
-const reviewMod = new Review('token', 'user_id')
 const landlordID = '9dd53577-b9aa-4024-beaa-1a38d3bba38b'
+const userID = 'Zo27YeFFKkfTyf9wvV6Qe4dT5mf2'
 const testReview = {
   recommends: true,
   landlord_id: '9dd53577-b9aa-4024-beaa-1a38d3bba38b',
@@ -17,45 +18,60 @@ const testReview = {
   approve_of_landlord: true,
 }
 
-const reviews = {
+const landlord_reviews = {
   reviews: [testReview],
   landlord_id: landlordID,
 }
 
-describe('Testing Review module', () => {
-  beforeAll(() => {
-    //@ts-ignore
-    axios.get.mockResolvedValue({ data: reviews })
-    //@ts-ignore
-    axios.put.mockResolvedValue({ data: reviews })
-    //@ts-ignore
-    axios.post.mockResolvedValue({ data: reviews })
-  })
+const user_reviews = {
+  reviews: [testReview],
+  user_id: userID,
+}
 
-  it('Should create a new review', async () => {
-    return reviewMod.create(testReview).then((data: any) => {
-      expect(data).toEqual(reviews)
+const updated_user_reviews = {
+  reviews: [{...testReview, title: "Test update"}],
+  user_id: userID,
+}
+
+//@ts-ignore
+authInit.functions = jest.fn(() => {
+  return {
+    httpsCallable: jest.fn((name: string) => {
+      switch (name) {
+        case "reviews-v1-create":
+          return () => ({ data: user_reviews })
+        case "reviews-v1-update":
+          return (review: IReview) => ({ data: {...user_reviews, reviews: [{...testReview, ...review}]} })
+        case "reviews-v1-retrieve-landlord":
+          return (options: {landlord_id: string, limit?: number}) => ({ data: {...landlord_reviews, landlord_id: options.landlord_id } })
+        case "reviews-v1-retrieve-user":
+          return () => ({ data: user_reviews })
+        default:
+        return null
+      }
+    })
+  }
+})
+
+describe("Testing reviews functionality", () => {
+  it("Should create a new review and return array of reviews", () => {
+    createReview(testReview).then((res) => {
+      expect(res).toEqual(user_reviews)
     })
   })
-  it('Should update a review', () => {
-    return reviewMod.update(testReview).then((data: any) => {
-      expect(data).toEqual(reviews)
+  it("Should update a review and return array of reviews", () => {
+    updateReview({...testReview, title: "Test update"}).then((res) => {
+      expect(res).toEqual(updated_user_reviews)
     })
   })
-  it('Should retrieve a user review', () => {
-    return reviewMod
-      .retrieve()
-      .user()
-      .then((data: any) => {
-        expect(data).toEqual(reviews)
-      })
+  it("Should retrieve all landlord reviews", () => {
+    retrieveReview.landlord(landlordID).then((res) => {
+      expect(res).toEqual(landlord_reviews)
+    })
   })
-  it('Should retrieve a landlord review', () => {
-    return reviewMod
-      .retrieve()
-      .landlord(landlordID)
-      .then((data: any) => {
-        expect(data).toEqual(reviews)
-      })
+  it("Should retrieve all user reviews", () => {
+    retrieveReview.user().then((res) => {
+      expect(res).toEqual(user_reviews)
+    })
   })
 })

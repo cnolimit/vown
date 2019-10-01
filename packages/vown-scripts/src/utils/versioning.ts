@@ -20,9 +20,8 @@ class Versions {
 
   _stabiliseVersions() {
     const list = this.getVersionsList().packages.map(pkg => {
-      const packageName = pkg.name.replace('@', '').replace('/', '-')
       pkg.current = require(path.join(
-        __dirname + `../../../../${packageName}/package.json`
+        __dirname + `../../../../../${pkg.path}/package.json`
       )).version
       pkg.lastUpdated = new Date().toISOString()
       return pkg
@@ -62,8 +61,9 @@ class Versions {
 
   setVersion(newVersion: string) {
     const packageDetails = this.getPackageVersion()
-    const packageName = this.packageName.replace('@', '').replace('/', '-')
-    const packageJsonFilePath = path.join(__dirname + `../../../../${packageName}/package.json`)
+    const packageJsonFilePath = path.join(
+      __dirname + `../../../../../${packageDetails.path}/package.json`
+    )
     const packageJson = require(packageJsonFilePath)
 
     packageDetails.previous = packageDetails.current

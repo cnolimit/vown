@@ -10,8 +10,8 @@ import {
   FormControlLabel,
 } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
-import Reviews from '@vown/reviews'
-import auth from '@vown/auth'
+import { createReview } from '@vown/reviews'
+import { Auth } from '@vown/auth'
 
 const ReviewForm = () => {
   const [title, setTitle] = useState('')
@@ -22,13 +22,10 @@ const ReviewForm = () => {
   const [approves, setApproves] = useState(false)
 
   const submitData = async () => {
-    const token = await auth.GetToken()
-    const userId = await auth.GetId()
+    const userId = await Auth.GetUserId()
 
-    if (token && userId) {
-      const ReviewsMod = new Reviews(token, userId)
-
-      ReviewsMod.create({
+    if (userId) {
+      createReview({
         title,
         user_id: userId,
         landlord_id: '9dd53577-b9aa-4024-beaa-1a38d3bba38b',

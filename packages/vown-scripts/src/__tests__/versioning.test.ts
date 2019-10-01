@@ -1,5 +1,5 @@
 import VersionBump from '../utils/versioning'
-import { IVersionsList } from '../types'
+import { IVersionsList, IVersion } from '../types'
 const fs = require('fs')
 
 jest.mock('fs')
@@ -38,24 +38,32 @@ describe('Testing - Version Bump Functionality', () => {
       })
     ).toThrow()
   })
+})
 
-  describe('Testing - MAJOR | MINOR | PATCH bump', () => {
-    const componentsPackageName = '@vown/components'
-    const vBump = new VersionBump(componentsPackageName)
-    vBump._getVersionsFile = jest.fn(() => __dirname + '/data/versions.json')
+describe('Testing - MAJOR | MINOR | PATCH bump', () => {
+  const componentsPackageName = '@vown/components'
+  const vBump = new VersionBump(componentsPackageName)
+  vBump._getVersionsFile = jest.fn(() => __dirname + '/data/versions.json')
 
-    it('Should update major version', () => {
-      expect(vBump.generateNewVersion('MAJOR')).toEqual('3.0.0')
-    })
-    it('Should update minor version', () => {
-      expect(vBump.generateNewVersion('MINOR')).toEqual('2.1.0')
-    })
-    it('Should update patch version', () => {
-      expect(vBump.generateNewVersion('PATCH')).toEqual('2.0.1')
-    })
-    it('Should return current version if tyoe isnt passed', () => {
-      //@ts-ignore
-      expect(vBump.generateNewVersion()).toEqual('2.0.0')
+  it('Should update major version', () => {
+    expect(vBump.generateNewVersion('MAJOR')).toEqual('3.0.0')
+  })
+  it('Should update minor version', () => {
+    expect(vBump.generateNewVersion('MINOR')).toEqual('2.1.0')
+  })
+  it('Should update patch version', () => {
+    expect(vBump.generateNewVersion('PATCH')).toEqual('2.0.1')
+  })
+  it('Should return current version if type isnt passed', () => {
+    //@ts-ignore
+    expect(vBump.generateNewVersion()).toEqual('2.0.0')
+  })
+})
+
+describe('Testing all paths resolve package.json correctly', () => {
+  it('Should find the correct package.json associated to the package', () => {
+    versions.packages.forEach((pkg: IVersion) => {
+      expect(require(`../../../../${pkg.path}/package.json`)).toHaveProperty('name', pkg.name)
     })
   })
 })

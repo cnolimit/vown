@@ -1,5 +1,6 @@
 export interface IVersion {
   name: string
+  path: string
   current: string
   previous: string
   lastUpdated: string

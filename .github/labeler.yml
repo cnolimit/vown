@@ -1,7 +1,7 @@
 vown-auth 🔑:
   - packages/vown-auth/**/*
-vown-functions 🔥:
-  - packages/vown-functions/**/*
+vown-firebase 🔥:
+  - packages/vown-firebase/**/*
 vown-reviews 📝:
   - packages/vown-reviews/**/*
 vown-types 🖋:

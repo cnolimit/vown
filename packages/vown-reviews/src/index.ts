@@ -1,52 +1,42 @@
-import axios, { AxiosResponse } from 'axios'
 import { IReview, IReviewUpdate } from '@vown/types'
+import { authInit } from '@vown/auth'
 
-class Review {
-  private baseURL: any
-  private headers: any
-  private version = 'v1'
-  private host = `https://us-central1-veriown-reviews.cloudfunctions.net/api/${this.version}reviews`
+const firebase = authInit
 
-  constructor(token: string, user: string) {
-    this.baseURL = `${this.host}/${this.version}`
-    this.headers = {
-      'Content-Type': 'application/json',
-      Accept: 'application/json',
-      token: token,
-      user: user,
-    }
-  }
-
-  create(review: IReview): Promise<IReview[]> {
-    return axios
-      .post(`${this.baseURL}/create`, review, { headers: this.headers })
-      .then(res => res.data)
-      .catch((res: AxiosResponse) => res.data)
-  }
-
-  update(review: IReviewUpdate): Promise<IReview[]> {
-    return axios
-      .put(`${this.baseURL}/update`, review, { headers: this.headers })
-      .then(res => res.data)
-      .catch((res: AxiosResponse) => res.data)
-  }
-
-  retrieve() {
-    return {
-      landlord: (id: string): Promise<IReview[]> => {
-        return axios
-          .get(`${this.baseURL}/landlord/${id}`, { headers: this.headers })
-          .then(res => res.data)
-          .catch((res: AxiosResponse) => res.data)
-      },
-      user: (): Promise<IReview[]> => {
-        return axios
-          .get(`${this.baseURL}/user`, { headers: this.headers })
-          .then(res => res.data)
-          .catch((res: AxiosResponse) => res.data)
-      },
-    }
-  }
+export const createReview = async (
+  review: IReview
+): Promise<{ reviews: IReview[]; user_id: string }> => {
+  const reviewCreate = firebase.functions().httpsCallable('reviews-v1-create')
+  const { data } = await reviewCreate(review)
+  return data
 }
 
-export default Review
+export const updateReview = async (
+  review: IReviewUpdate
+): Promise<{ reviews: IReview[]; user_id: string }> => {
+  const reviewUpdate = firebase.functions().httpsCallable('reviews-v1-update')
+  const { data } = await reviewUpdate(review)
+  return data
+}
+
+export const retrieveReview = {
+  landlord: async (
+    landlord_id: string,
+    limit?: number
+  ): Promise<{ reviews: IReview[]; landlord_id: string }> => {
+    const reviewLandlord = firebase.functions().httpsCallable('reviews-v1-retrieve-landlord')
+    const { data } = await reviewLandlord({ landlord_id, limit })
+    return data
+  },
+  user: async (limit?: number): Promise<{ reviews: IReview[]; user_id: string }> => {
+    const reviewUser = firebase.functions().httpsCallable('reviews-v1-retrieve-user')
+    const { data } = await reviewUser({ limit })
+    return data
+  },
+}
+
+export default {
+  create: createReview,
+  update: updateReview,
+  retrieve: retrieveReview,
+}

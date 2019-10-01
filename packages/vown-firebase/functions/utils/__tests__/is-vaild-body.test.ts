@@ -1,5 +1,5 @@
 import { isInvalidBody } from '..'
-import { createApi } from '../../api/v1/errors'
+import { createApi } from '../../v1/errors'
 
 describe('Testing isInvalidBody function', () => {
   it('Should return all errors if an empty review is provided', () => {

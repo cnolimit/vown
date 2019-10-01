@@ -4,14 +4,15 @@
   "private": true,
   "main": "index.js",
   "workspaces": [
-    "packages/*"
+    "packages/**/*"
   ],
   "scripts": {
-    "danger": "danger",
+    "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
+    "danger": "danger",
     "test": "jest",
     "lint": "eslint ./packages --ext .ts,.tsx",
-    "prettier": "prettier --check \"packages/**/*.+(ts|tsx|json|md)\"",
+    "prettier": "prettier --check \"./**/*.+(ts|tsx|json|md)\"",
     "format": "yarn prettier --write"
   },
   "license": "MIT",
@@ -37,6 +38,10 @@
       "^.+\\.tsx?$": "ts-jest"
     }
   },
+  "nohoist": [
+    "**/firebase-admin",
+    "**/firebase-function"
+  ],
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.3.0",
     "@typescript-eslint/parser": "^2.3.0",

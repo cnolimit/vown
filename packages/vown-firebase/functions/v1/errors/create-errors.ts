@@ -1,55 +1,55 @@
-import { ResponseError } from '../../../types'
+import { ResponseError } from '../../types'
 
 export const Error422: ResponseError = {
-  code: 'INVALID_PROPERTIES',
-  message: 'Invalid properties',
-  target: 'properties',
+  code: 'MISSING_REQUIRED_FIELDS',
+  message: 'Missing required fields',
+  target: 'review',
   details: [
     {
-      code: 'INVALID_TITLE_FIELD',
-      message: 'invalid title field',
+      code: 'MISSING_TITLE_FIELD',
+      message: 'missing title field',
       target: 'review object',
       key: 'title',
     },
     {
-      code: 'INVALID_RATING_FIELD',
-      message: 'invalid rating field',
+      code: 'MISSING_RATING_FIELD',
+      message: 'missing rating field',
       target: 'review object',
       key: 'rating',
     },
     {
-      code: 'INVALID_DIFFICULTY_RATING_FIELD',
-      message: 'invalid difficulty rating field',
+      code: 'MISSING_DIFFICULTY_RATING_FIELD',
+      message: 'missing difficulty rating field',
       target: 'review object',
       key: 'difficulty_rating',
     },
     {
-      code: 'INVALID_EXPERIENCE_RATING_FIELD',
-      message: 'invalid experience rating field',
+      code: 'MISSING_EXPERIENCE_RATING_FIELD',
+      message: 'missing experience rating field',
       target: 'review object',
       key: 'experience_rating',
     },
     {
-      code: 'INVALID_APPROVE_OF_LANDLORD_FIELD',
-      message: 'invalid approve or landlord field',
+      code: 'MISSING_APPROVE_OF_LANDLORD_FIELD',
+      message: 'missing approve or landlord field',
       target: 'review object',
       key: 'approve_of_landlord',
     },
     {
-      code: 'INVALID_RECCOMENDS_FIELD',
-      message: 'invalid recommends field',
+      code: 'MISSING_RECCOMENDS_FIELD',
+      message: 'missing recommends field',
       target: 'review object',
       key: 'recommends',
     },
     {
-      code: 'INVALID_LANDLORD_FIELD',
-      message: 'invalid landlord field',
+      code: 'MISSING_LANDLORD_FIELD',
+      message: 'missing landlord field',
       target: 'review object',
       key: 'landlord_id',
     },
     {
-      code: 'INVALID_USER_FIELD',
-      message: 'invalid user field',
+      code: 'MISSING_USER_FIELD',
+      message: 'missing user field',
       target: 'review object',
       key: 'user_id',
     },
@@ -63,13 +63,13 @@ export const Error404: ResponseError = {
   details: [
     {
       code: 'INVALID_LANDLORD_ID',
-      message: 'landlord id does not exist',
+      message: 'Invalid landlord id',
       target: 'landlord',
       key: 'landlord_id',
     },
     {
       code: 'INVALID_USER_ID',
-      message: 'user id does not exist',
+      message: 'Invalid user id',
       target: 'user',
       key: 'user_id',
     },

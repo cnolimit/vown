@@ -13,6 +13,6 @@
     "version-bump": "version-bump @vown/types"
   },
   "devDependencies": {
-    "@vown/scripts": "1.0.1"
+    "@vown/scripts": "1.1.0"
   }
 }

@@ -1,11 +1,11 @@
 {
   "packages": [
-    {"name": "@vown/auth", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
-    {"name": "@vown/components", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
-    {"name": "@vown/functions", "current": "2.1.0", "previous": "2.1.0", "lastUpdated": ""},
-    {"name": "@vown/reviews", "current": "2.1.0", "previous": "2.1.0", "lastUpdated": ""},
-    {"name": "@vown/scripts", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
-    {"name": "@vown/types", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
-    {"name": "@vown/web-app", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""}
+    {"name": "@vown/auth", "path": "packages/vown-auth", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
+    {"name": "@vown/components", "path": "packages/vown-components", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
+    {"name": "@vown/firebase", "path": "packages/vown-firebase/functions", "current": "2.1.0", "previous": "2.1.0", "lastUpdated": ""},
+    {"name": "@vown/reviews", "path": "packages/vown-reviews", "current": "2.1.0", "previous": "2.1.0", "lastUpdated": ""},
+    {"name": "@vown/scripts", "path": "packages/vown-scripts", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
+    {"name": "@vown/types", "path": "packages/vown-types", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""},
+    {"name": "@vown/web-app", "path": "packages/vown-web-app", "current": "2.0.0", "previous": "2.0.0", "lastUpdated": ""}
   ]
 }

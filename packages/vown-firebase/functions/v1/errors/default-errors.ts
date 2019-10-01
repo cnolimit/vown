@@ -1,4 +1,4 @@
-import { ResponseError } from '../../../types'
+import { ResponseError } from '../../types'
 
 export const defaultError: ResponseError = {
   code: 'FAILED_REQUEST',

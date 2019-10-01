@@ -1,5 +1,5 @@
 import { isInvalid } from '..'
-import { createApi } from '../../api/v1/errors'
+import { createApi } from '../../v1/errors'
 
 describe('Testing isValid function', () => {
   it('Should return an error for landlord id', () => {

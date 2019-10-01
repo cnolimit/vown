@@ -1,4 +1,4 @@
-import { ResponseError } from '../../../types'
+import { ResponseError } from '../../types'
 
 export const Error404: ResponseError = {
   code: 'NOT_FOUND',

@@ -16,16 +16,15 @@
     "version-bump": "version-bump @vown/reviews"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/jest": "^24.0.18",
-    "@vown/scripts": "1.0.1",
+    "@vown/scripts": "1.1.0",
+    "@vown/types": "1.0.1",
+    "jest": "^24.9.0",
     "ts-jest": "^24.1.0",
     "typescript": "^3.5.3"
   },
   "dependencies": {
-    "@vown/types": "1.0.1",
-    "axios": "^0.19.0",
-    "jest": "^24.9.0"
+    "@vown/auth": "1.0.1"
   },
   "jest": {
     "roots": [

@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: 10.x
       - name: Install Dependancies
-        run: yarn
+        run: yarn && yarn build
       - name: Run Lint - @vown
         run: yarn lint
       - name: Run Tests - @vown/auth
@@ -58,12 +58,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 8.x
+          node-version: 10.x
       - name: Install Firebase Function Dependancies
-        run: cd ./packages/vown-functions/functions && npm i
-      - name: Run Build - @vown/functions
-        run: cd ./packages/vown-functions/functions && npm run build
-      - name: Run Tests - @vown/functions
-        run: cd ./packages/vown-functions/functions && npm test
+        run: cd ./packages/vown-firebase/functions && yarn
+      - name: Run Build - @vown/firebase
+        run: cd ./packages/vown-firebase/functions && yarn build
+      - name: Run Tests - @vown/firebase
+        run: cd ./packages/vown-firebase/functions && yarn test
         env:
           CI: true

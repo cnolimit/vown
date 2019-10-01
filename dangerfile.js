@@ -42,18 +42,22 @@ MODIFIED_FILES.forEach(async file => {
       .split('packages/')
       .join('')
       .split('/')[0]
+    const packageNameAlias = `@${modifiedPackage.replace('-', '/')}`
+    const version = versions.packages.filter(pkg => pkg.name === packageNameAlias)[0]
+    const packageJsonPath = `${version.path}/package.json`
 
-    const packageJsonPath = `packages/${modifiedPackage}/package.json`
     const hasUpdatedPackageJSON = FILES.includes(packageJsonPath)
     if (!hasUpdatedPackageJSON && !packagesToUpgrade.includes(modifiedPackage)) {
       return packagesToUpgrade.push(modifiedPackage)
     }
 
     const packageJsonDiff = await danger.git.diffForFile(`${packageJsonPath}`)
+    const diffMatch = packageJsonDiff.diff.match(/"version":/g)
 
     if (
       !!packageJsonDiff &&
-      packageJsonDiff.diff.match(/"version":/g).length === 2 &&
+      diffMatch &&
+      diffMatch.length === 2 &&
       !packagesToUpgrade.includes(modifiedPackage)
     ) {
       return packagesToUpgrade.push(modifiedPackage)

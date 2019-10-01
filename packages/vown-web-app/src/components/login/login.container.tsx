@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import LoginForm from './login-form'
-import Auth from '@vown/auth'
+import { Auth } from '@vown/auth'
 
 const Container = styled.div`
   width: 100vw;
@@ -14,11 +14,8 @@ const Container = styled.div`
 
 const App = () => {
   const handleSignIn = async (username: string, password: string, cb: Function) => {
-    console.log({ username, password })
-    Auth.SignIn(username, password).catch(async () => {
-      console.log('ID', await Auth.GetId())
-      cb()
-    })
+    await Auth.SignIn(username, password)
+    cb()
   }
 
   return (

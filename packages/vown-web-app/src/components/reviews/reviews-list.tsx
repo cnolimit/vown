@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { CardHeader, Box, Typography, Card } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { IReview } from '@vown/types'
-import Reviews from '@vown/reviews'
-import auth from '@vown/auth'
+import { retrieveReview } from '@vown/reviews'
 
 const App = () => {
   const [reviews, setReviews] = useState<IReview[]>([])
@@ -11,18 +10,9 @@ const App = () => {
 
   useEffect(() => {
     const fetchUserReviews = async () => {
-      const token = await auth.GetToken()
-      const userId = await auth.GetId()
-
-      if (token && userId) {
-        const ReviewsMod = new Reviews(token, userId)
-        const userReviews = await ReviewsMod.retrieve().user()
-
-        if (userReviews) {
-          setReviews(userReviews)
-        }
-        setFecting(false)
-      }
+      const userReviews = await retrieveReview.user()
+      if (userReviews) setReviews(userReviews.reviews)
+      setFecting(false)
     }
     fetchUserReviews()
   }, [])

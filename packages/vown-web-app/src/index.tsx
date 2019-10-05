@@ -1,30 +1,32 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import * as ReactDOM from 'react-dom'
-import Login from '@components/login/login.container'
+import { createGlobalStyle } from 'styled-components'
+import Registration from '@components/registration/registration.container'
 import Reviews from '@components/reviews/reviews.container'
+import { observer } from 'mobx-react-lite'
 import './vendors/normalise.css'
-import { Auth } from '@vown/auth'
+import { state, actions } from '@store/.'
 
-const App = () => {
-  const [loggedIn, setLoggedIn] = useState(false)
+const GlobalStyle = createGlobalStyle`
+  * {
+      font-family: 'Nunito Sans', sans-serif;
+    }
+`
 
-  useEffect(() => {
-    const checkLoggedIn = async () => setLoggedIn(await Auth.isLoggedIn())
-    checkLoggedIn()
-  }, [])
-
+const App = observer(() => {
   return (
     <React.Fragment>
-      {loggedIn ? (
-        <div>
-          <button onClick={Auth.SignOut}>Sign Out</button>
+      <GlobalStyle />
+      {state.loggedIn ? (
+        <>
+          <button onClick={actions.signOut}>Sign Out</button>
           <Reviews />
-        </div>
+        </>
       ) : (
-        <Login />
+        <Registration />
       )}
     </React.Fragment>
   )
-}
+})
 
 ReactDOM.render(<App />, document.getElementById('app'))

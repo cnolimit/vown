@@ -6,7 +6,9 @@
     "lib": ["dom", "es2015", "es2017"],
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@store/*": ["src/store/*"]
     }
   }
 }

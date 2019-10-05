@@ -1,2 +1,5 @@
 export { default as Button } from './button'
+export { default as Input } from './input'
+export { default as LoginForm } from './login-form'
+export { default as RegistrationForm } from './registration-form'
 export { default as OverflowLoader } from './overflow-loader'

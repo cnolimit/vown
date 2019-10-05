@@ -1,28 +1,57 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import LoginForm from './login-form'
-import { Auth } from '@vown/auth'
+import { LoginForm } from '@vown/components'
+import OvalShape from '@assets/oval_shape.svg'
+import { observer } from 'mobx-react-lite'
+import { actions } from '@store/.'
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  display: grid;
-  align-content: center;
-  justify-content: center;
   background-color: #4880ff;
+  background-image: url(${OvalShape});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  @media (min-width: 768px) {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+  }
 `
 
-const App = () => {
-  const handleSignIn = async (username: string, password: string, cb: Function) => {
-    await Auth.SignIn(username, password)
-    cb()
+const FormWrapper = styled.div`
+  overflow: hidden;
+  height: 100%;
+  @media (min-width: 768px) {
+    border-radius: 15px;
+    width: 500px;
+  }
+`
+
+interface ILoginFormData {
+  username: string
+  password: string
+  rememberPassword: boolean
+}
+
+const Login = observer(() => {
+  const [loading, setLoading] = useState(false)
+
+  const handleSignIn = (data: ILoginFormData) => {
+    setLoading(true)
+    actions.signIn(data.username, data.password).catch(() => {
+      setLoading(false)
+    })
   }
 
   return (
     <Container>
-      <LoginForm onSubmit={handleSignIn} />
+      <FormWrapper>
+        <LoginForm loading={loading} onSubmit={handleSignIn} />
+      </FormWrapper>
     </Container>
   )
-}
+})
 
-export default App
+export default Login

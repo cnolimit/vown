@@ -18,7 +18,8 @@
     "window": true,
     "console": true,
     "process": true,
-    "require": true
+    "require": true,
+    "module": true
   },
   "settings": {
     "react": {

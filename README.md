@@ -18,7 +18,7 @@
 
 <br />
 
-[**API Documentation**](https://veriownreviews.docs.apiary.io/)
+[**Workflow Documentation**](docs/workflow.md)
 
 <br />
 </div>

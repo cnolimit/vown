@@ -1,7 +1,7 @@
 on:
   pull_request:
     branches:
-      - master
+      - develop
 
 name: 🏠Veriown - PR Checks
 

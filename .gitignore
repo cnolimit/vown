@@ -4,6 +4,7 @@ package-lock.json
 
 # Build Folders
 dist
+.next
 
 # Error Logs
 *-debug.log
@@ -14,3 +15,4 @@ dist
 
 # Config Files
 *-key.json
+

@@ -24,7 +24,7 @@
     "babel-jest": "^24.9.0"
   },
   "dependencies": {
-    "@vown/auth": "2.0.0"
+    "@vown/auth": "2.0.1"
   },
   "jest": {
     "roots": [

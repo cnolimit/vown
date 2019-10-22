@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { Card, Typography, Link, FormControlLabel, Checkbox, Container } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import { Button, OverflowLoader, Input } from '../'
@@ -49,9 +49,9 @@ interface ILoginForm {
 
 const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
   const classes = useStyles()
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [rememberPassword, setRememberPassword] = useState(false)
+  const [username, setUsername] = React.useState('')
+  const [password, setPassword] = React.useState('')
+  const [rememberPassword, setRememberPassword] = React.useState(false)
 
   const handleFormSubmit = () => onSubmit({ username, password, rememberPassword })
 

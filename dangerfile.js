@@ -1,5 +1,6 @@
 const { danger, fail, warn } = require('danger')
 const fs = require('fs')
+const { execSync } = require('child_process')
 const versions = require('./versions.json')
 const PR = danger.github.pr
 const MODIFIED_FILES = danger.git.modified_files
@@ -11,6 +12,7 @@ const IGNORE_LIST = ['vown-scripts']
 
 const packagesUpdatedManually = []
 const packagesToUpgrade = []
+const DIFF_COMMAND = 'git diff origin/develop -- '
 
 FILES.forEach(async file => {
   // Check if the package.json file have been edited manually
@@ -35,7 +37,7 @@ FILES.forEach(async file => {
   }
 })
 
-MODIFIED_FILES.forEach(async file => {
+MODIFIED_FILES.forEach(file => {
   // Check if any modified packages have not been upgraded.
   if (file.includes('/vown-')) {
     const modifiedPackage = file
@@ -51,13 +53,13 @@ MODIFIED_FILES.forEach(async file => {
       return packagesToUpgrade.push(modifiedPackage)
     }
 
-    const packageJsonDiff = await danger.git.diffForFile(`${packageJsonPath}`)
-    const diffMatch = packageJsonDiff.diff.match(/"version":/g)
+    const packageJsonDiff = execSync(`${DIFF_COMMAND}${packageJsonPath}`, { stdio: 'pipe' })
+    const diffMatch = packageJsonDiff && packageJsonDiff.toString().match(/"version":/g)
 
     if (
       !!packageJsonDiff &&
       diffMatch &&
-      diffMatch.length === 2 &&
+      diffMatch.length !== 2 &&
       !packagesToUpgrade.includes(modifiedPackage)
     ) {
       return packagesToUpgrade.push(modifiedPackage)

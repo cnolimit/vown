@@ -1,15 +1,13 @@
 import React, { useState } from 'react'
-import styled from 'styled-components'
-import { LoginForm } from '@vown/components'
-import OvalShape from '@assets/oval_shape.svg'
 import { observer } from 'mobx-react-lite'
-import { actions } from '@store/.'
+import { RegistrationForm } from '@vown/components'
+import { actions } from '../store'
+import styled from 'styled-components'
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: #4880ff;
-  background-image: url(${OvalShape});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -30,14 +28,14 @@ const FormWrapper = styled.div`
 `
 
 interface ILoginFormData {
+  email: string
   username: string
   password: string
   rememberPassword: boolean
 }
 
-const Login = observer(() => {
+const Registration = observer(() => {
   const [loading, setLoading] = useState(false)
-
   const handleSignIn = (data: ILoginFormData) => {
     setLoading(true)
     actions.signIn(data.username, data.password).catch(() => {
@@ -48,10 +46,10 @@ const Login = observer(() => {
   return (
     <Container>
       <FormWrapper>
-        <LoginForm loading={loading} onSubmit={handleSignIn} />
+        <RegistrationForm onSubmit={handleSignIn} loading={loading} />
       </FormWrapper>
     </Container>
   )
 })
 
-export default Login
+export default Registration

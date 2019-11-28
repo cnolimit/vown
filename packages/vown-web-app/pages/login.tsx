@@ -1,15 +1,16 @@
+import { LoginForm } from '@vown/components'
+import { ERRORS, NOTIFICATION_STATES, SUCCESS } from '@vown/types'
+import { observer } from 'mobx-react-lite'
 import * as React from 'react'
 import styled from 'styled-components'
-import { LoginForm } from '@vown/components'
-import { observer } from 'mobx-react-lite'
+import FormWrapper from '../components/form-wrapper'
 import { actions } from '../store'
-import { ROUTES, COOKIE } from '../utils/constants'
-import { isTokenValid } from '../utils/auth'
+import { COOKIE, ROUTES } from '../types'
+import { auth } from '../utils'
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #4880ff;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -17,15 +18,6 @@ const Container = styled.div`
     display: grid;
     align-content: center;
     justify-content: center;
-  }
-`
-
-const FormWrapper = styled.div`
-  overflow: hidden;
-  height: 100%;
-  @media (min-width: 768px) {
-    border-radius: 15px;
-    width: 500px;
   }
 `
 
@@ -39,10 +31,29 @@ const Login = () => {
   const [loading, setLoading] = React.useState(false)
   const handleSignIn = (data: ILoginFormData) => {
     setLoading(true)
+    if (!data.username || !data.password) {
+      actions.pushNotification({
+        type: NOTIFICATION_STATES.ERROR,
+        message: ERRORS.INVALID_LOGIN,
+      })
+      return setLoading(false)
+    }
     actions
       .signIn(data.username, data.password)
-      .then(() => setLoading(false))
-      .catch(() => setLoading(false))
+      .then(() => {
+        setLoading(false)
+        actions.pushNotification({
+          type: NOTIFICATION_STATES.SUCCESS,
+          message: SUCCESS.SUCCESS_LOGIN,
+        })
+      })
+      .catch(err => {
+        setLoading(false)
+        actions.pushNotification({
+          type: NOTIFICATION_STATES.ERROR,
+          message: ERRORS[err.code] || ERRORS['LOGIN_FAILED'],
+        })
+      })
   }
 
   return (
@@ -55,7 +66,7 @@ const Login = () => {
 }
 
 Login.getInitialProps = (ctx: any) => {
-  if (isTokenValid(ctx)) {
+  if (auth.isTokenValid(ctx)) {
     ctx.res.writeHead(303, { Location: ROUTES.dashboard })
     ctx.res.end()
   }

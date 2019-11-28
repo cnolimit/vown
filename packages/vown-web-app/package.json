@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@material-ui/core": "4.5.1",
+    "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "4.0.0-alpha.28",
     "@material-ui/styles": "4.5.0",
     "@types/jsonwebtoken": "^8.3.5",
@@ -34,9 +35,13 @@
     "styled-components": "4.4.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^9.1.4",
+    "@svgr/webpack": "^4.3.3",
     "@types/js-cookie": "^2.2.3",
     "@vown/scripts": "1.1.0",
+    "@vown/types": "1.0.1",
     "babel-plugin-styled-components": "1.10.6",
-    "next-transpile-modules": "^2.3.1"
+    "next-transpile-modules": "^2.3.1",
+    "url-loader": "^2.2.0"
   }
 }

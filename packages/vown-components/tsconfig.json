@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "./dist/",
     "jsx": "react",
-    "declaration": true,
-    "sourceMap": false
+    "sourceMap": false,
+    "lib": ["dom", "esnext"],
+    "esModuleInterop": true,
   }
 }

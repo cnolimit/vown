@@ -1,52 +1,87 @@
-import * as React from 'react'
-import { actions } from '../store'
-import { withAuth } from '../utils/auth'
-import { COOKIE } from '../utils/constants'
-import { slideInOut } from '../utils/variants'
+import { AppBar, Theme, Typography } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
 import { IUserDetails } from '@vown/types'
 import { motion } from 'framer-motion'
+import * as React from 'react'
 import styled from 'styled-components'
-import { Button } from '@vown/components'
-import Reviews from '../components/reviews/reviews.container'
+import MenuList from '../components/menu-list'
+import ReviewList from '../components/reviews/reviews-list'
+import Logo from '../static/assets/logo_hori.svg'
+import { actions } from '../store'
+import { COOKIE } from '../types'
+import { auth, variants } from '../utils'
 
 const Container = styled.div`
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
 `
 
-const Content = styled.div`
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
-  color: white;
-  background-color: black;
-  border: 2px solid black;
-  width: 250px;
-  height: 250px;
-  border-radius: 10px;
-  padding: 50px;
-  margin: 25px;
-`
+const useStyles = makeStyles((theme: Theme) => ({
+  bar: {
+    width: '100%',
+    color: 'black',
+    display: 'flex',
+    boxShadow: 'none',
+    position: 'relative',
+    alignContent: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
+    border: '1px solid rgba(232,232,232,0.2)',
+  },
+  barContent: {
+    width: '100%',
+    display: 'flex',
+    margin: '0 auto',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    maxWidth: `calc(991px + (${theme.typography.pxToRem(20)} * 2))`,
+    padding: `${theme.typography.pxToRem(24)} ${theme.typography.pxToRem(20)}`,
+  },
+  barButton: {
+    flexGrow: 1,
+    maxWidth: '200px',
+  },
+  body: {
+    width: '100%',
+    margin: '0 auto',
+    maxWidth: `calc(990px + (${theme.typography.pxToRem(20)} * 2))`,
+    padding: `${theme.typography.pxToRem(50)} ${theme.typography.pxToRem(20)}`,
+  },
+  bodyTitle: {
+    lineHeight: '1.38',
+    marginBottom: theme.typography.pxToRem(28),
+  },
+  bodyContent: {
+    borderRadius: theme.typography.pxToRem(10),
+    minHeight: theme.typography.pxToRem(250),
+    position: 'relative',
+    marginBottom: theme.typography.pxToRem(25),
+  },
+}))
 
 const Dashboard = (props: { session: IUserDetails }) => {
+  const classes = useStyles()
+
   return (
     <Container>
-      <motion.div initial="exit" animate="enter" exit="exit">
-        <motion.div variants={slideInOut}>
-          <Content>
-            <h4>Dashboard: USER: {props.session.email}</h4>
-            <motion.div variants={slideInOut}>
-              <Button onClick={actions.signOut}>SIGN OUT</Button>
-            </motion.div>
-          </Content>
-        </motion.div>
+      <AppBar className={classes.bar}>
+        <div className={classes.barContent}>
+          <Logo />
+          <MenuList user={props.session} onSignOut={actions.signOut} />
+        </div>
+      </AppBar>
+      <motion.div className={classes.body} initial="exit" animate="enter" exit="exit">
+        <Typography className={classes.bodyTitle} variant="h1">
+          My Reviews
+        </Typography>
+        <motion.section className={classes.bodyContent} variants={variants.slideInOut}>
+          <ReviewList />
+        </motion.section>
       </motion.div>
-      <Reviews />
     </Container>
   )
 }
 
 Dashboard.getInitialProps = (ctx: any) => ({ session: ctx[COOKIE.token] })
 
-export default withAuth(Dashboard)
+export default auth.withAuth(Dashboard)

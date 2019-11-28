@@ -1,6 +1,6 @@
-import { IReview, Collections, ReviewKeys, ResponseError } from '../types'
+import { Collections, IReview, ResponseError, ReviewKeys } from '../types'
+import { getEmptyValueKeys, hasEmptyValues, isInvalid, isInvalidBody } from '../utils'
 import { createApi, defaultApi, retrieveApi, updateApi } from './errors'
-import { isInvalidBody, isInvalid, getEmptyValueKeys, hasEmptyValues } from '../utils'
 import uuid = require('uuid')
 import admin = require('firebase-admin')
 
@@ -25,11 +25,22 @@ const fetchReviews = async (idName: string, idValue: string, limit?: string) => 
   return { reviews, [idName]: idValue }
 }
 
+const sendError = (error: ResponseError) => {
+  return { error }
+}
+
 export const create = async (data: IReview, uid: string) => {
   try {
     const review: IReview = data
     const error = isInvalidBody(review, createApi.Error422)
-    if (error) return error
+    if (error) return sendError(error)
+
+    const missingValues = hasEmptyValues(review)
+    if (missingValues) {
+      const missingValueKeys = getEmptyValueKeys(review).map(key => ({ key, exists: false }))
+      const errorValues = isInvalid(missingValueKeys, createApi.Error422)
+      if (errorValues) return sendError(errorValues)
+    }
 
     const id = uuid()
     const userRef = await admin
@@ -52,17 +63,23 @@ export const create = async (data: IReview, uid: string) => {
       createApi.Error404
     )
 
-    if (IDError) return IDError
+    if (IDError) return sendError(IDError)
 
     await admin
       .firestore()
       .collection(Collections.REVIEWS)
       .doc(id)
-      .create({ id, landlord_id: review.landlord_id, user_id: uid, ...review })
+      .create({
+        id,
+        landlord_id: review.landlord_id,
+        user_id: uid,
+        createdAt: new Date().toISOString(),
+        ...review,
+      })
 
     return await fetchReviews(ReviewKeys.USER_ID, uid)
   } catch (e) {
-    return { ...defaultApi.Error, target: `${MODULE}-create`, message: e.message }
+    return sendError({ ...defaultApi.Error, target: `${MODULE}-create`, message: e.message })
   }
 }
 
@@ -80,12 +97,16 @@ export const retrieveLandlord = async (data: IReview) => {
     retrieveApi.Error404
   )
 
-  if (IDError) return IDError
+  if (IDError) return sendError(IDError)
 
   try {
     return await fetchReviews(ReviewKeys.LANDLORD_ID, landlord_id, limit)
   } catch (e) {
-    return { ...defaultApi.Error, target: `${MODULE}-retrieve-landlord`, message: e.message }
+    return sendError({
+      ...defaultApi.Error,
+      target: `${MODULE}-retrieve-landlord`,
+      message: e.message,
+    })
   }
 }
 
@@ -103,12 +124,12 @@ export const retrieveUser = async (data: IReview, uid: string) => {
     retrieveApi.Error404
   )
 
-  if (IDError) return IDError
+  if (IDError) return sendError(IDError)
 
   try {
     return await fetchReviews(ReviewKeys.USER_ID, user_id, limit)
   } catch (e) {
-    return { ...defaultApi.Error, target: `${MODULE}-retrieve-user`, message: e.message }
+    return sendError({ ...defaultApi.Error, target: `${MODULE}-retrieve-user`, message: e.message })
   }
 }
 
@@ -122,8 +143,8 @@ export const update = async (data: IReview, uid: string) => {
 
     if (missingValues) {
       const missingValueKeys = getEmptyValueKeys(review).map(key => ({ key, exists: false }))
-
-      return isInvalid(missingValueKeys, updateApi.Error422)
+      const error = isInvalid(missingValueKeys, updateApi.Error422)
+      if (error) return sendError(error)
     }
 
     if (landlord_id) {
@@ -149,7 +170,7 @@ export const update = async (data: IReview, uid: string) => {
       IDError = isInvalid([{ key: ReviewKeys.USER_ID, exists: user.exists }], updateApi.Error404)
     }
 
-    if (IDError) return IDError
+    if (IDError) return sendError(IDError)
     const reviewRef = await admin.firestore().collection(Collections.REVIEWS)
     await reviewRef.doc(review_id).update({ ...review })
     const reviewDocs = await reviewRef.get()
@@ -160,6 +181,6 @@ export const update = async (data: IReview, uid: string) => {
     })
     return { reviews }
   } catch (e) {
-    return { ...defaultApi.Error, target: `${MODULE}-update`, message: e.message }
+    return sendError({ ...defaultApi.Error, target: `${MODULE}-update`, message: e.message })
   }
 }

@@ -2,12 +2,12 @@ import React, { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { RegistrationForm } from '@vown/components'
 import { actions } from '../store'
+import FormWrapper from '../components/form-wrapper'
 import styled from 'styled-components'
 
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: #4880ff;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -15,15 +15,6 @@ const Container = styled.div`
     display: grid;
     align-content: center;
     justify-content: center;
-  }
-`
-
-const FormWrapper = styled.div`
-  overflow: hidden;
-  height: 100%;
-  @media (min-width: 768px) {
-    border-radius: 15px;
-    width: 500px;
   }
 `
 

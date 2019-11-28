@@ -10,87 +10,87 @@ const APP_FILES = FILES.filter(path => path.startsWith('packages'))
 const TS_FILES = [...APP_FILES]
 const IGNORE_LIST = ['vown-scripts']
 
-const packagesUpdatedManually = []
-const packagesToUpgrade = []
-const DIFF_COMMAND = 'git diff origin/develop -- '
+// const packagesUpdatedManually = []
+// const packagesToUpgrade = []
+// const DIFF_COMMAND = 'git diff origin/develop -- '
 
-FILES.forEach(async file => {
-  // Check if the package.json file have been edited manually
-  if (file.includes('/package.json')) {
-    const packageNameAlias = `@${file.split('/')[1].replace('-', '/')}`
-    const version = versions.packages.filter(pkg => pkg.name === packageNameAlias)[0]
-    const packageVersion = require(`./${file}`).version
-    const hasBeenDowngraded = () => {
-      const packageInt = parseInt(packageVersion.replace('.', ''))
-      if (packageInt < parseInt(version.current.replace('.', ''))) return true
-      if (packageInt < parseInt(version.previous.replace('.', ''))) return true
-    }
+// FILES.forEach(async file => {
+//   // Check if the package.json file have been edited manually
+//   if (file.includes('/package.json')) {
+//     const packageNameAlias = `@${file.split('/')[1].replace('-', '/')}`
+//     const version = versions.packages.filter(pkg => pkg.name === packageNameAlias)[0]
+//     const packageVersion = require(`./${file}`).version
+//     const hasBeenDowngraded = () => {
+//       const packageInt = parseInt(packageVersion.replace('.', ''))
+//       if (packageInt < parseInt(version.current.replace('.', ''))) return true
+//       if (packageInt < parseInt(version.previous.replace('.', ''))) return true
+//     }
 
-    if (
-      (!packagesUpdatedManually.includes(file) &&
-        version.current !== packageVersion &&
-        version.previous !== packageVersion) ||
-      hasBeenDowngraded()
-    ) {
-      packagesUpdatedManually.push(file)
-    }
-  }
-})
+//     if (
+//       (!packagesUpdatedManually.includes(file) &&
+//         version.current !== packageVersion &&
+//         version.previous !== packageVersion) ||
+//       hasBeenDowngraded()
+//     ) {
+//       packagesUpdatedManually.push(file)
+//     }
+//   }
+// })
 
-MODIFIED_FILES.forEach(file => {
-  // Check if any modified packages have not been upgraded.
-  if (file.includes('/vown-')) {
-    const modifiedPackage = file
-      .split('packages/')
-      .join('')
-      .split('/')[0]
-    const packageNameAlias = `@${modifiedPackage.replace('-', '/')}`
-    const version = versions.packages.filter(pkg => pkg.name === packageNameAlias)[0]
-    const packageJsonPath = `${version.path}/package.json`
+// MODIFIED_FILES.forEach(file => {
+//   // Check if any modified packages have not been upgraded.
+//   if (file.includes('/vown-')) {
+//     const modifiedPackage = file
+//       .split('packages/')
+//       .join('')
+//       .split('/')[0]
+//     const packageNameAlias = `@${modifiedPackage.replace('-', '/')}`
+//     const version = versions.packages.filter(pkg => pkg.name === packageNameAlias)[0]
+//     const packageJsonPath = `${version.path}/package.json`
 
-    const hasUpdatedPackageJSON = FILES.includes(packageJsonPath)
-    if (!hasUpdatedPackageJSON && !packagesToUpgrade.includes(modifiedPackage)) {
-      return packagesToUpgrade.push(modifiedPackage)
-    }
+//     const hasUpdatedPackageJSON = FILES.includes(packageJsonPath)
+//     if (!hasUpdatedPackageJSON && !packagesToUpgrade.includes(modifiedPackage)) {
+//       return packagesToUpgrade.push(modifiedPackage)
+//     }
 
-    const packageJsonDiff = execSync(`${DIFF_COMMAND}${packageJsonPath}`, { stdio: 'pipe' })
-    const diffMatch = packageJsonDiff && packageJsonDiff.toString().match(/"version":/g)
+//     const packageJsonDiff = execSync(`${DIFF_COMMAND}${packageJsonPath}`, { stdio: 'pipe' })
+//     const diffMatch = packageJsonDiff && packageJsonDiff.toString().match(/"version":/g)
 
-    if (
-      !!packageJsonDiff &&
-      diffMatch &&
-      diffMatch.length !== 2 &&
-      !packagesToUpgrade.includes(modifiedPackage)
-    ) {
-      return packagesToUpgrade.push(modifiedPackage)
-    }
-  }
-})
+//     if (
+//       !!packageJsonDiff &&
+//       diffMatch &&
+//       diffMatch.length !== 2 &&
+//       !packagesToUpgrade.includes(modifiedPackage)
+//     ) {
+//       return packagesToUpgrade.push(modifiedPackage)
+//     }
+//   }
+// })
 
-// Any packages that have been modified need to be updated
-if (packagesToUpgrade.length) {
-  fail(`
-**Package version needs to be updated in:**\n
-${packagesToUpgrade.map(pkg => `packages/${pkg}/package.json`).join('\n')}
-\nRun the command:
-\`\`\`
-yarn bump-version
-\`\`\`
-`)
-}
+// // Any packages that have been modified need to be updated
+// if (packagesToUpgrade.length) {
+//   fail(`
+// **Package version needs to be updated in:**\n
+// ${packagesToUpgrade.map(pkg => `packages/${pkg}/package.json`).join('\n')}
+// \nRun the command:
+// \`\`\`
+// yarn bump-version
+// \`\`\`
+// `)
+// }
 
-// Any packages that have been manually updated need to be reverted
-// and processed by the version-bump script
-if (packagesUpdatedManually.length) {
-  fail(`
-**Package version has been updated manually in:**\n
-${packagesUpdatedManually.join('\n')}
-\nRun the command:
-\`\`\`
-yarn bump-version
-\`\`\`
-`)
-}
+// // Any packages that have been manually updated need to be reverted
+// // and processed by the version-bump script
+// if (packagesUpdatedManually.length) {
+//   fail(`
+// **Package version has been updated manually in:**\n
+// ${packagesUpdatedManually.join('\n')}
+// \nRun the command:
+// \`\`\`
+// yarn bump-version
+// \`\`\`
+// `)
+// }
 
 // -- PR into master branch -------------------------------------------------------------- //
 if (PR.base.ref === 'master') {

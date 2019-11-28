@@ -1,9 +1,9 @@
-import * as React from 'react'
-import { Card, Typography, Link, FormControlLabel, Checkbox, Container } from '@material-ui/core'
+import { Card, Checkbox, FormControlLabel, Link, Theme, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import { Button, OverflowLoader, Input } from '../'
+import * as React from 'react'
+import { Button, Input, OverflowLoader } from '../'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     width: '100%',
     height: '100%',
@@ -12,35 +12,35 @@ const useStyles = makeStyles({
     backgroundColor: 'white',
   },
   wrapper: {
-    paddingLeft: '50px',
-    paddingRight: '50px',
+    paddingLeft: theme.typography.pxToRem(50),
+    paddingRight: theme.typography.pxToRem(50),
   },
   title: {
-    margin: '50px 0 15px',
+    margin: `${theme.typography.pxToRem(50)} 0 ${theme.typography.pxToRem(15)}`,
     textAlign: 'center',
     fontWeight: 600,
   },
   subtitle: {
-    margin: '15px 0 50px',
+    margin: `${theme.typography.pxToRem(15)} 0 ${theme.typography.pxToRem(50)}`,
     textAlign: 'center',
   },
   footerText: {
-    margin: '15px 0 50px',
+    margin: `${theme.typography.pxToRem(15)} 0 ${theme.typography.pxToRem(50)}`,
     textAlign: 'center',
   },
   input: {
-    marginBottom: '35px',
+    marginBottom: theme.typography.pxToRem(35),
   },
   checkbox: {
-    marginRight: '5px !important',
+    marginRight: `${theme.typography.pxToRem(5)} !important`,
   },
   label: {
-    padding: '9px',
-    marginTop: '-25px',
-    marginBottom: '40px',
+    padding: `${theme.typography.pxToRem(9)} 0`,
+    marginTop: `-${theme.typography.pxToRem(25)}`,
+    marginBottom: theme.typography.pxToRem(40),
     color: 'rgba(0,0,0,0.54)',
   },
-})
+}))
 
 interface ILoginForm {
   onSubmit: Function
@@ -58,31 +58,35 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
   return (
     <Card className={classes.container}>
       <OverflowLoader loading={loading}>
-        <Container className={classes.wrapper}>
+        <form
+          className={classes.wrapper}
+          onSubmit={handleFormSubmit}
+          data-testid="login-form-component"
+        >
           <Typography variant="h5" className={classes.title}>
             Login to Account
           </Typography>
           <Typography variant="subtitle2" className={classes.subtitle}>
             Please enter your email and password to continue
           </Typography>
-
           <Input
+            autoComplete="on"
             className={classes.input}
             fieldName="username"
             fieldValue={username}
             fieldLabel="Email address:"
             placeholder="cnolimit@gmail.com"
-            onChange={e => setUsername(e.target.value)}
+            onChange={(e: any) => setUsername(e.target.value)}
             type="text"
           />
-
           <Input
+            autoComplete="on"
             className={classes.input}
             fieldName="passowrd"
             fieldValue={password}
             fieldLabel="Password:"
             placeholder="******"
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e: any) => setPassword(e.target.value)}
             type="password"
           />
           <FormControlLabel
@@ -97,11 +101,14 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             }
             label="Remember Password"
           />
-          <Button onClick={handleFormSubmit}>Sign In</Button>
+          <Button type="submit">Sign In</Button>
           <Typography variant="subtitle1" className={classes.footerText}>
-            {`Don't have an account?`} <Link href="/register">Create Account</Link>
+            {`Don't have an account?`}{' '}
+            <Link href="/register" color="secondary">
+              <strong>Create Account</strong>
+            </Link>
           </Typography>
-        </Container>
+        </form>
       </OverflowLoader>
     </Card>
   )

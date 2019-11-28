@@ -1,5 +1,5 @@
-import { createMuiTheme } from '@material-ui/core/styles'
 import red from '@material-ui/core/colors/red'
+import { createMuiTheme } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
   palette: {
@@ -13,7 +13,23 @@ const theme = createMuiTheme({
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#F5F6FA',
+    },
+  },
+  typography: {
+    htmlFontSize: 16,
+    fontFamily: '"Nunito Sans", sans-serif;',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 700,
+    h1: {
+      fontWeight: 700,
+      fontSize: '2.285rem',
+    },
+    h2: {
+      fontWeight: 600,
+      fontSize: '2rem',
     },
   },
 })

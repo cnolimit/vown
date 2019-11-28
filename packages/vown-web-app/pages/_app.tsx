@@ -1,9 +1,9 @@
-import React from 'react'
-import App from 'next/app'
-import theme from '../utils/theme'
-import Layout from '../components/layout'
-import { AnimatePresence } from 'framer-motion'
 import { ThemeProvider } from '@material-ui/styles'
+import { AnimatePresence } from 'framer-motion'
+import App from 'next/app'
+import React from 'react'
+import Layout from '../components/layout'
+import theme from '../utils/theme'
 
 class MyApp extends App {
   componentDidMount() {

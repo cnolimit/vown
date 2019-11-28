@@ -1,36 +1,73 @@
-import * as React from 'react'
-import styled from 'styled-components'
 import { CircularProgress } from '@material-ui/core'
+import { makeStyles } from '@material-ui/styles'
+import * as React from 'react'
 
-const Container = styled.div`
-  z-index: 5;
-  width: 100%;
-  height: 100%;
-  display: grid;
-  position: absolute;
-  align-content: center;
-  background-color: rgba(255, 255, 255, 0.5);
-  justify-content: center;
-`
-
-const Blur = styled.div`
-  filter: blur(2px);
-`
+const useClasses = makeStyles({
+  container: {
+    zIndex: 5,
+    width: '100%',
+    height: '100%',
+    display: 'grid',
+    position: 'absolute',
+    alignContent: 'center',
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+  },
+  blur: {
+    filter: 'blur(2px)',
+  },
+  top: {
+    color: 'rgb(95,37,159, 0.3)',
+  },
+  bottom: {
+    animationDuration: '550ms',
+    position: 'absolute',
+    left: 0,
+  },
+})
 
 interface IOverflowLoader {
   loading: boolean
   children: React.ReactNode
 }
 
-const OverflowLoader = (props: IOverflowLoader) => {
+const OverflowLoader = ({ loading, children, ...restProps }: IOverflowLoader) => {
+  const classes = useClasses()
   return (
     <React.Fragment>
-      {props.loading ? (
-        <Container>
-          <CircularProgress data-testid="loader-component" size={60} thickness={4.5} />
-        </Container>
+      {loading ? (
+        <div className={classes.container}>
+          <div style={{ position: 'relative' }}>
+            <CircularProgress
+              color="primary"
+              data-testid="loader-component"
+              variant="determinate"
+              className={classes.top}
+              value={100}
+              size={60}
+              thickness={4.5}
+              {...restProps}
+            />
+            <CircularProgress
+              color="primary"
+              variant="indeterminate"
+              disableShrink
+              value={80}
+              className={classes.bottom}
+              size={60}
+              thickness={4.5}
+              {...restProps}
+            />
+          </div>
+        </div>
       ) : null}
-      {props.loading ? <Blur data-testid="blur-component">{props.children}</Blur> : props.children}
+      {loading ? (
+        <div className={classes.blur} data-testid="blur-component">
+          {children}
+        </div>
+      ) : (
+        children
+      )}
     </React.Fragment>
   )
 }

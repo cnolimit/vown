@@ -1,7 +1,7 @@
-import * as React from 'react'
 import { ServerStyleSheets } from '@material-ui/styles'
-import { ServerStyleSheet } from 'styled-components'
 import Document, { Head, Main, NextScript } from 'next/document'
+import * as React from 'react'
+import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
@@ -38,7 +38,7 @@ class MyDocument extends Document {
           <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
           <link rel="shortcut icon" href="static/logo.png" />
           <link
-            href="https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700&display=swap"
+            href={'https://fonts.googleapis.com/css?family=Nunito+Sans:400,600,700&display=swap'}
             rel="stylesheet"
           />
           <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />

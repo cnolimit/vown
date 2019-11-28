@@ -1,6 +1,6 @@
-import * as React from 'react'
 import { Link } from '@material-ui/core'
-import { ROUTES } from '../utils/constants'
+import * as React from 'react'
+import { ROUTES } from '../types'
 
 function Home() {
   return (

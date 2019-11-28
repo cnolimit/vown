@@ -1,29 +1,21 @@
-// https://github.com/cnolimit/veriown-web-app-fire/blob/master/src/lib/constants.js
-// ----------------- Route constants ------------------
-export enum ROUTES {
-  main = '/',
-  login = '/login',
-  home = '/home',
-  help = '/help',
-  about = '/about',
-  contact = '/contact',
-  dashboard = '/dashboard',
-  properties = '/property',
-  properties_search = '/property/search',
-  dashboard_home = '/dashboard/home',
-  dashboard_application = '/dashboard/application',
-  dashboard_area = '/dashboard/area',
-  dashboard_marketplace = '/dashboard/marketplace',
-  dashboard_help = '/dashboard/help',
-}
+import DashboardIcon from '../static/assets/dashboard.svg'
+import ReviewIcon from '../static/assets/reviews.svg'
+import { NAVIGATION, ROUTES } from '../types'
 
-// ----------------- Cookie constants ------------------
-export enum COOKIE {
-  token = 'token',
-  delete_date = '=;expires=Thu, 01 Jan 1970 00:00:00 GMT',
-}
+// ----------------- Notification Timeout constants ------------------
+export const NOTIFICATION_TIMEOUT = 5000
 
-// ----------------- JWT Secret constants ------------------
-export enum TOKEN {
-  secret = 'secret',
-}
+export const NAVIGATION_LIST: NAVIGATION = [
+  {
+    link: ROUTES.dashboard,
+    text: 'Dashboard',
+    icon: DashboardIcon,
+  },
+  {
+    link: ROUTES.reviews,
+    text: 'Reviews',
+    icon: ReviewIcon,
+  },
+]
+
+export default { NOTIFICATION_TIMEOUT }

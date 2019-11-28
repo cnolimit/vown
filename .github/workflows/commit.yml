@@ -19,6 +19,8 @@ jobs:
           printenv
       - name: Install Dependancies
         run: yarn
+      - name: Run Build - @vown/types
+        run: cd ./packages/vown-types && yarn build
       - name: Run Build - @vown/auth
         run: cd ./packages/vown-auth && yarn build
       - name: Run Build - @vown/components

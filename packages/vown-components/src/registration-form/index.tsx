@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     marginRight: '5px !important',
   },
   label: {
-    padding: '9px',
+    padding: '9px 0',
     marginTop: '-25px',
     marginBottom: '40px',
     color: 'rgba(0,0,0,0.54)',
@@ -110,7 +110,10 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
           />
           <Button onClick={handleFormSubmit}>Sign In</Button>
           <Typography variant="subtitle1" className={classes.footerText}>
-            {`Already have an account?`} <Link href="/login">Login</Link>
+            {`Already have an account?`}{' '}
+            <Link href="/login" color="secondary">
+              <strong>Login</strong>
+            </Link>
           </Typography>
         </Container>
       </OverflowLoader>

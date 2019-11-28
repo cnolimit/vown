@@ -1,12 +1,12 @@
-import React from 'react'
-import nextCookie from 'next-cookies'
-import { ROUTES, COOKIE, TOKEN } from './constants'
-import jwt from 'jsonwebtoken'
 import cookie from 'js-cookie'
+import jwt from 'jsonwebtoken'
+import nextCookie from 'next-cookies'
+import React from 'react'
+import { COOKIE, ROUTES, TOKEN } from '../types'
 
-export const auth = (ctx: any) => nextCookie(ctx).token
+const auth = (ctx: any) => nextCookie(ctx).token
 
-export const isTokenValid = (ctx: any) => {
+const isTokenValid = (ctx: any) => {
   const token = auth(ctx)
   try {
     return token ? jwt.verify(token, TOKEN.secret) : false
@@ -15,7 +15,7 @@ export const isTokenValid = (ctx: any) => {
   }
 }
 
-export const redirect = (ctx: any, path: ROUTES) => {
+const redirect = (ctx: any, path: ROUTES) => {
   if (ctx.res) {
     ctx.res.writeHead(302, { Location: path })
     ctx.res.end()
@@ -24,7 +24,7 @@ export const redirect = (ctx: any, path: ROUTES) => {
   }
 }
 
-export const withAuth = (WrappedComponent: any) => {
+const withAuth = (WrappedComponent: any) => {
   class Wrapper extends React.Component<{ token: string }> {
     static getInitialProps(ctx: any) {
       const token = auth(ctx)
@@ -51,4 +51,11 @@ export const withAuth = (WrappedComponent: any) => {
   }
 
   return Wrapper
+}
+
+export default {
+  withAuth,
+  redirect,
+  isTokenValid,
+  auth,
 }

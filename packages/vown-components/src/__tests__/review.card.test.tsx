@@ -1,8 +1,9 @@
+import { createMuiTheme } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/styles"
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import React from 'react'
 import { ReviewCard } from '../'
-
 
 describe('Testing Review Card', () => {
   const reviewIds = {
@@ -15,11 +16,17 @@ describe('Testing Review Card', () => {
   const rating = 2
   const date = "2019-10-31T19:54:20"
   const description = "Test review description"
-  const getComponent = () => render(<ReviewCard title={title} rating={rating} description={description} date={date} />)
 
+  const getComponent = () => render(
+    <ThemeProvider theme={createMuiTheme({})}>
+      <ReviewCard title={title} rating={rating} description={description} date={date} />
+    </ThemeProvider>
+  )
+
+  
   it('Should render review card components', () => {
-  const {getByTestId} = getComponent()
-  Object.values(reviewIds).forEach((id) => {
+    const {getByTestId} = getComponent()
+    Object.values(reviewIds).forEach((id) => {
       expect(getByTestId(id)).toBeDefined()
     })
   })

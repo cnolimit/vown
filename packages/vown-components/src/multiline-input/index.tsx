@@ -3,7 +3,7 @@ import { InputBaseProps } from '@material-ui/core/InputBase'
 import { styled } from '@material-ui/core/styles'
 import * as React from 'react'
 
-const StyledInputBase = styled(InputBase)({
+const StyledInputBase = styled(InputBase)(props => ({
   width: '100%',
   padding: '15px',
   height: '150px',
@@ -11,9 +11,9 @@ const StyledInputBase = styled(InputBase)({
   marginTop: '10px',
   backgroundColor: '#F1F4F9',
   fontSize: '1.2em',
-  borderRadius: '8px',
+  borderRadius: props.theme.shape.borderRadius,
   border: '1px solid #D8D8D8',
-})
+}))
 
 interface IInput {
   fieldName: string

@@ -1,8 +1,9 @@
+import { createMuiTheme } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/styles'
 import '@testing-library/jest-dom/extend-expect'
 import { fireEvent, render } from '@testing-library/react'
 import React, { useState } from 'react'
 import { Input } from '../'
-
 
 describe('Testing Input', () => {
   const fieldName = 'Test Name'
@@ -14,12 +15,14 @@ describe('Testing Input', () => {
   const InputTestComponent = () => {
     const [value, setValue] = useState(fieldValue)
     return (
-      <Input 
-      fieldName={fieldName}
-      fieldValue={value}
-      fieldLabel={fieldLabel}
-      onChange={(e) => setValue(e.target.value)}
-    />
+      <ThemeProvider theme={createMuiTheme({})}>
+        <Input 
+          fieldName={fieldName}
+          fieldValue={value}
+          fieldLabel={fieldLabel}
+          onChange={(e) => setValue(e.target.value)}
+        />
+      </ThemeProvider>
     )
   }
   

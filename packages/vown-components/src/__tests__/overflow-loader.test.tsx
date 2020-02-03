@@ -1,3 +1,5 @@
+import { createMuiTheme } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/styles"
 import '@testing-library/jest-dom/extend-expect'
 import { render } from '@testing-library/react'
 import * as React from 'react'
@@ -9,9 +11,11 @@ describe('Testing Overflow Loader', () => {
   const loaderTestId = 'loader-component'
   const Content = () => <div>{testMessage}</div>
   const _OverflowLoader = (loading: boolean) => (
-    <OverflowLoader loading={loading}>
+    <ThemeProvider theme={createMuiTheme({})}>
+      <OverflowLoader loading={loading}>
         <Content />
       </OverflowLoader>
+    </ThemeProvider>
   )
 
   it('Should render the blur component when loading true', () => {

@@ -1,9 +1,9 @@
-import { Button } from '@material-ui/core'
+import { Button, Theme } from '@material-ui/core'
 import { ButtonProps } from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   button: {
     width: '100%',
     height: '50px',
@@ -12,16 +12,16 @@ const useStyles = makeStyles({
     fontSize: '1em',
     fontWeight: 'bold',
     textTransform: 'capitalize',
-    borderRadius: '8px',
-    backgroundColor: 'rgb(95, 37, 159)',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.primary.main,
     '&:hover': {
-      backgroundColor: 'rgba(95, 37, 159, 0.8)',
+      backgroundColor: theme.palette.primary.dark,
     },
     '&:disabled': {
-      backgroundColor: 'rgba(95, 37, 159, 0.5)',
+      opacity: 0.5,
     },
   },
-})
+}))
 
 interface IButton {
   children: any

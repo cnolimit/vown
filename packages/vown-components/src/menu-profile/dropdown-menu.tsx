@@ -8,8 +8,8 @@ const DropdownMenuStyle = makeStyles((theme: Theme) => ({
     position: 'absolute',
     top: '2.5rem',
     right: '0.5rem',
-    borderRadius: '8px',
-    backgroundColor: '#ffffff',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.background.paper,
     border: '1px solid rgba(0,0,0,0.2)',
     overflow: 'hidden',
   },
@@ -21,7 +21,7 @@ const DropdownMenuStyle = makeStyles((theme: Theme) => ({
       cursor: 'pointer',
       transition: 'background-color 0.2s ease',
       '&:hover': {
-        backgroundColor: '#F5F5F5',
+        backgroundColor: theme.palette.background.default,
       },
     },
   },
@@ -29,7 +29,7 @@ const DropdownMenuStyle = makeStyles((theme: Theme) => ({
     fontWeight: 600,
     margin: `0 ${theme.typography.pxToRem(20)}`,
     padding: `${theme.typography.pxToRem(8)} 0`,
-    color: '#21314D',
+    color: theme.palette.text.primary,
     borderTop: '1px solid #EBEBEB',
     '& span': {
       display: 'inline-block',
@@ -43,9 +43,10 @@ interface DropdownMenuProps {
   name: string
   email: string
   onSignOut: () => void
+  onMyAccount: () => void
 }
 
-const DropdownMenu = ({ name, email, onSignOut }: DropdownMenuProps) => {
+const DropdownMenu = ({ name, email, onSignOut, onMyAccount }: DropdownMenuProps) => {
   const classes = DropdownMenuStyle()
   return (
     <div className={classes.menu} data-testid="menu-profile-dropdown-menu">
@@ -61,7 +62,7 @@ const DropdownMenu = ({ name, email, onSignOut }: DropdownMenuProps) => {
           </div>
         </li>
         <li>
-          <div className={classes.menuListItem}>
+          <div className={classes.menuListItem} onClick={onMyAccount}>
             <Typography
               variant="subtitle2"
               style={{ color: '#3367AB' }}

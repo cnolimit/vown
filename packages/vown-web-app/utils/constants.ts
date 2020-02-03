@@ -12,7 +12,7 @@ export const NAVIGATION_LIST: NAVIGATION = [
     icon: DashboardIcon,
   },
   {
-    link: ROUTES.reviews,
+    link: ROUTES.dashboard_reviews,
     text: 'Reviews',
     icon: ReviewIcon,
   },

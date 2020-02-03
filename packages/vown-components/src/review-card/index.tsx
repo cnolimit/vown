@@ -1,17 +1,17 @@
-import { Typography } from '@material-ui/core'
+import { Theme, Typography } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { makeStyles } from '@material-ui/styles'
 import React from 'react'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     border: '2px solid #F0F0F2',
     width: '300px',
     height: '250px',
     padding: '25px',
     cursor: 'pointer',
-    borderRadius: '8px',
-    backgroundColor: '#fff',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.background.paper,
     zIndex: 2,
   },
   title: {
@@ -33,7 +33,7 @@ const useStyles = makeStyles({
     overflow: 'hidden',
     textOverflow: 'ellipsis',
   },
-})
+}))
 
 interface IReviewCard {
   title: string

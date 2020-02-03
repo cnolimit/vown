@@ -21,6 +21,10 @@
 [**Workflow Documentation**](docs/workflow.md)
 
 <br />
+
+![🏠Veriown - Package Checks](https://github.com/Veriown/vown/workflows/%F0%9F%8F%A0Veriown%20-%20Package%20Checks/badge.svg)
+
+<br />
 </div>
 
 <hr />

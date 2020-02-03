@@ -20,14 +20,14 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: `${theme.typography.pxToRem(4.5)} ${theme.typography.pxToRem(14)}`,
     backgroundColor: 'transparent',
     '&:not(:last-child)': {
-      borderRadius: theme.typography.pxToRem(5),
+      borderRadius: theme.shape.borderRadius,
       transition: 'background-color 0.2s ease',
       '&:hover': {
         backgroundColor: '#F5F5F5',
       },
       '& a': {
         fontWeight: 'bold',
-        color: '#21314D',
+        color: theme.palette.text.primary,
         textDecoration: 'none',
       },
     },
@@ -40,9 +40,10 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface MenuListProps {
   user: IUserDetails
   onSignOut: () => void
+  onMyAccount: () => void
 }
 
-const MenuList = ({ user, onSignOut }: MenuListProps) => {
+const MenuList = ({ user, onSignOut, onMyAccount }: MenuListProps) => {
   const classes = useStyles()
   const name = user.displayName || user.email.split('@')[0]
   const image = user.photoURL || Placeholder
@@ -65,6 +66,7 @@ const MenuList = ({ user, onSignOut }: MenuListProps) => {
             email={user.email}
             role="Developer"
             onSignOut={onSignOut}
+            onMyAccount={onMyAccount}
           />
         </li>
       </ul>

@@ -9,7 +9,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     height: '100%',
     position: 'relative',
     boxShadow: 'none',
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.background.paper,
   },
   wrapper: {
     paddingLeft: theme.typography.pxToRem(50),
@@ -53,7 +53,10 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
   const [password, setPassword] = React.useState('')
   const [rememberPassword, setRememberPassword] = React.useState(false)
 
-  const handleFormSubmit = () => onSubmit({ username, password, rememberPassword })
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    onSubmit({ username, password, rememberPassword })
+  }
 
   return (
     <Card className={classes.container}>

@@ -1,15 +1,23 @@
-import * as React from 'react'
-import { Card, Typography, Link, FormControlLabel, Checkbox, Container } from '@material-ui/core'
+import {
+  Card,
+  Checkbox,
+  Container,
+  FormControlLabel,
+  Link,
+  Theme,
+  Typography,
+} from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
-import { Button, OverflowLoader, Input } from '../'
+import * as React from 'react'
+import { Button, Input, OverflowLoader } from '../'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   container: {
     width: '100%',
     height: '100%',
     position: 'relative',
     boxShadow: 'none',
-    backgroundColor: 'white',
+    backgroundColor: theme.palette.background.paper,
   },
   wrapper: {
     paddingLeft: '50px',
@@ -40,7 +48,7 @@ const useStyles = makeStyles({
     marginBottom: '40px',
     color: 'rgba(0,0,0,0.54)',
   },
-})
+}))
 
 interface ILoginForm {
   onSubmit: Function

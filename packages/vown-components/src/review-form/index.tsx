@@ -1,15 +1,15 @@
-import { FormGroup, Typography } from '@material-ui/core'
+import { FormGroup, Theme, Typography } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 import { makeStyles } from '@material-ui/styles'
 import { IReview } from '@vown/types'
 import React, { useState } from 'react'
 import { Button, Input, MultilineInput } from '../'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   card: {
     padding: '25px',
-    borderRadius: '8px',
-    backgroundColor: '#fff',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: theme.palette.background.paper,
     border: '2px solid #F0F0F2',
     overflow: 'hidden',
   },
@@ -31,8 +31,7 @@ const useStyles = makeStyles({
     margin: '25px 0',
     border: '1px solid #F0F0F2',
   },
-})
-
+}))
 interface IReviewForm {
   onSubmit: (review: IReview) => {}
 }

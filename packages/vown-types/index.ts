@@ -55,6 +55,12 @@ export interface IUserDetails {
   token: string
 }
 
+export interface IUserProfileDetails {
+  firstName: string
+  lastName: string
+  photo: string
+}
+
 export interface INotification {
   id?: number
   type: NOTIFICATION_STATES

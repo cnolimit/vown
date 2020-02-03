@@ -4,16 +4,15 @@ import '@testing-library/jest-dom/extend-expect';
 import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { LoginForm } from '../';
+
 describe('Testing Login Form', () => {
   const testFunc = jest.fn()
   
-  const LoginFormTestComponent = ({loading}: {loading: boolean}) => {
-    return (
-      <ThemeProvider theme={createMuiTheme({})}>
-        <LoginForm loading={loading} onSubmit={testFunc} />
-      </ThemeProvider>
-    )
-  }
+  const LoginFormTestComponent = ({loading}: {loading: boolean}) => (
+    <ThemeProvider theme={createMuiTheme({})}>
+      <LoginForm loading={loading} onSubmit={testFunc} />
+    </ThemeProvider>
+  )
   const getComponent = (loading: boolean) => render(<LoginFormTestComponent loading={loading} />)
 
   it('Should render loader if loading prop true', () => {

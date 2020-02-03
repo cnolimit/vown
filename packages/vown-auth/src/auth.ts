@@ -1,5 +1,5 @@
 /// <reference lib="dom" />
-import { IUserDetails } from '@vown/types'
+import { IUserDetails, IUserProfileDetails } from '@vown/types'
 import authInit from './auth-init'
 
 class Auth {
@@ -60,6 +60,36 @@ class Auth {
   public SignOut = () => {
     this._deleteSession()
     this.app.auth().signOut()
+  }
+
+  public UpdateDetails = (userData: IUserProfileDetails) => {
+    const user = this.app.auth().currentUser
+    if (user) {
+      user
+        .updateProfile({
+          displayName: `${userData.firstName} ${userData.lastName}`,
+          photoURL: userData.photo,
+        })
+        .then(() => {
+          const details = this.GetPersonalDetails()
+          if (details) {
+            details.displayName
+            this._setSession({
+              ...details,
+              displayName: user.displayName || details.displayName,
+              photoURL: user.photoURL || details.photoURL,
+            })
+            this.app
+              .firestore()
+              .collection('users')
+              .doc(user.uid)
+              .update({
+                displayName: `${userData.firstName} ${userData.lastName}`,
+                photoURL: userData.photo,
+              })
+          }
+        })
+    }
   }
 
   public isLoggedIn = () => {

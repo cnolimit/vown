@@ -4,7 +4,6 @@ import { ERRORS, NOTIFICATION_STATES } from '@vown/types'
 import React from 'react'
 import { Notification } from '../'
 
-
 describe('Testing Notification', () => {
   const notifications = [
     {id: 'notification-type-ERROR', type: NOTIFICATION_STATES.ERROR},

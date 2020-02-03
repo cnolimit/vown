@@ -1,3 +1,5 @@
+import { createMuiTheme } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/styles"
 import '@testing-library/jest-dom/extend-expect'
 import { fireEvent, render } from '@testing-library/react'
 import React from 'react'
@@ -5,7 +7,11 @@ import { ReviewForm } from '../'
 
 describe('Testing Review Form', () => {
   const handleSubmit = jest.fn((review) => review)
-  const getComponent = () => render(<ReviewForm onSubmit={handleSubmit} />)
+  const getComponent = () => render(
+    <ThemeProvider theme={createMuiTheme({})}>
+      <ReviewForm onSubmit={handleSubmit} />
+    </ThemeProvider>
+  )
 
   it('Should ', () => {
     const reviewObject = {

@@ -46,9 +46,10 @@ interface MenuProfileProps {
   image: string
   email: string
   onSignOut: () => void
+  onMyAccount: () => void
 }
 
-const MenuProfile = ({ role, name, image, email, onSignOut }: MenuProfileProps) => {
+const MenuProfile = ({ role, name, image, email, onSignOut, onMyAccount }: MenuProfileProps) => {
   const classes = MenuProfileStyle({ image })
   const [menuVisibility, setMenuVisibility] = useState(false)
 
@@ -77,7 +78,9 @@ const MenuProfile = ({ role, name, image, email, onSignOut }: MenuProfileProps) 
         className={classes.menuProfileButton}
         onClick={() => setMenuVisibility(!menuVisibility)}
       />
-      {menuVisibility && <DropdownMenu name={name} email={email} onSignOut={onSignOut} />}
+      {menuVisibility && (
+        <DropdownMenu name={name} email={email} onSignOut={onSignOut} onMyAccount={onMyAccount} />
+      )}
     </div>
   )
 }

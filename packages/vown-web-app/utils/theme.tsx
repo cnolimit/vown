@@ -1,19 +1,34 @@
-import red from '@material-ui/core/colors/red'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 const theme = createMuiTheme({
   palette: {
+    type: 'light',
     primary: {
+      dark: '#42196f',
       main: '#5F259F',
+      light: '#7f50b2',
+      contrastText: '#5F259F',
     },
     secondary: {
-      main: '#3CDBC0',
+      dark: '#209788',
+      main: '#2ED9C3',
+      light: '#57e0cf',
+      contrastText: '#2ED9C3',
     },
     error: {
-      main: red.A400,
+      dark: '#aa2e25',
+      main: '#f44336',
+      light: '#f6685e',
+      contrastText: '#f44336',
     },
     background: {
-      default: '#F5F6FA',
+      default: '#F5F5F5',
+    },
+    text: {
+      primary: 'rgba(33, 49, 77, 0.87)',
+      secondary: 'rgba(33, 49, 77, 0.54)',
+      disabled: 'rgba(33, 49, 77, 0.38)',
+      hint: 'rgba(33, 49, 77, 0.38)',
     },
   },
   typography: {
@@ -31,6 +46,9 @@ const theme = createMuiTheme({
       fontWeight: 600,
       fontSize: '2rem',
     },
+  },
+  shape: {
+    borderRadius: 4,
   },
 })
 

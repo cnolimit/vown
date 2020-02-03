@@ -1,3 +1,5 @@
+import { createMuiTheme } from '@material-ui/core'
+import { ThemeProvider } from '@material-ui/styles'
 import '@testing-library/jest-dom/extend-expect'
 import { fireEvent, render } from '@testing-library/react'
 import React, { useState } from 'react'
@@ -9,7 +11,9 @@ describe('Testing Button', () => {
   const ButtonTestComponent = () => {
     const [message, setMessage] = useState(testMessage)
     return (
-      <Button onClick={() => setMessage(testMessage2)}>{message}</Button>
+      <ThemeProvider theme={createMuiTheme({})}>
+        <Button onClick={() => setMessage(testMessage2)}>{message}</Button>
+      </ThemeProvider>
     )
   }
   const getComponent = () => render(<ButtonTestComponent />)

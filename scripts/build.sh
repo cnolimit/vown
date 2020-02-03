@@ -7,7 +7,7 @@ let ERROR_COUNT=0
 # loop through packages and build
 for PACKAGE in $(ls ./packages)
 do
-  if [ $PACKAGE != "vown-firebase" ] && [ $PACKAGE != "vown-types" ]
+  if [ $PACKAGE != "vown-firebase" ]
   then
     printf "\n\n🧰  - Building $PACKAGE package\n\n"
     cd "$PACKAGE_PATH/$PACKAGE"

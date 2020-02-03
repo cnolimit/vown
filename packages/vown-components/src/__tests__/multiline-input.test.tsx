@@ -1,8 +1,9 @@
+import { createMuiTheme } from "@material-ui/core"
+import { ThemeProvider } from "@material-ui/styles"
 import '@testing-library/jest-dom/extend-expect'
 import { fireEvent, render } from '@testing-library/react'
 import React, { useState } from 'react'
 import { MultilineInput } from '../'
-
 
 describe('Testing Multiline Input', () => {
   const fieldName = 'Test Name'
@@ -14,12 +15,14 @@ describe('Testing Multiline Input', () => {
   const InputTestComponent = () => {
     const [value, setValue] = useState(fieldValue)
     return (
-      <MultilineInput 
-      fieldName={fieldName}
-      fieldValue={value}
-      fieldLabel={fieldLabel}
-      onChange={(e:any) => setValue(e.target.value)}
-    />
+      <ThemeProvider theme={createMuiTheme({})}>
+        <MultilineInput 
+          fieldName={fieldName}
+          fieldValue={value}
+          fieldLabel={fieldLabel}
+          onChange={(e:any) => setValue(e.target.value)}
+        />
+      </ThemeProvider>
     )
   }
   

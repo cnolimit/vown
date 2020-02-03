@@ -1,3 +1,4 @@
+export { default as AccountDetailsCard } from './account-details-card'
 export { default as Button } from './button'
 export { default as Input } from './input'
 export { default as LoginForm } from './login-form'

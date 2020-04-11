@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 
-import Versioning from '../utils/versioning'
 import { IVersionsList } from '../types'
+import Versioning from '../utils/versioning'
 
 const chalk = require('chalk')
 const path = require('path')
@@ -36,3 +36,5 @@ const reviewBump = () => {
 }
 
 reviewBump()
+
+export default reviewBump

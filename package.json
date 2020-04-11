@@ -18,6 +18,9 @@
     "prettier": "prettier --check \"./**/*.+(ts|tsx|json|md)\"",
     "format": "yarn prettier --write"
   },
+  "dependencies": {
+    "next": "9.2.0"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.8",

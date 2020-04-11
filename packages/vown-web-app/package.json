@@ -18,6 +18,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "4.0.0-alpha.28",
     "@material-ui/styles": "4.5.0",
+    "@now/static-build": "^0.15.1",
     "@types/jsonwebtoken": "^8.3.5",
     "@vown/auth": "2.0.1",
     "@vown/components": "1.1.1",

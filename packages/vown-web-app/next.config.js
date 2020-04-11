@@ -6,6 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 
 module.exports = withBundleAnalyzer(
   withTM({
+    target: 'serverless',
     transpileModules: ['@vown/auth', '@vown/components', '@vown/reviews', '@vown/types'],
     webpack: config => {
       config.resolve.alias = {

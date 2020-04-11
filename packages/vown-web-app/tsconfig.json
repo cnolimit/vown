@@ -1,6 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "components/*": ["components/*"],
+      "utils/*": ["utils/*"],
+      "types/*": ["types/*"],
+      "store/*": ["store/*"],
+      "pages/*": ["pages/*"],
+      "static/*": ["static/*"],
+    },
     "jsx": "preserve",
     "target": "es5",
     "lib": [

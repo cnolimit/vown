@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/styles'
 import { OverflowLoader, ReviewCard } from '@vown/components'
 import format from 'date-fns/format'
 import React, { useEffect, useState } from 'react'
-import { actions, state } from '../../store'
-import { truncate } from '../../utils/helpers'
+import { actions, state } from 'store'
+import { truncate } from 'utils/helpers'
 
 const useStyles = makeStyles({
   container: {

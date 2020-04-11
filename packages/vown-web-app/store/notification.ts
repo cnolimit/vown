@@ -1,6 +1,6 @@
 import { INotification } from '@vown/types'
 import { action } from 'mobx'
-import { constants } from '../utils'
+import { constants } from 'utils'
 import state from './state'
 
 const notificationActions = {

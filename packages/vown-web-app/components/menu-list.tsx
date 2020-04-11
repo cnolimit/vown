@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/styles'
 import { MenuProfile } from '@vown/components'
 import { IUserDetails } from '@vown/types'
 import React from 'react'
-import Placeholder from '../static/assets/placeholder.png'
-import { NAVIGATION_LIST } from '../utils/constants'
+import Placeholder from 'static/assets/placeholder.png'
+import { NAVIGATION_LIST } from 'utils/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({
   menu: {

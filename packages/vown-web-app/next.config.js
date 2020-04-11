@@ -1,3 +1,4 @@
+const path = require('path')
 const withTM = require('next-transpile-modules')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -13,6 +14,12 @@ module.exports = withBundleAnalyzer(
         '@vown/components': require.resolve('@vown/components'),
         '@vown/reviews': require.resolve('@vown/reviews'),
         '@vown/types': require.resolve('@vown/types'),
+        components: path.resolve(__dirname, 'components'),
+        utils: path.resolve(__dirname, 'utils'),
+        types: path.resolve(__dirname, 'types'),
+        store: path.resolve(__dirname, 'store'),
+        pages: path.resolve(__dirname, 'pages'),
+        static: path.resolve(__dirname, 'static'),
       }
 
       config.module.rules.push(

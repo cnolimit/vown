@@ -2,7 +2,7 @@ import { Auth } from '@vown/auth'
 import { ReviewForm } from '@vown/components'
 import { IReview } from '@vown/types'
 import React from 'react'
-import { actions } from '../../store'
+import { actions } from 'store'
 
 const ReviewFormContainer = () => {
   const submitData = async (review: IReview) => {

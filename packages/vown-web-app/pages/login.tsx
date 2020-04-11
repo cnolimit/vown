@@ -1,12 +1,12 @@
 import { LoginForm } from '@vown/components'
 import { ERRORS, NOTIFICATION_STATES, SUCCESS } from '@vown/types'
+import FormWrapper from 'components/form-wrapper'
 import { observer } from 'mobx-react-lite'
 import * as React from 'react'
+import { actions } from 'store'
 import styled from 'styled-components'
-import FormWrapper from '../components/form-wrapper'
-import { actions } from '../store'
-import { COOKIE, ROUTES } from '../types'
-import { auth } from '../utils'
+import { COOKIE, ROUTES } from 'types'
+import { auth } from 'utils'
 
 const Container = styled.div`
   width: 100vw;

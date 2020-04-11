@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/styles'
 import { IUserDetails } from '@vown/types'
 import { useRouter } from 'next/router'
 import React from 'react'
-import Logo from '../static/assets/logo_hori.svg'
-import { ROUTES } from '../types'
+import Logo from 'static/assets/logo_hori.svg'
+import { ROUTES } from 'types'
 import MenuList from './menu-list'
 
 const useStyles = makeStyles((theme: Theme) => ({

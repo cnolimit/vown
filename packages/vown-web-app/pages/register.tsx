@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { observer } from 'mobx-react-lite'
 import { RegistrationForm } from '@vown/components'
-import { actions } from '../store'
-import FormWrapper from '../components/form-wrapper'
+import FormWrapper from 'components/form-wrapper'
+import { observer } from 'mobx-react-lite'
+import React, { useState } from 'react'
+import { actions } from 'store'
 import styled from 'styled-components'
 
 const Container = styled.div`
@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `
 
-interface ILoginFormData {
+interface IRegistrationFormData {
   email: string
   username: string
   password: string
@@ -27,9 +27,9 @@ interface ILoginFormData {
 
 const Registration = observer(() => {
   const [loading, setLoading] = useState(false)
-  const handleSignIn = (data: ILoginFormData) => {
+  const handleSignInUp = (data: IRegistrationFormData) => {
     setLoading(true)
-    actions.signIn(data.username, data.password).catch(() => {
+    actions.signUp(data.username, data.password).catch(() => {
       setLoading(false)
     })
   }
@@ -37,7 +37,7 @@ const Registration = observer(() => {
   return (
     <Container>
       <FormWrapper>
-        <RegistrationForm onSubmit={handleSignIn} loading={loading} />
+        <RegistrationForm onSubmit={handleSignInUp} loading={loading} />
       </FormWrapper>
     </Container>
   )

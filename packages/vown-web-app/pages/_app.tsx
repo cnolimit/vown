@@ -1,3 +1,4 @@
+import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
 import Layout from 'components/layouts/base-layout'
 import App from 'next/app'
@@ -20,6 +21,7 @@ class MyApp extends App {
     return (
       <Layout>
         <ThemeProvider theme={theme}>
+          <CssBaseline />
           <Component {...pageProps} key={router.route} />
         </ThemeProvider>
       </Layout>

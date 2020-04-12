@@ -1,4 +1,3 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
 import { Notification } from '@vown/components'
 import { motion } from 'framer-motion'
 import { observer } from 'mobx-react-lite'
@@ -58,7 +57,6 @@ const Layout = ({ children }: { children: any }) => {
       ) : null}
       <Container>
         <div style={{ width: '100%' }}>{children}</div>
-        <CssBaseline />
       </Container>
     </div>
   )

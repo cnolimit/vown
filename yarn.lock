@@ -1733,10 +1733,12 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@now/static-build@^0.15.1":
-  version "0.15.1"
-  resolved "https://registry.yarnpkg.com/@now/static-build/-/static-build-0.15.1.tgz#c42843d99d0aa840d4774f19bac312fe8c3f6d5a"
-  integrity sha512-0CURx6YQ2LiKwMr1/NkpwjF0bA0ExGmQkQv8BJPYVJ7exIAH1POfZmqCwFSY48ApsW6Zfzf9HdodBaR29e/ghQ==
+"@now/node@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@now/node/-/node-1.5.0.tgz#a159772276ae11acf87cf2620a86204abff38f1c"
+  integrity sha512-0MChNIBHsViTMPDsifTveWmMpUSUbVQYAHg9Qa8p7uF7pkfBAghyCGHSKHJVg3zxx0vVE4z+rYgaRS6xvF8qMA==
+  dependencies:
+    "@types/node" "*"
 
 "@octokit/auth-token@^2.4.0":
   version "2.4.0"

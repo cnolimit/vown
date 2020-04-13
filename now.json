@@ -2,5 +2,5 @@
   "name": "veriown",
   "version": 2,
   "alias": ["app.veriown.io"],
-  "builds": [{ "src": "packages/vown-web-app/", "use": "@now/node" }]
+  "builds": [{ "src": "packages/vown-web-app/", "use": "@now/next" }]
 }

@@ -19,6 +19,7 @@
     "format": "yarn prettier --write"
   },
   "dependencies": {
+    "@now/next": "^2.5.2",
     "next": "9.2.0"
   },
   "devDependencies": {

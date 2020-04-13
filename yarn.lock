@@ -1705,6 +1705,11 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@now/next@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@now/next/-/next-2.5.2.tgz#acda97a6bc213abfa4898ac49d880b9e45d9bc72"
+  integrity sha512-6f26A2rmTOv6Z6s4azssQHmrjIC4dDkNeYkVgJ+HDd7Gz9OPSDQv3lG7ybWNMZAfjxC1vKZ1N/8yuMpJW0zzbQ==
+
 "@now/node@^1.5.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@now/node/-/node-1.5.0.tgz#a159772276ae11acf87cf2620a86204abff38f1c"

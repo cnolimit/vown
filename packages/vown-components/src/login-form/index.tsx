@@ -40,18 +40,31 @@ const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: theme.typography.pxToRem(40),
     color: 'rgba(0,0,0,0.54)',
   },
+  span: {
+    display: 'block',
+    cursor: 'pointer',
+    textAlign: 'right',
+    fontSize: theme.typography.pxToRem(12),
+    marginTop: `-${theme.typography.pxToRem(30)}`,
+    marginBottom: theme.typography.pxToRem(20),
+    color: theme.palette.secondary.main,
+  },
 }))
 
 interface ILoginForm {
   onSubmit: Function
+  resetCache: () => void
+  cachedUser: string
   loading: boolean
 }
 
-const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
+const LoginForm = ({ onSubmit, loading, cachedUser, resetCache }: ILoginForm) => {
   const classes = useStyles()
-  const [username, setUsername] = React.useState('')
+  const [username, setUsername] = React.useState(cachedUser || '')
   const [password, setPassword] = React.useState('')
   const [rememberPassword, setRememberPassword] = React.useState(false)
+
+  React.useEffect(() => setUsername(cachedUser), [cachedUser])
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -76,11 +89,12 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             autoComplete="on"
             className={classes.input}
             fieldName="username"
-            fieldValue={username}
+            fieldValue={cachedUser || username}
             fieldLabel="Email address:"
-            placeholder="cnolimit@gmail.com"
+            placeholder={cachedUser || 'example@gmail.com'}
             onChange={(e: any) => setUsername(e.target.value)}
             type="text"
+            disabled={!!cachedUser}
           />
           <Input
             autoComplete="on"
@@ -92,18 +106,24 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             onChange={(e: any) => setPassword(e.target.value)}
             type="password"
           />
-          <FormControlLabel
-            className={classes.label}
-            control={
-              <Checkbox
-                className={classes.checkbox}
-                checked={rememberPassword}
-                onChange={() => setRememberPassword(!rememberPassword)}
-                color="primary"
-              />
-            }
-            label="Remember Password"
-          />
+          {cachedUser ? (
+            <Typography component="span" className={classes.span} onClick={resetCache}>
+              Not you?
+            </Typography>
+          ) : (
+            <FormControlLabel
+              className={classes.label}
+              control={
+                <Checkbox
+                  className={classes.checkbox}
+                  checked={rememberPassword}
+                  onChange={() => setRememberPassword(!rememberPassword)}
+                  color="primary"
+                />
+              }
+              label="Remember me"
+            />
+          )}
           <Button type="submit">Sign In</Button>
           <Typography variant="subtitle1" className={classes.footerText}>
             {`Don't have an account?`}{' '}

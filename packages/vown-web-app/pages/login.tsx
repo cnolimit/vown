@@ -29,7 +29,20 @@ interface ILoginFormData {
 
 const Login = () => {
   const [loading, setLoading] = React.useState(false)
+  const [cachedUser, setCachedUser] = React.useState('')
+
+  React.useEffect(() => {
+    setCachedUser(actions.getCacheLogin() || '')
+  }, [cachedUser])
+
+  const resetCache = () => {
+    actions.clearCache()
+    setCachedUser('')
+  }
+
   const handleSignIn = (data: ILoginFormData) => {
+    console.log({ data })
+
     setLoading(true)
     if (!data.username || !data.password) {
       actions.pushNotification({
@@ -38,6 +51,11 @@ const Login = () => {
       })
       return setLoading(false)
     }
+
+    if (data.rememberPassword) {
+      actions.cacheLogin(data.username)
+    }
+
     actions
       .signIn(data.username, data.password)
       .then(() => {
@@ -59,7 +77,12 @@ const Login = () => {
   return (
     <Container>
       <FormWrapper>
-        <LoginForm loading={loading} onSubmit={handleSignIn} />
+        <LoginForm
+          resetCache={resetCache}
+          cachedUser={cachedUser}
+          loading={loading}
+          onSubmit={handleSignIn}
+        />
       </FormWrapper>
     </Container>
   )

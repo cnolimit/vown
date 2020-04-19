@@ -27,6 +27,18 @@ const authActions = {
     state.loggedIn = status
   }),
 
+  cacheLogin: action((email: string) => {
+    localStorage.setItem('email', email)
+  }),
+
+  clearCache: action(() => {
+    localStorage.setItem('email', '')
+  }),
+
+  getCacheLogin: action(() => {
+    return localStorage.getItem('email')
+  }),
+
   getPersonalDetails: action(() => {
     return process.browser && Auth.GetPersonalDetails()
   }),

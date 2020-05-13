@@ -1,4 +1,5 @@
 import { RegistrationForm } from '@vown/components'
+import { ERRORS, NOTIFICATION_STATES, SUCCESS } from '@vown/types'
 import FormWrapper from 'components/form-wrapper'
 import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
@@ -29,9 +30,21 @@ const Registration = observer(() => {
   const [loading, setLoading] = useState(false)
   const handleSignInUp = (data: IRegistrationFormData) => {
     setLoading(true)
-    actions.signUp(data.username, data.password).catch(() => {
-      setLoading(false)
-    })
+    actions
+      .signUp(data.username, data.password)
+      .then(() => {
+        actions.pushNotification({
+          type: NOTIFICATION_STATES.SUCCESS,
+          message: SUCCESS.SUCCESS_CREATED_ACCOUNT,
+        })
+      })
+      .catch(() => {
+        actions.pushNotification({
+          type: NOTIFICATION_STATES.ERROR,
+          message: ERRORS.SIGN_UP_FAILED,
+        })
+        setLoading(false)
+      })
   }
 
   return (

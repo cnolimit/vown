@@ -1,3 +1,4 @@
+import { CanduProvider } from '@candulabs/react-sdk'
 import { Theme, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import { IUserDetails } from '@vown/types'
@@ -49,7 +50,9 @@ const DashboardLayout = ({ session, title, children }: IDashboardLayout) => {
           {title}
         </Typography>
         <motion.section className={classes.bodyContent} variants={variants.slide}>
-          {children}
+          <CanduProvider clientToken="vmDi4LBOdY" userId="VOWN_APP">
+            {children}
+          </CanduProvider>
         </motion.section>
       </motion.div>
     </Container>

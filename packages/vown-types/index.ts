@@ -89,6 +89,7 @@ export enum ReviewKeys {
 
 export enum SUCCESS {
   SUCCESS_LOGIN = 'Logged in successfully',
+  SUCCESS_CREATED_ACCOUNT = 'Account Created',
   SUCCESS_CREATED_REVIEW = 'Successfully created review',
 }
 

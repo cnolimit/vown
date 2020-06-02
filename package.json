@@ -10,6 +10,7 @@
     "packages/**/*"
   ],
   "scripts": {
+    "start": "cd packages/vown-web-app && yarn dev",
     "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
     "test": "./scripts/test.sh",

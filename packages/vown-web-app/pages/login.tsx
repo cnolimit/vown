@@ -52,14 +52,11 @@ const Login = () => {
       return setLoading(false)
     }
 
-    if (data.rememberPassword) {
-      actions.cacheLogin(data.username)
-    }
-
     actions
       .signIn(data.username, data.password)
       .then(() => {
         setLoading(false)
+        if (data.rememberPassword) actions.cacheLogin(data.username)
         actions.pushNotification({
           type: NOTIFICATION_STATES.SUCCESS,
           message: SUCCESS.SUCCESS_LOGIN,

@@ -1,4 +1,4 @@
-import { Tutorial } from '@candulabs/react-sdk'
+import { Portal } from '@candulabs/react-sdk'
 import { IUserDetails } from '@vown/types'
 import { DashboardLayout } from 'components/layouts'
 import * as React from 'react'
@@ -8,7 +8,7 @@ import { auth } from 'utils'
 const Dashboard = (props: { session: IUserDetails }) => {
   return (
     <DashboardLayout title="My Dashboard" session={props.session}>
-      <Tutorial slug="welcome-screen" />
+      <Portal slug="welcome-screen" />
     </DashboardLayout>
   )
 }

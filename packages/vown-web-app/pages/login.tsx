@@ -32,7 +32,7 @@ const Login = () => {
   const [cachedUser, setCachedUser] = React.useState('')
 
   React.useEffect(() => {
-    setCachedUser(actions.getCacheLogin() || '')
+    setCachedUser(actions.getCacheLogin())
   }, [cachedUser])
 
   const resetCache = () => {
@@ -41,8 +41,6 @@ const Login = () => {
   }
 
   const handleSignIn = (data: ILoginFormData) => {
-    console.log({ data })
-
     setLoading(true)
     if (!data.username || !data.password) {
       actions.pushNotification({

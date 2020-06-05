@@ -36,7 +36,7 @@ const authActions = {
   }),
 
   getCacheLogin: action(() => {
-    return localStorage.getItem('email')
+    return localStorage.getItem('email') || ''
   }),
 
   getPersonalDetails: action(() => {

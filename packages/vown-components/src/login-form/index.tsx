@@ -2,7 +2,6 @@ import { Card, Checkbox, FormControlLabel, Link, Theme, Typography } from '@mate
 import { makeStyles } from '@material-ui/styles'
 import * as React from 'react'
 import { Button, Input, OverflowLoader } from '../'
-import VeriownLogo from '../../icons/VeriownLogo'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
@@ -80,7 +79,6 @@ const LoginForm = ({ onSubmit, loading, cachedUser, resetCache }: ILoginForm) =>
           onSubmit={handleFormSubmit}
           data-testid="login-form-component"
         >
-          <VeriownLogo />
           <Typography variant="h5" className={classes.title}>
             Login to Account
           </Typography>

@@ -70,11 +70,11 @@ export const create = async (data: IReview, uid: string) => {
       .collection(Collections.REVIEWS)
       .doc(id)
       .create({
+        ...review,
         id,
         landlord_id: review.landlord_id,
         user_id: uid,
         createdAt: new Date().toISOString(),
-        ...review,
       })
 
     return await fetchReviews(ReviewKeys.USER_ID, uid)

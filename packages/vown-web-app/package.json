@@ -7,15 +7,15 @@
     "dev": "next",
     "clean": "rm -rf .next",
     "build": "yarn clean && next build",
+    "now-build": "next build",
     "start": "next start",
+    "export": "next export",
+    "deploy": "yarn build && yarn export",
     "test": "jest",
     "version-bump": "version-bump @vown/web-app"
   },
   "dependencies": {
-    "@material-ui/core": "4.5.1",
-    "@material-ui/icons": "^4.5.1",
-    "@material-ui/lab": "4.0.0-alpha.28",
-    "@material-ui/styles": "4.5.0",
+    "@candulabs/react-sdk": "^0.0.29",
     "@types/jsonwebtoken": "^8.3.5",
     "@vown/auth": "2.0.1",
     "@vown/components": "1.1.1",
@@ -28,11 +28,7 @@
     "jsonwebtoken": "^8.5.1",
     "mobx": "5.14.0",
     "mobx-react-lite": "1.4.1",
-    "next": "9.2.0",
-    "next-cookies": "1.1.3",
-    "react": "16.10.2",
-    "react-dom": "16.10.2",
-    "styled-components": "4.4.0"
+    "next-cookies": "1.1.3"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^9.1.4",

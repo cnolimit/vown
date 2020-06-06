@@ -1,13 +1,14 @@
+import { Portal } from '@candulabs/react-sdk'
 import { IUserDetails } from '@vown/types'
+import { DashboardLayout } from 'components/layouts'
 import * as React from 'react'
-import DashboardLayout from '../../components/layout/dashboard-layout'
-import { COOKIE } from '../../types'
-import { auth } from '../../utils'
+import { COOKIE } from 'types'
+import { auth } from 'utils'
 
 const Dashboard = (props: { session: IUserDetails }) => {
   return (
     <DashboardLayout title="My Dashboard" session={props.session}>
-      YOLO
+      <Portal slug="welcome-screen" />
     </DashboardLayout>
   )
 }

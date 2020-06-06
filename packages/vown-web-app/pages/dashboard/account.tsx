@@ -1,10 +1,10 @@
 import { AccountDetailsCard } from '@vown/components'
 import { IUserDetails, IUserProfileDetails } from '@vown/types'
+import DashboardLayout from 'components/layouts/dashboard-layout'
 import * as React from 'react'
-import DashboardLayout from '../../components/layout/dashboard-layout'
-import { actions } from '../../store'
-import { COOKIE } from '../../types'
-import { auth } from '../../utils'
+import { actions } from 'store'
+import { COOKIE } from 'types'
+import { auth } from 'utils'
 
 const Account = (props: { session: IUserDetails }) => {
   const AccountSub = (data: IUserProfileDetails) => {

@@ -10,6 +10,7 @@
     "packages/**/*"
   ],
   "scripts": {
+    "start": "cd packages/vown-web-app && yarn dev",
     "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
     "test": "./scripts/test.sh",
@@ -17,6 +18,19 @@
     "lint": "eslint ./packages --ext .ts,.tsx",
     "prettier": "prettier --check \"./**/*.+(ts|tsx|json|md)\"",
     "format": "yarn prettier --write"
+  },
+  "dependencies": {
+    "@firebase/app-types": "^0.6.0",
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.28",
+    "@material-ui/styles": "^4.5.0",
+    "@now/next": "^2.5.2",
+    "next": "^9.2.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "styled-components": "^4.4.0",
+    "webpack": "^4.42.1"
   },
   "devDependencies": {
     "@types/jest": "^24.0.18",

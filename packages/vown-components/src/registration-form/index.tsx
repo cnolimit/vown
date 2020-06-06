@@ -116,7 +116,7 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             }
             label="I accept terms and conditions"
           />
-          <Button onClick={handleFormSubmit}>Sign In</Button>
+          <Button onClick={handleFormSubmit}>Sign Up</Button>
           <Typography variant="subtitle1" className={classes.footerText}>
             {`Already have an account?`}{' '}
             <Link href="/login" color="secondary">

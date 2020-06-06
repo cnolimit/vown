@@ -19,19 +19,19 @@
     "test": "jest",
     "version-bump": "version-bump @vown/components"
   },
-  "dependencies": {
-    "@material-ui/core": "4.5.1",
-    "@material-ui/styles": "4.5.0",
-    "react": "16.10.2",
-    "react-dom": "16.10.2",
-    "styled-components": "4.4.0"
-  },
   "devDependencies": {
     "@testing-library/jest-dom": "4.1.0",
     "@testing-library/react": "9.1.4",
     "@types/styled-components": "4.1.19",
     "@types/testing-library__react": "9.1.1",
     "@vown/scripts": "1.1.0"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.5.1",
+    "@material-ui/styles": "^4.5.0",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "styled-components": "^4.4.0"
   },
   "jest": {
     "roots": [

@@ -1,12 +1,13 @@
+import { CanduProvider } from '@candulabs/react-sdk'
 import { Theme, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import { IUserDetails } from '@vown/types'
+import NavBar from 'components/nav-bar'
 import { motion } from 'framer-motion'
 import React from 'react'
+import { actions } from 'store'
 import styled from 'styled-components'
-import { actions } from '../../store'
-import { variants } from '../../utils'
-import NavBar from '../nav-bar'
+import { variants } from 'utils'
 
 const Container = styled.div`
   width: 100%;
@@ -48,8 +49,10 @@ const DashboardLayout = ({ session, title, children }: IDashboardLayout) => {
         <Typography className={classes.bodyTitle} variant="h1">
           {title}
         </Typography>
-        <motion.section className={classes.bodyContent} variants={variants.slideInOut}>
-          {children}
+        <motion.section className={classes.bodyContent} variants={variants.slide}>
+          <CanduProvider clientToken="vmDi4LBOdY" userId="VOWN_APP">
+            {children}
+          </CanduProvider>
         </motion.section>
       </motion.div>
     </Container>

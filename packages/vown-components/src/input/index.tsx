@@ -1,25 +1,34 @@
-import { InputBase, InputLabel } from '@material-ui/core'
-import { InputBaseProps } from '@material-ui/core/InputBase'
-import { styled } from '@material-ui/core/styles'
+import { InputBase, InputBaseProps, InputLabel } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 import * as React from 'react'
 
-const StyledInputBase = styled(InputBase)(props => ({
-  width: '100%',
-  paddingLeft: '15px',
-  paddingTop: '2px',
-  height: '45px',
-  color: '#000',
-  marginTop: '10px',
-  backgroundColor: '#F1F4F9',
-  fontSize: '1em',
-  borderRadius: props.theme.shape.borderRadius,
-  border: '1px solid #D8D8D8',
+const useStyles = makeStyles((theme: Theme) => ({
+  input: {
+    width: '100%',
+    color: '#000',
+    height: '45px',
+    fontSize: '1em',
+    paddingTop: '2px',
+    marginTop: '10px',
+    paddingLeft: '15px',
+    backgroundColor: '#F1F4F9',
+    border: '1px solid #D8D8D8',
+    borderRadius: theme.shape.borderRadius,
+  },
+  disabled: {
+    padding: 0,
+    opacity: 1,
+    margin: 0,
+    border: 0,
+    background: 'none',
+  },
 }))
 
 interface IInput {
   fieldName: string
   fieldValue: string
   fieldLabel: string
+  disabled?: boolean
 }
 
 const Input = ({
@@ -29,21 +38,28 @@ const Input = ({
   placeholder,
   onChange,
   className,
+  disabled,
   ...restProps
-}: IInput & InputBaseProps) => (
-  <div className={className}>
-    <InputLabel data-testid={`${fieldLabel}-input-label-component`} htmlFor={fieldName}>
-      {fieldLabel}
-    </InputLabel>
-    <StyledInputBase
-      {...restProps}
-      id={fieldName}
-      value={fieldValue}
-      placeholder={placeholder}
-      onChange={onChange}
-      data-testid={`${fieldLabel}-input-component`}
-    />
-  </div>
-)
+}: IInput & InputBaseProps) => {
+  const classes = useStyles()
+
+  return (
+    <div className={className}>
+      <InputLabel data-testid={`${fieldLabel}-input-label-component`} htmlFor={fieldName}>
+        {fieldLabel}
+      </InputLabel>
+      <InputBase
+        {...restProps}
+        id={fieldName}
+        value={fieldValue}
+        onChange={onChange}
+        disabled={disabled}
+        className={`${classes.input} ${disabled && classes.disabled}`}
+        placeholder={placeholder}
+        data-testid={`${fieldLabel}-input-component`}
+      />
+    </div>
+  )
+}
 
 export default Input

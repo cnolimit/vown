@@ -1,21 +1,20 @@
-import CssBaseline from '@material-ui/core/CssBaseline'
 import { Notification } from '@vown/components'
 import { motion } from 'framer-motion'
 import { observer } from 'mobx-react-lite'
 import Head from 'next/head'
 import React from 'react'
+import { state } from 'store'
 import styled from 'styled-components'
-import { state } from '../../store'
-import { variants } from '../../utils'
+import { ANIMATION_DURATION, zIndex } from 'utils/constants'
 
-const NotificationWrapper = styled.div`
+const NotificationWrapper = styled(motion.div)`
   left: 0;
   right: 0;
   width: 100%;
-  z-index: 99;
   margin-left: 0;
   overflow: hidden;
   border-radius: 0;
+  z-index: ${zIndex.highest};
   @media (min-width: 768px) {
     top: 15px;
     left: 50%;
@@ -53,17 +52,12 @@ const Layout = ({ children }: { children: any }) => {
         <title>{`Veriown | Search, Rent & Review Properties Online`}</title>
       </Head>
       {notificationsExists ? (
-        <motion.div initial="exit" animate="enter" exit="exit">
-          <motion.div variants={variants.slideIn}>
-            <NotificationWrapper>
-              <Notification notifications={state.notification} />
-            </NotificationWrapper>
-          </motion.div>
-        </motion.div>
+        <NotificationWrapper animate={{ y: 20, transition: { duration: ANIMATION_DURATION } }}>
+          <Notification notifications={state.notification} />
+        </NotificationWrapper>
       ) : null}
       <Container>
         <div style={{ width: '100%' }}>{children}</div>
-        <CssBaseline />
       </Container>
     </div>
   )

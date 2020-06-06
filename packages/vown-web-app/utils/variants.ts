@@ -1,34 +1,10 @@
-const slideInOut = (() => {
-  const easing = [0.175, 0.85, 0.42, 0.96]
-  return {
-    exit: { y: 100, opacity: 0, transition: { duration: 1, ease: easing } },
-    enter: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 1,
-        ease: easing,
-      },
-    },
-  }
-})()
+const duration = 0.5
 
-const slideIn = (() => {
-  const easing = [0.175, 0.85, 0.42, 0.96]
-  return {
-    exit: { y: 10, opacity: 0, transition: { duration: 1, ease: easing } },
-    enter: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 1,
-        ease: easing,
-      },
-    },
-  }
-})()
+const slide = {
+  exit: { y: 100, opacity: 0, transition: { duration } },
+  enter: { y: 0, opacity: 1, transition: { duration } },
+}
 
 export default {
-  slideInOut,
-  slideIn,
+  slide,
 }

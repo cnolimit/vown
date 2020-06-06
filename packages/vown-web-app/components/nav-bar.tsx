@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/styles'
 import { IUserDetails } from '@vown/types'
 import { useRouter } from 'next/router'
 import React from 'react'
-import Logo from '../static/assets/logo_hori.svg'
-import { ROUTES } from '../types'
+import Logo from 'static/assets/logo_hori.svg'
+import { ROUTES } from 'types'
+import { zIndex } from 'utils/constants'
 import MenuList from './menu-list'
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     color: 'black',
     display: 'flex',
     boxShadow: 'none',
+    zIndex: zIndex.high,
     position: 'relative',
     alignContent: 'center',
     justifyContent: 'center',
@@ -42,7 +44,7 @@ const NavBar = ({ session, handleSignOut }: INavBar) => {
   return (
     <AppBar className={classes.bar}>
       <div className={classes.barContent}>
-        <Logo />
+        <Logo onClick={() => router.push(ROUTES.dashboard)} style={{ cursor: 'pointer' }} />
         <MenuList
           user={session}
           onSignOut={handleSignOut}

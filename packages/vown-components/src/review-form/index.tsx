@@ -80,9 +80,7 @@ const ReviewForm = (props: IReviewForm) => {
           name="overall-rating"
           size="large"
           value={rating}
-          onChange={(_, newValue) => {
-            setRating(newValue)
-          }}
+          onChange={(_, newValue: number) => newValue && setRating(newValue)}
         />
       </div>
       <Input

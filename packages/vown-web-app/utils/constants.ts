@@ -3,7 +3,17 @@ import ReviewIcon from '../static/assets/reviews.svg'
 import { NAVIGATION, ROUTES } from '../types'
 
 // ----------------- Notification Timeout constants ------------------
-export const NOTIFICATION_TIMEOUT = 5000
+export const NOTIFICATION_TIMEOUT = 3000
+
+// ----------------- Animation constants ------------------
+export const ANIMATION_DURATION = 0.3
+
+export const zIndex = {
+  lowest: 8,
+  low: 16,
+  high: 32,
+  highest: 64,
+}
 
 export const NAVIGATION_LIST: NAVIGATION = [
   {

@@ -1,9 +1,9 @@
+import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
-import { AnimatePresence } from 'framer-motion'
+import Layout from 'components/layouts/base-layout'
 import App from 'next/app'
 import React from 'react'
-import Layout from '../components/layout/base-layout'
-import theme from '../utils/theme'
+import theme from 'utils/theme'
 
 class MyApp extends App {
   componentDidMount() {
@@ -21,9 +21,8 @@ class MyApp extends App {
     return (
       <Layout>
         <ThemeProvider theme={theme}>
-          <AnimatePresence exitBeforeEnter>
-            <Component {...pageProps} key={router.route} />
-          </AnimatePresence>
+          <CssBaseline />
+          <Component {...pageProps} key={router.route} />
         </ThemeProvider>
       </Layout>
     )

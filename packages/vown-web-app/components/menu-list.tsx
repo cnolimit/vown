@@ -2,9 +2,10 @@ import { Theme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import { MenuProfile } from '@vown/components'
 import { IUserDetails } from '@vown/types'
+import Link from 'next/link'
 import React from 'react'
-import Placeholder from '../static/assets/placeholder.png'
-import { NAVIGATION_LIST } from '../utils/constants'
+import Placeholder from 'static/assets/placeholder.png'
+import { NAVIGATION_LIST } from 'utils/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({
   menu: {
@@ -16,6 +17,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
   menuListItem: {
     display: 'inline',
+    cursor: 'pointer',
     marginLeft: theme.typography.pxToRem(12),
     padding: `${theme.typography.pxToRem(4.5)} ${theme.typography.pxToRem(14)}`,
     backgroundColor: 'transparent',
@@ -53,9 +55,9 @@ const MenuList = ({ user, onSignOut, onMyAccount }: MenuListProps) => {
         {NAVIGATION_LIST.map(nav => {
           return (
             <li className={classes.menuListItem} key={nav.link}>
-              <a href={nav.link}>
+              <Link href={nav.link}>
                 <span>{nav.text}</span>
-              </a>
+              </Link>
             </li>
           )
         })}

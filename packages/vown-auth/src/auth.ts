@@ -23,10 +23,10 @@ class Auth {
     }
   }
 
-  public SignIn = (username: string, password: string) => {
+  public SignIn = (email: string, password: string) => {
     return this.app
       .auth()
-      .signInWithEmailAndPassword(username, password)
+      .signInWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         if (user) {
           const userDetails = await this.app
@@ -40,18 +40,14 @@ class Auth {
       })
   }
 
-  public SignUp = (username: string, password: string) => {
+  public SignUp = (email: string, password: string, username: string) => {
     return this.app
       .auth()
-      .createUserWithEmailAndPassword(username, password)
+      .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {
         if (user) {
-          const userDetails = await this.app
-            .firestore()
-            .collection('users')
-            .doc(user.uid)
-            .get()
-          this._setSession(userDetails.data() as IUserDetails)
+          this.UpdateDetails({ displayName: username })
+          this._setSession({ uid: user.uid, email, displayName: username } as IUserDetails)
         }
         return await this.GetPersonalDetails()
       })
@@ -63,32 +59,37 @@ class Auth {
   }
 
   public UpdateDetails = (userData: IUserProfileDetails) => {
+    // Grab the current user details to update
     const user = this.app.auth().currentUser
+
     if (user) {
-      user
-        .updateProfile({
-          displayName: `${userData.firstName} ${userData.lastName}`,
-          photoURL: userData.photo,
-        })
-        .then(() => {
-          const details = this.GetPersonalDetails()
-          if (details) {
-            details.displayName
-            this._setSession({
-              ...details,
-              displayName: user.displayName || details.displayName,
-              photoURL: user.photoURL || details.photoURL,
-            })
-            this.app
-              .firestore()
-              .collection('users')
-              .doc(user.uid)
-              .update({
-                displayName: `${userData.firstName} ${userData.lastName}`,
-                photoURL: userData.photo,
-              })
-          }
-        })
+      // Create the unified details object to ensure we pass
+      // through the same information in all updates
+      const userDetails: any = {
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+        ...userData,
+      }
+
+      user.updateProfile({ ...userDetails }).then(() => {
+        // We get the current user details in storage. We want to
+        // update the session storage so that the user can see the
+        // Changes without having to logout and sign back in.
+        const details = this.GetPersonalDetails()
+
+        if (details) {
+          this._setSession({ ...details, ...userDetails })
+
+          // We need to update the users information in our database
+          // so that we keep the profile object in sync with the
+          // user data stored in our database.
+          this.app
+            .firestore()
+            .collection('users')
+            .doc(user.uid)
+            .update(userDetails)
+        }
+      })
     }
   }
 

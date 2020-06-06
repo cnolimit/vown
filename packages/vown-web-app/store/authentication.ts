@@ -15,11 +15,10 @@ const loginAndSetState = () => {
     cookie.set(COOKIE.token, token, { expires: 1 })
   }
   const expireLogout = setTimeout(() => {
-    Router.reload()
     clearTimeout(expireLogout)
   }, 15000)
+
   Router.replace(ROUTES.dashboard)
-  Router.reload()
 }
 
 const authActions = {
@@ -43,12 +42,12 @@ const authActions = {
     return process.browser && Auth.GetPersonalDetails()
   }),
 
-  signUp: action((username: string, password: string) => {
-    return Auth.SignUp(username, password).then(() => loginAndSetState())
+  signUp: action((email: string, password: string, username: string) => {
+    return Auth.SignUp(email, password, username).then(() => loginAndSetState())
   }),
 
-  signIn: action((username: string, password: string) => {
-    return Auth.SignIn(username, password).then(() => loginAndSetState())
+  signIn: action((email: string, password: string) => {
+    return Auth.SignIn(email, password).then(() => loginAndSetState())
   }),
 
   signOut: action(() => {

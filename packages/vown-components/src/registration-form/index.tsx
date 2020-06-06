@@ -83,6 +83,7 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             placeholder="cnolimit@gmail.com"
             onChange={(e: any) => setEmail(e.target.value)}
             type="email"
+            required
           />
 
           <Input
@@ -93,6 +94,7 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             placeholder="cnolimit"
             onChange={(e: any) => setUsername(e.target.value)}
             type="text"
+            required
           />
 
           <Input
@@ -103,6 +105,7 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
             placeholder="******"
             onChange={(e: any) => setPassword(e.target.value)}
             type="password"
+            required
           />
           <FormControlLabel
             className={classes.label}
@@ -112,11 +115,14 @@ const LoginForm = ({ onSubmit, loading }: ILoginForm) => {
                 checked={rememberPassword}
                 onChange={() => setRememberPassword(!rememberPassword)}
                 color="primary"
+                required
               />
             }
             label="I accept terms and conditions"
           />
-          <Button onClick={handleFormSubmit}>Sign Up</Button>
+          <Button onClick={handleFormSubmit} disabled={!email || !username || !password}>
+            Sign Up
+          </Button>
           <Typography variant="subtitle1" className={classes.footerText}>
             {`Already have an account?`}{' '}
             <Link href="/login" color="secondary">

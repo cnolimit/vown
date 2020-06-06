@@ -26,11 +26,20 @@ describe('Testing Registration Form', () => {
     expect(() => getByTestId("loader-component")).toThrow()
   })
 
-  it('Should trigger onclick function', () => {
+  it('Should not trigger onclick function when fields are empty', () => {
     const {getByTestId} = getComponent(false)
     const button = getByTestId('button-component')
     fireEvent.click(button)
 
-    expect(testFunc).toBeCalled()
+    expect(testFunc).toHaveBeenCalledTimes(0)
   })
+
+  // TODO(phillip): Workout a way to test adding value to the text filed
+  // to test the disabled button functionality.
+  // it('Should not trigger onclick function when fields are empty', () => {
+  //   const { getByLabelText, getByRole} = getComponent(false)
+  //   const username = getByRole('input')
+  //   console.log({username});
+  //   expect(testFunc).toBeCalled()
+  // })
 })

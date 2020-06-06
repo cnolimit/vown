@@ -56,9 +56,10 @@ export interface IUserDetails {
 }
 
 export interface IUserProfileDetails {
-  firstName: string
-  lastName: string
-  photo: string
+  firstName?: string
+  lastName?: string
+  photo?: string
+  displayName?: string
 }
 
 export interface INotification {

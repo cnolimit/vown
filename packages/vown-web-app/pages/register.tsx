@@ -5,6 +5,8 @@ import { observer } from 'mobx-react-lite'
 import React, { useState } from 'react'
 import { actions } from 'store'
 import styled from 'styled-components'
+import { COOKIE, ROUTES } from 'types'
+import { auth } from 'utils'
 
 const Container = styled.div`
   width: 100vw;
@@ -26,19 +28,22 @@ interface IRegistrationFormData {
   rememberPassword: boolean
 }
 
-const Registration = observer(() => {
+const Registration = () => {
   const [loading, setLoading] = useState(false)
+
   const handleSignInUp = (data: IRegistrationFormData) => {
     setLoading(true)
+
     actions
-      .signUp(data.username, data.password)
+      .signUp(data.email, data.password, data.username)
       .then(() => {
         actions.pushNotification({
           type: NOTIFICATION_STATES.SUCCESS,
           message: SUCCESS.SUCCESS_CREATED_ACCOUNT,
         })
       })
-      .catch(() => {
+      .catch((err: any) => {
+        console.error({ err })
         actions.pushNotification({
           type: NOTIFICATION_STATES.ERROR,
           message: ERRORS.SIGN_UP_FAILED,
@@ -54,6 +59,15 @@ const Registration = observer(() => {
       </FormWrapper>
     </Container>
   )
-})
+}
 
-export default Registration
+Registration.getInitialProps = (ctx: any) => {
+  if (auth.isTokenValid(ctx)) {
+    ctx.res.writeHead(303, { Location: ROUTES.dashboard })
+    ctx.res.end()
+  }
+
+  return { session: ctx[COOKIE.token] }
+}
+
+export default observer(Registration)

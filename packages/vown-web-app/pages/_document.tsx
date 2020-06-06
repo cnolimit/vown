@@ -1,7 +1,16 @@
 import { ServerStyleSheets } from '@material-ui/styles'
+import * as Sentry from '@sentry/browser'
 import Document, { Head, Main, NextScript } from 'next/document'
 import * as React from 'react'
 import { ServerStyleSheet } from 'styled-components'
+
+process.on('unhandledRejection', err => {
+  Sentry.captureException(err)
+})
+
+process.on('uncaughtException', err => {
+  Sentry.captureException(err)
+})
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
@@ -30,6 +39,7 @@ class MyDocument extends Document {
       styledComponentsSheet.seal()
     }
   }
+
   render() {
     return (
       <html lang="en">

@@ -38,7 +38,8 @@ const Registration = observer(() => {
           message: SUCCESS.SUCCESS_CREATED_ACCOUNT,
         })
       })
-      .catch(() => {
+      .catch(err => {
+        console.error({ err })
         actions.pushNotification({
           type: NOTIFICATION_STATES.ERROR,
           message: ERRORS.SIGN_UP_FAILED,

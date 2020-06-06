@@ -1,11 +1,26 @@
 import { CssBaseline } from '@material-ui/core'
 import { ThemeProvider } from '@material-ui/styles'
+import * as Sentry from '@sentry/browser'
 import Layout from 'components/layouts/base-layout'
 import App from 'next/app'
 import React from 'react'
 import theme from 'utils/theme'
 
+Sentry.init({ dsn: process.env.SENTRY_DSN })
+
 class MyApp extends App {
+  componentDidCatch(error: any, errorInfo: React.ErrorInfo) {
+    Sentry.withScope(scope => {
+      Object.keys(errorInfo).forEach(key => {
+        scope.setExtra(key, errorInfo[key])
+      })
+
+      Sentry.captureException(error)
+    })
+
+    super.componentDidCatch(error, errorInfo)
+  }
+
   componentDidMount() {
     const jssStyles = document.querySelector('#jss-server-side')
     if (jssStyles) {

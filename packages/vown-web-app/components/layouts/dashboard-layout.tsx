@@ -50,7 +50,7 @@ const DashboardLayout = ({ session, title, children }: IDashboardLayout) => {
           {title}
         </Typography>
         <motion.section className={classes.bodyContent} variants={variants.slide}>
-          <CanduProvider clientToken="vmDi4LBOdY" userId="VOWN_APP">
+          <CanduProvider clientToken="vmDi4LBOdY" userId={session.uid}>
             {children}
           </CanduProvider>
         </motion.section>

@@ -6,7 +6,10 @@ import App from 'next/app'
 import React from 'react'
 import theme from 'utils/theme'
 
-Sentry.init({ dsn: process.env.SENTRY_DSN, environment: process.env.NODE_ENV })
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.SENTRY_ENV || process.env.NODE_ENV,
+})
 
 class MyApp extends App {
   componentDidCatch(error: any, errorInfo: React.ErrorInfo) {

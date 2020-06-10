@@ -9,11 +9,12 @@ import { NAVIGATION_LIST } from 'utils/constants'
 
 const useStyles = makeStyles((theme: Theme) => ({
   menu: {
+    margin: 0,
+    padding: 0,
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center',
-    margin: '0',
     listStyleType: 'none',
+    justifyContent: 'center',
   },
   menuListItem: {
     display: 'inline',
@@ -46,6 +47,8 @@ interface MenuListProps {
 }
 
 const MenuList = ({ user, onSignOut, onMyAccount }: MenuListProps) => {
+  console.log({ user })
+
   const classes = useStyles()
   const name = user.displayName || user.email.split('@')[0]
   const image = user.photoURL || Placeholder

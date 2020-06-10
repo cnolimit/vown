@@ -28,4 +28,47 @@ export const NAVIGATION_LIST: NAVIGATION = [
   },
 ]
 
+export const LEARNING_RESOURCES = {
+  javascript: {
+    tags: [],
+    resources: [
+      {
+        level: 'beginner',
+        link:
+          'https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/JavaScript_basics',
+        free: true,
+        price: 0,
+      },
+      {
+        level: 'beginner',
+        link: 'https://www.codecademy.com/learn/introduction-to-javascript',
+        free: true,
+        price: 0,
+      },
+
+      {
+        level: 'intermediate',
+        link: 'https://htmldog.com/guides/javascript/intermediate/',
+        free: true,
+        price: 0,
+      },
+      {
+        level: 'beginner',
+        link: 'https://javascript30.com/',
+        free: true,
+        price: 0,
+      },
+    ],
+  },
+}
+
+// interface post {
+//   title: string
+//   description: string
+//   skills: string[]
+//   posted_by: string
+//   salary: number
+//   term: 'PERMENENT' | 'CONTRACT'
+// }
+
 export default { NOTIFICATION_TIMEOUT }

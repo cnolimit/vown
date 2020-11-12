@@ -16,7 +16,7 @@
     "version-bump": "version-bump @vown/firebase"
   },
   "engines": {
-    "node": "10"
+    "node": "12"
   },
   "dependencies": {
     "firebase-admin": "^8.0.0",

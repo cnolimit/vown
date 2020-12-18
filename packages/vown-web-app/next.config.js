@@ -45,6 +45,14 @@ module.exports = withBundleAnalyzer(
         // and upload the source maps to sentry.
         // This is an alternative to manually uploading the source maps
         // Note: This is disabled in development mode.
+        console.log({
+          NEXT_PUBLIC_SENTRY_DSN,
+          SENTRY_ORG,
+          SENTRY_PROJECT,
+          SENTRY_AUTH_TOKEN,
+          NODE_ENV,
+        })
+
         if (
           NEXT_PUBLIC_SENTRY_DSN &&
           SENTRY_ORG &&
@@ -56,7 +64,7 @@ module.exports = withBundleAnalyzer(
             new SentryWebpackPlugin({
               include: '.next',
               ignore: ['node_modules'],
-              urlPrefix: '~/_next',
+              urlPrefix: '~/',
               release: options.buildId,
             })
           )
@@ -86,6 +94,10 @@ module.exports = withBundleAnalyzer(
             use: ['url-loader'],
           }
         )
+
+        config.env = {
+          release: options.buildId,
+        }
 
         return config
       },

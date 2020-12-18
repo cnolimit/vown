@@ -7,6 +7,7 @@ import { actions } from 'store'
 import styled from 'styled-components'
 import { COOKIE, ROUTES } from 'types'
 import { auth } from 'utils'
+import * as Sentry from '@sentry/browser'
 
 const Container = styled.div`
   width: 100vw;
@@ -71,6 +72,12 @@ const Login = () => {
 
   return (
     <Container>
+      <button
+        style={{ border: '2px solid red', background: 'red', width: '250px', height: '250px' }}
+        onClick={() => Sentry.captureException(new Error('This is my fake error message'))}
+      >
+        ERORR
+      </button>
       <FormWrapper>
         <LoginForm
           resetCache={resetCache}

@@ -11,6 +11,7 @@ const {
   SENTRY_PROJECT,
   SENTRY_AUTH_TOKEN,
   NODE_ENV,
+  VERCEL_GIT_COMMIT_SHA,
 } = process.env
 
 module.exports = withBundleAnalyzer(
@@ -51,6 +52,7 @@ module.exports = withBundleAnalyzer(
           SENTRY_PROJECT,
           SENTRY_AUTH_TOKEN,
           NODE_ENV,
+          VERCEL_GIT_COMMIT_SHA,
         })
 
         if (
@@ -65,7 +67,7 @@ module.exports = withBundleAnalyzer(
               include: '.next',
               ignore: ['node_modules'],
               urlPrefix: '~/',
-              release: options.buildId,
+              release: VERCEL_GIT_COMMIT_SHA,
             })
           )
         }
@@ -94,10 +96,6 @@ module.exports = withBundleAnalyzer(
             use: ['url-loader'],
           }
         )
-
-        config.env = {
-          release: options.buildId,
-        }
 
         return config
       },

@@ -46,15 +46,6 @@ module.exports = withBundleAnalyzer(
         // and upload the source maps to sentry.
         // This is an alternative to manually uploading the source maps
         // Note: This is disabled in development mode.
-        console.log({
-          NEXT_PUBLIC_SENTRY_DSN,
-          SENTRY_ORG,
-          SENTRY_PROJECT,
-          SENTRY_AUTH_TOKEN,
-          NODE_ENV,
-          VERCEL_GIT_COMMIT_SHA,
-        })
-
         if (
           NEXT_PUBLIC_SENTRY_DSN &&
           SENTRY_ORG &&

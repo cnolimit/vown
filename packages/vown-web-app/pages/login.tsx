@@ -72,12 +72,6 @@ const Login = () => {
 
   return (
     <Container>
-      <button
-        style={{ border: '2px solid red', background: 'red', width: '250px', height: '250px' }}
-        onClick={() => Sentry.captureException(new Error('This is my fake error message'))}
-      >
-        ERORR
-      </button>
       <FormWrapper>
         <LoginForm
           resetCache={resetCache}

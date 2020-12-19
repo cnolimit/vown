@@ -60,8 +60,8 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: 12.x
-      - name: Install Firebase Function Dependancies
+          node-version: 10.x
+      - name: Install Firebase Function Dependencies
         run: cd ./packages/vown-firebase/functions && yarn
       - name: Run Build - @vown/firebase
         run: cd ./packages/vown-firebase/functions && yarn build

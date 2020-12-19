@@ -9,6 +9,9 @@
   "workspaces": [
     "packages/**/*"
   ],
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "start": "cd packages/vown-web-app && yarn dev",
     "build": "./scripts/build.sh",

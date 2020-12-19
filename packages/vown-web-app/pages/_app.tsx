@@ -7,6 +7,7 @@ import React from 'react'
 import theme from 'utils/theme'
 
 Sentry.init({
+  release: process.env.VERCEL_GIT_COMMIT_SHA,
   dsn: process.env.SENTRY_DSN,
   environment: process.env.SENTRY_ENV || process.env.NODE_ENV,
 })

@@ -27,9 +27,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: Install Dependancies
+      - name: Install Dependencies
         run: yarn
       - name: Danger Checks
         run: yarn danger ci
         env:
-          GITHUB_TOKEN: ${{ secrets.VOWN_BOT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

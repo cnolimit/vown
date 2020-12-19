@@ -7,6 +7,7 @@ import { actions } from 'store'
 import styled from 'styled-components'
 import { COOKIE, ROUTES } from 'types'
 import { auth } from 'utils'
+import * as Sentry from '@sentry/browser'
 
 const Container = styled.div`
   width: 100vw;

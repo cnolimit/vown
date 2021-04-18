@@ -1210,32 +1210,40 @@
     lodash "^4.17.19"
     to-fast-properties "^2.0.0"
 
-"@candulabs/core@^0.7.1-alpha.14":
-  version "0.7.1-alpha.14"
-  resolved "https://registry.yarnpkg.com/@candulabs/core/-/core-0.7.1-alpha.14.tgz#254a673821ae763a6229538eb60b77773f689db6"
-  integrity sha512-D/9GdzIboThM2PmRVYpBNBStXaHgc5cOp0dT0b2WdVmzJrTXfOKWM5GI1PFUruOjueGeJRd1F4d/fSekNjVn9Q==
+"@candulabs/core@^0.6.14-alpha.7":
+  version "0.6.14-alpha.7"
+  resolved "https://registry.yarnpkg.com/@candulabs/core/-/core-0.6.14-alpha.7.tgz#ed2c8b15f07465f387ceb96fee53232670b29458"
+  integrity sha512-6jXW14qeX41JhwPTU/wB2FDlkDav69V1m46Nq1uA3VXuSl7pnUTxV81JNRwJtCuxUQE1k5eXC2XQh7qUWl8eLg==
   dependencies:
-    "@candulabs/eventing" "^0.7.1-alpha.14"
+    "@candulabs/eventing" "^0.6.14-alpha.7"
+    "@candulabs/models" "^0.6.14-alpha.7"
     dataloader "^2.0.0"
     react-style-object-to-css "^1.1.2"
-    setimmediate "^1.0.5"
 
-"@candulabs/eventing@^0.7.1-alpha.14":
-  version "0.7.1-alpha.14"
-  resolved "https://registry.yarnpkg.com/@candulabs/eventing/-/eventing-0.7.1-alpha.14.tgz#9be22e58f33bbe3c4b351805e03e1e7850179057"
-  integrity sha512-PHgfEON1kh2wUsDtWUg86vkonM+rQA6eGqdgmaIPNJmKuiK45hre3Rmo7/3otYw4zwszp8DHWT/FIuVvRLY6jA==
+"@candulabs/eventing@^0.6.14-alpha.7":
+  version "0.6.14-alpha.7"
+  resolved "https://registry.yarnpkg.com/@candulabs/eventing/-/eventing-0.6.14-alpha.7.tgz#b28228a8ac5bfee697a252b51400cc39dd8fe3b4"
+  integrity sha512-mJGRxgPb3+Iq54YqZnkOWMCvL13QbYFuf7iDd2aA75lTasCtjHzuIs18rpo++CP3UxXFIguSJVNa61/61MFV/A==
   dependencies:
     "@sentry/browser" "^5.30.0"
     lodash "^4.17.15"
     uuid "^3.3.2"
 
-"@candulabs/react-sdk@^0.7.1-alpha.7":
-  version "0.7.1-alpha.14"
-  resolved "https://registry.yarnpkg.com/@candulabs/react-sdk/-/react-sdk-0.7.1-alpha.14.tgz#e611e9051a6c021d41290752f6d45f22341ac690"
-  integrity sha512-dY5eNEYSjZplZCexfsHfD68CDYlcty2MUnzVfLZTIami/MpPn6vqH9kgwyVQzF+HXgNCqP8WN5uMNYmZe17d6Q==
+"@candulabs/models@^0.6.14-alpha.7":
+  version "0.6.14-alpha.7"
+  resolved "https://registry.yarnpkg.com/@candulabs/models/-/models-0.6.14-alpha.7.tgz#61d4585018f95386967755d0538a483f4853c83d"
+  integrity sha512-tN43NkNdVHltJyr5GyfTxg/oxr8MqPov5zo+QZjeNdYCJX5767m6saameW92hfoO0z4ZWptUehR8xNyi8eFIpQ==
   dependencies:
-    "@candulabs/core" "^0.7.1-alpha.14"
-    "@candulabs/eventing" "^0.7.1-alpha.14"
+    lodash "^4.17.15"
+
+"@candulabs/react-sdk@^0.6.14-alpha.3":
+  version "0.6.14-alpha.7"
+  resolved "https://registry.yarnpkg.com/@candulabs/react-sdk/-/react-sdk-0.6.14-alpha.7.tgz#7c8182fdce961a58dd2fbac98b26f562623315de"
+  integrity sha512-8D9vUVkI5aPdHfkwMmTcpg66s9NS2xfTz2MqvaIVCDrqY8trTBvpAYGeDbq+VmwzVIZsYqp4nqZnCXJviNy2lw==
+  dependencies:
+    "@candulabs/core" "^0.6.14-alpha.7"
+    "@candulabs/eventing" "^0.6.14-alpha.7"
+    "@candulabs/models" "^0.6.14-alpha.7"
     invariant "^2.2.4"
     lodash "^4.17.15"
     prop-types "^15.7.2"
@@ -10478,7 +10486,7 @@ set-value@^2.0.0, set-value@^2.0.1:
     is-plain-object "^2.0.3"
     split-string "^3.0.1"
 
-setimmediate@^1.0.4, setimmediate@^1.0.5:
+setimmediate@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
   integrity sha1-KQy7Iy4waULX1+qbg3Mqt4VvgoU=

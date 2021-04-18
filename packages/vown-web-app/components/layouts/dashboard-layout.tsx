@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface IDashboardLayout {
   title: string
   session: IUserDetails
-  children: ReactElement
+  children: any
 }
 
 const DashboardLayout = ({ session, title, children }: IDashboardLayout) => {

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/styles'
 import { IUserDetails } from '@vown/types'
 import NavBar from 'components/nav-bar'
 import { motion } from 'framer-motion'
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { actions } from 'store'
 import styled from 'styled-components'
 import { variants } from 'utils'
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface IDashboardLayout {
   title: string
   session: IUserDetails
-  children: any
+  children: ReactElement
 }
 
 const DashboardLayout = ({ session, title, children }: IDashboardLayout) => {
@@ -50,7 +50,7 @@ const DashboardLayout = ({ session, title, children }: IDashboardLayout) => {
           {title}
         </Typography>
         <motion.section className={classes.bodyContent} variants={variants.slide}>
-          <CanduProvider clientToken="vmDi4LBOdY" userId={session.uid}>
+          <CanduProvider clientToken="vmDi4LBOdY" userId={session.uid} traits={session as any}>
             {children}
           </CanduProvider>
         </motion.section>

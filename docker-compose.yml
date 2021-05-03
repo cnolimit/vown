@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  vown_web_app:
+    build: .
+    ports:
+      - '3000:3000'
+    command: bash -c "yarn start:dev"

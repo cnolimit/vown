@@ -14,6 +14,7 @@
     "@typescript-eslint/no-var-requires": 0
   },
   "globals": {
+    "__dirname": true,
     "document": true,
     "window": true,
     "console": true,

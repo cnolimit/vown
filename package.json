@@ -13,7 +13,8 @@
     "node": "10.x"
   },
   "scripts": {
-    "start": "cd packages/vown-web-app && yarn dev",
+    "start": "cd ./packages/vown-web-app && yarn start",
+    "start:dev": "cd ./packages/vown-web-app && yarn dev",
     "build": "./scripts/build.sh",
     "clean": "./scripts/clean.sh",
     "test": "./scripts/test.sh",

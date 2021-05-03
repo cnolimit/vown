@@ -17,6 +17,7 @@ const {
 module.exports = withBundleAnalyzer(
   withSourceMaps(
     withTM({
+      distDir: 'build',
       env: {
         SENTRY_DSN: 'https://aa37d5076ba3407994b5fdb4d00252bd@o403587.ingest.sentry.io/5266426',
       },
@@ -56,7 +57,7 @@ module.exports = withBundleAnalyzer(
         ) {
           config.plugins.push(
             new SentryWebpackPlugin({
-              include: '.next',
+              include: 'build',
               ignore: ['node_modules'],
               urlPrefix: '~/_next',
               release: VERCEL_GIT_COMMIT_SHA,

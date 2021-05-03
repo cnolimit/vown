@@ -36,7 +36,7 @@ export const Error422: ResponseError = {
       key: 'approve_of_landlord',
     },
     {
-      code: 'MISSING_RECCOMENDS_FIELD',
+      code: 'MISSING_RECOMMENDS_FIELD',
       message: 'missing recommends field',
       target: 'review object',
       key: 'recommends',

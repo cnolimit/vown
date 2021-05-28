@@ -15,7 +15,7 @@
     "version-bump": "version-bump @vown/web-app"
   },
   "dependencies": {
-    "@candulabs/react-sdk": "^0.6.14-alpha.3",
+    "@candulabs/react-sdk": "^0.7.1-alpha.29",
     "@sentry/browser": "^5.16.1",
     "@sentry/node": "^5.16.1",
     "@sentry/webpack-plugin": "^1.11.1",
